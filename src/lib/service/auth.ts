@@ -23,7 +23,7 @@ const authenticate = (authorizedRole: "peneliti" | "mitra" | "eric" | "accountof
     return {
       redirect: {
         permanent: false,
-        destination: "/"
+        destination: "/?isLoggedOut=true"
       },
       props: {}
     }

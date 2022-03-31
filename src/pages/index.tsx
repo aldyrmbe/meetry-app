@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react"
+import { Box, Text, useToast } from "@chakra-ui/react"
 import { getUser } from "src/lib/service/user"
 import { GetServerSideProps, GetServerSidePropsContext } from "next"
 import { useRouter } from "next/router"
@@ -7,6 +7,8 @@ import Container from "@components/Container/Container"
 import OutlinedButton from "@components/Button/OutlinedButton"
 import Navbar from "@components/Navbar/Navbar"
 import Head from "next/head"
+import { showToast } from "@lib/toast/toast"
+import { useEffect } from "react"
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -32,6 +34,19 @@ const Home = () => {
   const toRegisterPage = (): void => {
     router.push("/register")
   }
+  const toast = useToast()
+  const isLoggedOut = router.query.isLoggedOut
+
+  useEffect(() => {
+    if (isLoggedOut) {
+      showToast(toast, {
+        title: "Anda sudah keluar",
+        description: "Silakan masuk kembali.",
+        status: "error"
+      })
+    }
+  }, [isLoggedOut])
+
   return (
     <>
       <Head>
