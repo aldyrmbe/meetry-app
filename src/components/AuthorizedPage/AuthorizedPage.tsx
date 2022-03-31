@@ -1,9 +1,8 @@
 const AuthorizedPage = (Component: any) => {
+  // eslint-disable-next-line react/display-name
   return () => {
     return <Component></Component>
   }
 }
-
-AuthorizedPage.displayName = "Authorized Page"
 
 export default AuthorizedPage
