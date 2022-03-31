@@ -1,36 +1,33 @@
-import { parseAuthCookie } from "@lib/utils/parseAuthCookie"
-import { baseURL } from "@lib/service/axios"
+import { GetServerSidePropsContext } from "next"
+import { getUser } from "@lib/service/user"
 
-interface AuthenticateUserParams {
-  req: any
-  role: "PENELITI" | "MITRA" | "ERIC" | "ACCOUNT_OFFICER"
-}
-
-interface AuthenticateReturn {
-  role: "PENELITI" | "MITRA" | "ERIC" | "ACCOUNT_OFFICER" | undefined
-  authenticated: boolean
-}
-
-const authenticate = async ({ req, role }: AuthenticateUserParams): Promise<AuthenticateReturn> => {
-  const cookie = parseAuthCookie(req)
-  if (cookie) {
-    try {
-      const response = await fetch(`${baseURL}/backend/user`, {
-        credentials: "include",
-        method: "GET",
-        headers: {
-          Cookie: cookie
+const authenticate = (authorizedRole: "peneliti" | "mitra" | "eric" | "accountofficer") => {
+  return async (context: GetServerSidePropsContext) => {
+    const user = await getUser(context.req.headers.cookie)
+    if (user) {
+      const role = user.role
+      if (authorizedRole === role.toLowerCase()) {
+        return {
+          props: {}
         }
-      })
-      const user = await response.json()
-      if (user?.role === role) {
-        return Promise.resolve({ role: user?.role, authenticated: true })
+      } else {
+        return {
+          redirect: {
+            permanent: false,
+            destination: `/${role.toLowerCase()}/dashboard`
+          },
+          props: {}
+        }
       }
-    } catch (err) {
-      return Promise.resolve({ role: undefined, authenticated: false })
+    }
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/"
+      },
+      props: {}
     }
   }
-  return Promise.resolve({ role: undefined, authenticated: false })
 }
 
 export default authenticate

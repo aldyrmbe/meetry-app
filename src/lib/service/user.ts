@@ -5,10 +5,11 @@ export interface User {
   role: "PENELITI" | "MITRA" | "ERIC" | "ACCOUNT_OFFICER"
 }
 
-export const getUser = async (cookie: any) => {
+export const getUser = async (cookie: string | undefined) => {
   try {
     const request = await serverSideAxiosInstance(cookie).get<User>("/backend/user")
-    const user = request.data
-    return user
-  } catch (error) {}
+    return request.data
+  } catch (error) {
+    return undefined
+  }
 }

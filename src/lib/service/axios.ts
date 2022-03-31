@@ -7,12 +7,12 @@ const axiosInstance = axios.create({
   withCredentials: true
 })
 
-const serverSideAxiosInstance = (cookie: any) => {
+const serverSideAxiosInstance = (cookie: string | undefined) => {
   return axios.create({
     baseURL,
     withCredentials: true,
     headers: {
-      Cookie: cookie
+      Cookie: cookie!
     },
     timeout: 10000
   })
