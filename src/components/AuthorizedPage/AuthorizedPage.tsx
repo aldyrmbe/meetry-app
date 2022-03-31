@@ -4,4 +4,6 @@ const AuthorizedPage = (Component: any) => {
   }
 }
 
+AuthorizedPage.displayName = "Authorized Page"
+
 export default AuthorizedPage
