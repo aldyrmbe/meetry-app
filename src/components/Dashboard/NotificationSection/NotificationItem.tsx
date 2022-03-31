@@ -1,6 +1,8 @@
 import { VStack, Flex, Text } from "@chakra-ui/react"
 import EllipseIcon from "@components/Icon/EllipseIcon"
+import LinkifyText from "@components/Linkify/LinkifyText"
 import { getDisplayTime } from "@lib/utils/date"
+import Linkify from "linkify-react"
 
 interface NotificationData {
   sender: string
@@ -30,7 +32,7 @@ const NotificationItem = ({ notification }: NotificationItemProps) => {
       <Text fontSize="lg" fontWeight="semibold">
         {title}
       </Text>
-      <Text>{body}</Text>
+      <LinkifyText value={body}></LinkifyText>
     </VStack>
   )
 }
