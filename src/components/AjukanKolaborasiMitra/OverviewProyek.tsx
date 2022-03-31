@@ -25,7 +25,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef }: OverviewPr
       behavior: "smooth",
       top: node?.offsetTop! - 10
     })
-  }, [])
+  }, [connectorRef])
 
   return (
     <>

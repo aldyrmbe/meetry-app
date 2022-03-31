@@ -19,7 +19,7 @@ const KriteriaMitra = ({ register, errors, prevStep, connectorRef }: KriteriaMit
       behavior: "smooth",
       top: node?.offsetTop! - 10
     })
-  }, [])
+  }, [connectorRef])
 
   return (
     <>
