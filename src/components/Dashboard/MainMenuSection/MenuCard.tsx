@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from "@chakra-ui/icons"
-import { Box, Flex, Text, IconButton } from "@chakra-ui/react"
+import { Box, Flex, Text, IconButton, transition } from "@chakra-ui/react"
 import { useRouter } from "next/router"
 
 interface MenuCardProps {
@@ -18,7 +18,13 @@ const MenuCard = ({ text, href }: MenuCardProps) => {
       }}
       w="100%"
       h="100%"
-      boxShadow="0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06)"
+      boxShadow="base"
+      _hover={{
+        boxShadow: "xl",
+        transition: "0.3s",
+        transform: "scale(1.02)",
+        border: "1px solid #A7BED7"
+      }}
       borderRadius="6px"
       p="32px"
       backgroundColor="white"

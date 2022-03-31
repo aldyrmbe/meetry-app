@@ -29,7 +29,7 @@ import React, { useState } from "react"
 interface DefaultInputProps<TFormValues extends FieldValues> extends InputProps {
   fieldName: Path<TFormValues>
   register: UseFormRegister<TFormValues>
-  label: string
+  label?: string
   validation?: RegisterOptions
   errors?: FieldErrors
 }

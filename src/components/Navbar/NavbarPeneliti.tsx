@@ -11,11 +11,11 @@ const NavbarPeneliti = () => {
   const toast = useToast()
   const handleLogout = () => {
     axiosInstance.post("/backend/user/logout").then((res) => {
+      router.replace("/")
       showToast(toast, {
         title: "Logout berhasil",
         status: "success"
       })
-      router.replace("/")
     })
   }
 
@@ -23,7 +23,7 @@ const NavbarPeneliti = () => {
     <nav>
       <NavWrapper>
         <Flex h="80px" gap="16px" align="center">
-          <Box as="a" href="/home">
+          <Box as="a" href="/peneliti/dashboard">
             <Image src="/logo.svg" alt="Meetry Logo"></Image>
           </Box>
           <Spacer></Spacer>

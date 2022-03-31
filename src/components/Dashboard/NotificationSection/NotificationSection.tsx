@@ -34,6 +34,7 @@ const NotificationSection = ({ role }: NotificationSectionProps) => {
 
   useEffect(() => {
     fetchMoreData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const fetchMoreData = () => {
@@ -59,7 +60,7 @@ const NotificationSection = ({ role }: NotificationSectionProps) => {
         mt="20px"
         h="70vh"
         overflowY="auto"
-        boxShadow="0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06)"
+        boxShadow="base"
         borderRadius="6px"
         p="32px"
         w="100%"
