@@ -10,7 +10,5 @@ export const getUser = async (cookie: any) => {
     const request = await serverSideAxiosInstance(cookie).get<User>("/backend/user")
     const user = request.data
     return user
-  } catch (error) {
-    console.error(error)
-  }
+  } catch (error) {}
 }
