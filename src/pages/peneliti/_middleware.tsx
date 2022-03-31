@@ -5,6 +5,6 @@ import authenticate from "@lib/service/auth"
 export const middleware = async (req: NextRequest, ev: NextFetchEvent) => {
   const { role, authenticated } = await authenticate({ req, role: "PENELITI" })
   if (role && !authenticated)
-    return NextResponse.redirect(`${baseURL}/${role.toLowerCase()}/dashboard`.toString())
-  if (!role && !authenticated) return NextResponse.redirect(baseURL.toString())
+    return Response.redirect(`${baseURL}/${role.toLowerCase()}/dashboard`.toString())
+  if (!role && !authenticated) return Response.redirect(baseURL.toString())
 }
