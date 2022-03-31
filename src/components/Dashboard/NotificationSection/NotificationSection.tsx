@@ -67,7 +67,7 @@ const NotificationSection = ({ role }: NotificationSectionProps) => {
       >
         {isLoading ? (
           <Center h="100%">
-            <Spinner color="teal.500" size="xl"></Spinner>
+            <Spinner color="teal.400" size="xl"></Spinner>
           </Center>
         ) : (
           <Fade in={true}>
