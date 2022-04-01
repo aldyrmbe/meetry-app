@@ -14,19 +14,19 @@ const TableFooter = ({ data, setPage, isLoading }: TableFooterProps) => {
         <Skeleton height="30px" w="130px"></Skeleton>
       ) : (
         <Text>
-          Halaman {data.pagination.currentPage} dari {data.pagination.totalPage}
+          Halaman {data?.pagination.currentPage} dari {data?.pagination.totalPage}
         </Text>
       )}
       <Flex gap="8px">
         <IconButton
-          isDisabled={data?.pagination.currentPage === 1}
+          isDisabled={data?.pagination?.currentPage === 1}
           icon={<ChevronLeftIcon w="16px" h="16px" />}
           onClick={() => setPage((prevState) => prevState - 1)}
           aria-label="previous"
           variant="outline"
         ></IconButton>
         <IconButton
-          isDisabled={data?.pagination.totalPage === data?.pagination.currentPage}
+          isDisabled={data?.pagination?.totalPage === data?.pagination?.currentPage}
           icon={<ChevronRightIcon w="16px" h="16px" />}
           aria-label="next"
           onClick={() => setPage((prevState) => prevState + 1)}
