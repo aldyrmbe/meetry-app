@@ -4,14 +4,15 @@ import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react"
 
 interface SearchBarInputProps {
   placeholder: string
-  handleSearch: any
+  onChange?: any
+  onKeyDown?: any
 }
 
-const SearchBarInput = ({ placeholder, handleSearch }: SearchBarInputProps) => {
+const SearchBarInput = ({ placeholder, onChange, onKeyDown }: SearchBarInputProps) => {
   return (
     <InputGroup>
       <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.400" />} />
-      <Input type="text" placeholder={placeholder} onKeyDown={handleSearch} />
+      <Input type="text" placeholder={placeholder} onChange={onChange} onKeyDown={onKeyDown} />
     </InputGroup>
   )
 }

@@ -23,7 +23,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<ApiRes
   const page = req.query.page ?? 1
 
   if (type === "peneliti") {
-    if (searchQuery === "") {
+    if (searchQuery === "ok") {
       if (page === "1") {
         setTimeout(() => {
           res.status(200).json({
@@ -32,7 +32,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<ApiRes
             data: [
               {
                 id: "123",
-                nama: "Peneliti1",
+                nama: "Peneliti Fajar Ryan Akhra",
                 fotoProfil: "https://ui-avatars.com/api/?name=P",
                 judulProyek: "Judul 1",
                 bidang: "Bidang 1, Bidang 2"

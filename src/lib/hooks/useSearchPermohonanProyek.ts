@@ -24,6 +24,11 @@ const useSearchPermohonanProyek = (type: "mitra" | "peneliti", searchQuery: stri
   const [page, setPage] = useState<number>(1)
 
   useEffect(() => {
+    setPage(1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery])
+
+  useEffect(() => {
     axiosInstance
       .get<ApiResponse>(`/api/searchProyek?type=${type}&searchQuery=${searchQuery}&page=${page}`)
       .then((response) => {
@@ -31,6 +36,7 @@ const useSearchPermohonanProyek = (type: "mitra" | "peneliti", searchQuery: stri
         setData(response.data)
       })
     setLoading(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, searchQuery])
 
   return { data, isLoading, setPage }

@@ -4,7 +4,7 @@ import { useState } from "react"
 import DetailProyek from "./DetailProyek"
 import TableListProyek from "./TableListProyek"
 
-const PermohonanPencarianMitra = () => {
+const PermohonanPencarianPeneliti = () => {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [proyekId, setProyekId] = useState<string | undefined>(undefined)
   const debouncedValue = useDebounce(searchQuery)
@@ -23,7 +23,7 @@ const PermohonanPencarianMitra = () => {
         <>
           <SearchBarInput placeholder="Cari proyek" onChange={handleSearchInput}></SearchBarInput>
           <TableListProyek
-            type="peneliti"
+            type="mitra"
             searchQuery={debouncedValue}
             setProyekId={setProyekId}
           ></TableListProyek>
@@ -33,4 +33,4 @@ const PermohonanPencarianMitra = () => {
   )
 }
 
-export default PermohonanPencarianMitra
+export default PermohonanPencarianPeneliti

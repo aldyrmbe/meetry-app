@@ -20,9 +20,10 @@ import TableFooter from "./TableFooter"
 interface TableListProyekProps {
   type: "mitra" | "peneliti"
   searchQuery: string
+  setProyekId: (proyekId: string) => void
 }
 
-const TableListProyek = ({ type, searchQuery }: TableListProyekProps) => {
+const TableListProyek = ({ type, searchQuery, setProyekId }: TableListProyekProps) => {
   const { data, isLoading, setPage } = useSearchPermohonanProyek(type, searchQuery)
   console.log(data)
 
@@ -46,21 +47,27 @@ const TableListProyek = ({ type, searchQuery }: TableListProyekProps) => {
         <Tbody>
           {isLoading
             ? [...Array(5)].map((n, index) => (
-                <Tr key={n}>
-                  <Td p="-16px auto -16px -24px">
+                <Tr key={index}>
+                  <Td w="25%">
+                    <Flex gap="12px">
+                      <Skeleton borderRadius="full" h="40px" w="40px"></Skeleton>
+                      <Skeleton h="40px" w="70%"></Skeleton>
+                    </Flex>
+                  </Td>
+                  <Td w="30%">
+                    <Skeleton h="40px" />
+                  </Td>
+                  <Td w="30%">
                     <Skeleton h="40px" />
                   </Td>
                   <Td>
-                    <Skeleton h="40px" />
-                  </Td>
-                  <Td>
-                    <Skeleton h="40px" />
+                    <Skeleton borderRadius="full" h="40px" w="40px" />
                   </Td>
                 </Tr>
               ))
             : data?.data.map((proyek, index) => (
                 <Tr key={index}>
-                  <Td p="16px auto 16px 24px">
+                  <Td w="25%" p="16px auto 16px 24px">
                     <HStack spacing="12px">
                       <Image
                         alt="Profile Image"
@@ -68,17 +75,24 @@ const TableListProyek = ({ type, searchQuery }: TableListProyekProps) => {
                         borderRadius="full"
                         src={proyek.fotoProfil}
                       ></Image>
-                      <Text>{proyek.nama}</Text>
+                      <Text fontWeight="medium" fontSize="sm">
+                        {proyek.nama}
+                      </Text>
                     </HStack>
                   </Td>
-                  <Td>{proyek.judulProyek}</Td>
-                  <Td>{proyek.bidang}</Td>
+                  <Td w="30%">
+                    <Text fontSize="sm">{proyek.judulProyek}</Text>
+                  </Td>
+                  <Td w="30%">
+                    <Text fontSize="sm">{proyek.bidang}</Text>
+                  </Td>
                   <Td>
                     <IconButton
                       icon={<ChevronRightIcon w="16px" h="16px" />}
                       borderRadius="full"
                       backgroundColor="transparent"
                       aria-label="detailProyek"
+                      onClick={() => setProyekId(proyek.id)}
                     ></IconButton>
                   </Td>
                 </Tr>

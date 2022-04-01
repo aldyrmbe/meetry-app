@@ -2,6 +2,7 @@ import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import AuthorizedPage from "@components/AuthorizedPage/AuthorizedPage"
 import Container from "@components/Container/Container"
 import PermohonanPencarianMitra from "@components/Dashboard/PermohonanPencarianProyek/PermohonanPencarianMitra"
+import PermohonanPencarianPeneliti from "@components/Dashboard/PermohonanPencarianProyek/PermohonanPencarianPeneliti"
 import NavbarERIC from "@components/Navbar/NavbarERIC"
 import authenticate from "@lib/service/auth"
 import { GetServerSideProps } from "next"
@@ -33,7 +34,9 @@ const DashboardERIC = () => {
               <TabPanel p="32px 0">
                 <PermohonanPencarianMitra></PermohonanPencarianMitra>
               </TabPanel>
-              <TabPanel p="32px 0">b</TabPanel>
+              <TabPanel p="32px 0">
+                <PermohonanPencarianPeneliti></PermohonanPencarianPeneliti>
+              </TabPanel>
             </TabPanels>
           </Tabs>
         </Box>

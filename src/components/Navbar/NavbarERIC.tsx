@@ -39,7 +39,7 @@ const NavbarERIC = () => {
           </Box>
           <SearchBarInput
             placeholder="Cari peneliti, mitra, atau account officer disini"
-            handleSearch={handleSearchInput}
+            onKeyDown={handleSearchInput}
           ></SearchBarInput>
           <Flex align="center" justify="center">
             <NavLink

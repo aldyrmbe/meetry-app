@@ -9,15 +9,7 @@ interface AppProps {
 const CustomLink = ({ value }: AppProps) => {
   const router = useRouter()
   return (
-    <Box
-      as="span"
-      _hover={{ color: "blue.600" }}
-      onClick={() => {
-        router.push(value)
-      }}
-      fontWeight="medium"
-      color="blue.500"
-    >
+    <Box as="span" _hover={{ color: "blue.600" }} fontWeight="medium" color="blue.500">
       {value}
     </Box>
   )
