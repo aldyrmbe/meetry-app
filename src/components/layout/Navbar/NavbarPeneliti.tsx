@@ -1,9 +1,9 @@
 import { Box, Flex, Image, Link, Spacer, useToast } from "@chakra-ui/react"
-import NavLink from "@components/Navbar/NavLink"
-import NavWrapper from "@components/Navbar/NavWrapper"
+import NavLink from "@components/layout/Navbar/NavLink"
+import NavWrapper from "@components/layout/Navbar/NavWrapper"
 import { useRouter } from "next/router"
-import { getRoleBasedPath } from "@lib/utils/basePath"
-import handleLogout from "@lib/utils/handleLogout"
+import { getRoleBasedPath } from "src/utils/basePath"
+import handleLogout from "src/utils/handleLogout"
 
 const NavbarPeneliti = () => {
   const router = useRouter()
@@ -18,11 +18,7 @@ const NavbarPeneliti = () => {
           </Box>
           <Spacer></Spacer>
           <Flex align="center" justify="center">
-            <NavLink
-              text="Beranda"
-              href={getRoleBasedPath("peneliti", "/dashboard")}
-              mr="32px"
-            ></NavLink>
+            <NavLink text="Beranda" href={getRoleBasedPath("peneliti", "/dashboard")} mr="32px"></NavLink>
             <NavLink text="Kolaborasi Saya" href="/about" path="/about" mr="32px"></NavLink>
             <Link onClick={() => handleLogout(router, toast)}>Logout</Link>
           </Flex>

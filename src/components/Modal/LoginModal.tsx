@@ -14,12 +14,12 @@ import {
 } from "@chakra-ui/react"
 import { useRouter } from "next/router"
 import { useForm, SubmitHandler, FieldError, FieldErrors, UseFormRegister } from "react-hook-form"
-import { axiosInstance } from "@lib/service/axios"
-import { showToast } from "@lib/toast/toast"
-import { emailValidation, passwordValidation } from "@lib/utils/input-validation/validation"
-import { EmailInput, PasswordInput } from "@components/Input/MeetryInput"
+import { axiosInstance } from "src/service/axios"
+import { showToast } from "src/service/toast"
+import { emailValidation, passwordValidation } from "src/utils/input-validation/validation"
+import { EmailInput, PasswordInput } from "@components/input/MeetryInput"
 import { useState } from "react"
-import { User } from "@lib/service/user"
+import { User } from "src/service/user"
 
 interface LoginRequest {
   email: string

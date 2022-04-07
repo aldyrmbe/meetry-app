@@ -16,14 +16,7 @@ import {
   InputProps
 } from "@chakra-ui/react"
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
-import {
-  UseFormRegister,
-  FieldValues,
-  RegisterOptions,
-  FieldErrors,
-  UseFormWatch,
-  Path
-} from "react-hook-form"
+import { UseFormRegister, FieldValues, RegisterOptions, FieldErrors, UseFormWatch, Path } from "react-hook-form"
 import React, { useState } from "react"
 
 interface DefaultInputProps<TFormValues extends FieldValues> extends InputProps {
@@ -190,7 +183,6 @@ export const TextArea = <TFormValues extends FieldValues>({
   helperText
 }: TextAreaProps<TFormValues>) => {
   let error = errors?.[fieldName]?.message
-
   return (
     <FormControl isInvalid={Boolean(error)} mt={mt ?? "32px"}>
       <FormLabel htmlFor={fieldName}>{label}</FormLabel>
@@ -227,28 +219,14 @@ export const FileInput = <TFormValues extends FieldValues>({
     <FormControl mt={mt ?? "32px"}>
       <FormLabel htmlFor={fieldName}>{label}</FormLabel>
       <InputGroup id={fieldName} backgroundColor="white" pos="relative">
-        <Flex
-          w="100%"
-          whiteSpace="nowrap"
-          px={4}
-          align="center"
-          borderWidth={1}
-          borderLeftRadius="md"
-        >
+        <Flex w="100%" whiteSpace="nowrap" px={4} align="center" borderWidth={1} borderLeftRadius="md">
           {!watchField?.[0] && (
             <Text color="blackAlpha.500" fontWeight="500">
               {placeholder}
             </Text>
           )}
           {watchField?.[0] && watchField[0].name}
-          <Input
-            type="file"
-            w="100%"
-            opacity={0}
-            pos="absolute"
-            inset={0}
-            {...register(fieldName, validation)}
-          />
+          <Input type="file" w="100%" opacity={0} pos="absolute" inset={0} {...register(fieldName, validation)} />
         </Flex>
         <InputRightAddon children={"Unggah File"}></InputRightAddon>
       </InputGroup>
@@ -280,12 +258,7 @@ export const SelectInput = <TFormValues extends FieldValues>({
   return (
     <FormControl isInvalid={Boolean(error)} mt={mt ?? "32px"}>
       <FormLabel htmlFor={fieldName}>{label}</FormLabel>
-      <Select
-        id={fieldName}
-        placeholder={placeholder}
-        {...register(fieldName, validation)}
-        backgroundColor="white"
-      >
+      <Select id={fieldName} placeholder={placeholder} {...register(fieldName, validation)} backgroundColor="white">
         {options.map((option, idx) => (
           <option key={idx} value={option.value}>
             {option.text}
@@ -297,8 +270,7 @@ export const SelectInput = <TFormValues extends FieldValues>({
   )
 }
 
-interface TextIconInputProps<TFormValues extends FieldValues>
-  extends DefaultInputProps<TFormValues> {
+interface TextIconInputProps<TFormValues extends FieldValues> extends DefaultInputProps<TFormValues> {
   icon: React.ReactNode
 }
 
@@ -318,12 +290,7 @@ export const TextIconInput = <TFormValues extends FieldValues>({
       <FormLabel htmlFor={fieldName}>{label}</FormLabel>
       <InputGroup>
         <InputLeftElement pointerEvents="none" children={icon} />
-        <Input
-          id="dokumenPendukung"
-          {...register(fieldName, validation)}
-          type="text"
-          placeholder={placeholder}
-        ></Input>
+        <Input id="dokumenPendukung" {...register(fieldName, validation)} type="text" placeholder={placeholder}></Input>
       </InputGroup>
       {error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>

@@ -1,5 +1,5 @@
-import BaseResponse from "@lib/service/baseResponse"
-import { axiosInstance } from "@lib/service/axios"
+import BaseResponse from "src/service/baseResponse"
+import { axiosInstance } from "src/service/axios"
 import { useEffect, useState } from "react"
 
 export interface ProyekData {

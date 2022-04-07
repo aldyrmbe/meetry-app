@@ -1,9 +1,9 @@
 import { Box, HStack, Heading, Button } from "@chakra-ui/react"
 import { ArrowBackIcon } from "@chakra-ui/icons"
-import Container from "@components/Container/Container"
-import Navbar from "@components/Navbar/Navbar"
+import Container from "@components/layout/Container/Container"
+import Navbar from "@components/layout/Navbar/Navbar"
 import Head from "next/head"
-import RegisterCard from "@components/RegisterCard/RegisterCard"
+import RegisterCard from "@components/page-component/Register/RegisterCard/RegisterCard"
 import { useState } from "react"
 
 const Register = () => {

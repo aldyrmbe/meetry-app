@@ -1,21 +1,12 @@
-import {
-  Box,
-  Flex,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Link,
-  useToast
-} from "@chakra-ui/react"
-import NavWrapper from "@components/Navbar/NavWrapper"
-import NavLink from "@components/Navbar/NavLink"
-import { getRoleBasedPath } from "@lib/utils/basePath"
+import { Box, Flex, Image, Input, InputGroup, InputLeftElement, Link, useToast } from "@chakra-ui/react"
+import NavWrapper from "@components/layout/Navbar/NavWrapper"
+import NavLink from "@components/layout/Navbar/NavLink"
+import { getRoleBasedPath } from "src/utils/basePath"
 import { SearchIcon } from "@chakra-ui/icons"
 import { KeyboardEvent } from "react"
 import { useRouter } from "next/router"
-import handleLogout from "@lib/utils/handleLogout"
-import SearchBarInput from "@components/Input/SearchBarInput"
+import handleLogout from "src/utils/handleLogout"
+import SearchBarInput from "@components/input/SearchBarInput"
 
 const NavbarERIC = () => {
   const router = useRouter()
@@ -25,7 +16,6 @@ const NavbarERIC = () => {
     if (e.key === "Enter") {
       const input = e.target as HTMLInputElement
       const searchQuery = input.value
-      console.log(searchQuery)
       router.push(getRoleBasedPath("eric", `/search?searchQuery=${searchQuery}`))
     }
   }
@@ -42,11 +32,7 @@ const NavbarERIC = () => {
             onKeyDown={handleSearchInput}
           ></SearchBarInput>
           <Flex align="center" justify="center">
-            <NavLink
-              text="Beranda"
-              href={getRoleBasedPath("eric", "/dashboard")}
-              mr="32px"
-            ></NavLink>
+            <NavLink text="Beranda" href={getRoleBasedPath("eric", "/dashboard")} mr="32px"></NavLink>
             <NavLink text="Kolaborasi Saya" href="/about" path="/about" mr="32px"></NavLink>
             <Link onClick={() => handleLogout(router, toast)}>Logout</Link>
           </Flex>

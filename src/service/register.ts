@@ -1,5 +1,5 @@
-import { axiosInstance } from "@lib/service/axios"
-import { showToast } from "@lib/toast/toast"
+import { axiosInstance } from "src/service/axios"
+import { showToast } from "src/service/toast"
 import { NextRouter } from "next/router"
 
 export interface RegisterPenelitiFormValues {

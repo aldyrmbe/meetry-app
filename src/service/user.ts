@@ -1,4 +1,4 @@
-import { serverSideAxiosInstance } from "src/lib/service/axios"
+import { serverSideAxiosInstance } from "src/service/axios"
 
 export interface User {
   id: string

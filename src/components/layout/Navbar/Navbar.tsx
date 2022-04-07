@@ -1,7 +1,7 @@
 import { Box, Flex, Image, Spacer, useDisclosure } from "@chakra-ui/react"
-import NavLink from "@components/Navbar/NavLink"
-import LoginModal from "@components/Modal/LoginModal"
-import PrimaryButton from "@components/Button/PrimaryButton"
+import NavLink from "@components/layout/Navbar/NavLink"
+import LoginModal from "@components/modal/LoginModal"
+import PrimaryButton from "@components/button/PrimaryButton"
 import NavWrapper from "./NavWrapper"
 
 const Navbar = () => {

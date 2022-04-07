@@ -1,28 +1,15 @@
 import { Box, Text, Divider, VStack, Spinner, Center, Flex, Fade } from "@chakra-ui/react"
-import MenuHeader from "@components/Dashboard/MenuHeader"
-import NotificationIcon from "@components/Icon/NotificationIcon"
-import IconLabel from "@components/Dashboard/IconLabel"
-import { axiosInstance } from "@lib/service/axios"
+import MenuHeader from "@components/page-component/Dashboard/MenuHeader"
+import NotificationIcon from "@components/icon/NotificationIcon"
+import IconLabel from "@components/page-component/Dashboard/IconLabel"
+import { axiosInstance } from "src/service/axios"
 import { useEffect, useState } from "react"
 import NotificationItem from "./NotificationItem"
-import PrimaryButton from "@components/Button/PrimaryButton"
+import PrimaryButton from "@components/button/PrimaryButton"
+import { NotificationData, GetNotificationResponse } from "@/types/api-response/notification"
 
 interface NotificationSectionProps {
   role: "peneliti" | "mitra"
-}
-
-interface NotificationData {
-  sender: string
-  time: number
-  type?: string
-  title: string
-  body: string
-}
-
-interface Data {
-  code: number
-  status: string
-  data: NotificationData[]
 }
 
 const NotificationSection = ({ role }: NotificationSectionProps) => {
@@ -39,7 +26,7 @@ const NotificationSection = ({ role }: NotificationSectionProps) => {
 
   const fetchMoreData = () => {
     setIsFetching(true)
-    axiosInstance.get<Data>(`/api/notification?page=${page}`).then((response) => {
+    axiosInstance.get<GetNotificationResponse>(`/api/notification?page=${page}`).then((response) => {
       const notificationsData = response.data.data
       setHasMore(notificationsData.length > 0)
       setNotifications(notifications.concat(notificationsData))

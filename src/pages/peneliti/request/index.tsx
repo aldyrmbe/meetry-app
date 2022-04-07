@@ -1,42 +1,17 @@
 import { ArrowBackIcon } from "@chakra-ui/icons"
-import { Flex, Box, Text, Divider, FormControl, Checkbox } from "@chakra-ui/react"
+import { Flex, Box, Text } from "@chakra-ui/react"
 import KriteriaMitra from "@components/AjukanKolaborasiMitra/KriteriaMitra"
 import OverviewProyek from "@components/AjukanKolaborasiMitra/OverviewProyek"
 import AuthorizedPage from "@components/AuthorizedPage/AuthorizedPage"
-import OutlinedButton from "@components/Button/OutlinedButton"
-import PrimaryButton from "@components/Button/PrimaryButton"
-import Container from "@components/Container/BoxContainer"
-import DocumentIcon from "@components/Icon/DocumentIcon"
-import {
-  DateInput,
-  SelectInput,
-  TextArea,
-  TextIconInput,
-  TextInput
-} from "@components/Input/MeetryInput"
-import NavbarPeneliti from "@components/Navbar/NavbarPeneliti"
-import useSteps from "@lib/hooks/useSteps"
-import authenticate from "@lib/service/auth"
-import { requiredValidation } from "@lib/utils/input-validation/validation"
+import Container from "@components/layout/Container/BoxContainer"
+import NavbarPeneliti from "@components/layout/Navbar/NavbarPeneliti"
+import useSteps from "src/hooks/useSteps"
+import authenticate from "src/service/auth"
 import { GetServerSideProps } from "next"
 import Head from "next/head"
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import { useForm } from "react-hook-form"
-
-interface AjukanKolaborasiRequest {
-  judul: string
-  periodeMulai: any
-  periodeSelesai: any
-  bidang: string
-  latarBelakang: string
-  tujuan: string
-  sasaranPengguna: string
-  output: string
-  ketepatanSolusi: string
-  tolakUkurKesuksesan: string
-  tingkatKesiapan: string
-  dokumenPendukung?: string
-}
+import { AjukanKolaborasiRequest } from "@/types/api-request/ajukankolaborasi"
 
 export const getServerSideProps: GetServerSideProps = authenticate("peneliti")
 
@@ -46,8 +21,23 @@ const AjukanKolaborasi = () => {
     register,
     handleSubmit,
     trigger,
+    control,
+    watch,
     formState: { errors }
-  } = useForm()
+  } = useForm<AjukanKolaborasiRequest>({
+    defaultValues: {
+      linkPendukung: [{ value: null }],
+      dokumenPendukung: [{ value: null }],
+      kebutuhanProyek: [
+        {
+          kebutuhanProyek: "",
+          bentukKolaborasi: "",
+          bidangMitra: [""],
+          penjelasanTambahan: ""
+        }
+      ]
+    }
+  })
 
   const connectorRef = useRef<HTMLDivElement>(null)
   const onSubmit = handleSubmit((data) => {
@@ -72,11 +62,7 @@ const AjukanKolaborasi = () => {
         <Box w="70%" m="0 auto">
           <Flex ref={connectorRef} gap="32px">
             <Flex flexDir="column" w="50%" gap="16px">
-              <Box
-                backgroundColor={activeStep === 1 ? "teal.500" : "gray.200"}
-                w="100%"
-                h="4px"
-              ></Box>
+              <Box backgroundColor={activeStep === 1 ? "teal.500" : "gray.200"} w="100%" h="4px"></Box>
               <Box>
                 <Text fontSize="sm" color="teal.500" fontWeight="semibold">
                   STEP 1
@@ -87,11 +73,7 @@ const AjukanKolaborasi = () => {
               </Box>
             </Flex>
             <Flex flexDir="column" w="50%" gap="16px">
-              <Box
-                backgroundColor={activeStep === 2 ? "teal.500" : "gray.200"}
-                w="100%"
-                h="4px"
-              ></Box>
+              <Box backgroundColor={activeStep === 2 ? "teal.500" : "gray.200"} w="100%" h="4px"></Box>
               <Box>
                 <Text fontSize="sm" color="teal.500" fontWeight="semibold">
                   STEP 2
@@ -110,6 +92,8 @@ const AjukanKolaborasi = () => {
                   register={register}
                   nextStep={nextStep}
                   errors={errors}
+                  control={control}
+                  watch={watch}
                 ></OverviewProyek>
               )}
               {activeStep === 2 && (
@@ -118,6 +102,7 @@ const AjukanKolaborasi = () => {
                   register={register}
                   prevStep={prevStep}
                   errors={errors}
+                  control={control}
                 ></KriteriaMitra>
               )}
             </form>

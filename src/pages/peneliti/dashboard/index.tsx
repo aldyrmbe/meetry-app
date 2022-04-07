@@ -1,12 +1,11 @@
 import { Box } from "@chakra-ui/react"
-import Container from "@components/Container/Container"
-import NavbarPeneliti from "@components/Navbar/NavbarPeneliti"
+import Container from "@components/layout/Container/Container"
+import NavbarPeneliti from "@components/layout/Navbar/NavbarPeneliti"
 import Head from "next/head"
-import MainMenuSection from "@components/Dashboard/MainMenuSection/MainMenuSection"
-import NotificationSection from "@components/Dashboard/NotificationSection/NotificationSection"
+import MainMenuSection from "@components/page-component/Dashboard/MainMenuSection/MainMenuSection"
+import NotificationSection from "@components/page-component/Dashboard/NotificationSection/NotificationSection"
 import { GetServerSideProps } from "next"
-import authenticate from "@lib/service/auth"
-import AuthorizedPage from "@components/AuthorizedPage/AuthorizedPage"
+import authenticate from "src/service/auth"
 
 export const getServerSideProps: GetServerSideProps = authenticate("peneliti")
 
@@ -29,4 +28,4 @@ const DashboardPeneliti = () => {
   )
 }
 
-export default AuthorizedPage(DashboardPeneliti)
+export default DashboardPeneliti

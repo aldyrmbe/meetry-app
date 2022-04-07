@@ -1,18 +1,10 @@
 import { VStack, Flex, Text } from "@chakra-ui/react"
-import EllipseIcon from "@components/Icon/EllipseIcon"
+import EllipseIcon from "@components/icon/EllipseIcon"
 import LinkifyText from "@components/Linkify/LinkifyText"
-import { getDisplayTime } from "@lib/utils/date"
-import Linkify from "linkify-react"
+import { getDisplayTime } from "src/utils/date"
+import { NotificationData } from "@/types/api-response/notification"
 
-interface NotificationData {
-  sender: string
-  time: number
-  type?: string
-  title: string
-  body: string
-}
-
-interface NotificationItemProps {
+type NotificationItemProps = {
   notification: NotificationData
 }
 

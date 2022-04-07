@@ -1,8 +1,8 @@
 import { ArrowBackIcon } from "@chakra-ui/icons"
 import { Flex, Spacer, Button, Text, Box, Divider, Center, Spinner } from "@chakra-ui/react"
-import PrimaryButton from "@components/Button/PrimaryButton"
+import PrimaryButton from "@components/button/PrimaryButton"
 import LinkifyText from "@components/Linkify/LinkifyText"
-import useDetailProyek from "@lib/hooks/useDetailProyek"
+import useDetailProyek from "src/hooks/useDetailProyek"
 
 interface DetailProyekProps {
   proyekId: string | undefined
@@ -14,11 +14,7 @@ const DetailProyek = ({ proyekId, setProyekId }: DetailProyekProps) => {
   return (
     <>
       <Flex align="center" gap="16px">
-        <ArrowBackIcon
-          boxSize="25px"
-          cursor="pointer"
-          onClick={() => setProyekId(undefined)}
-        ></ArrowBackIcon>
+        <ArrowBackIcon boxSize="25px" cursor="pointer" onClick={() => setProyekId(undefined)}></ArrowBackIcon>
         <Text fontSize="xl" fontWeight="semibold">
           Detail Proyek
         </Text>

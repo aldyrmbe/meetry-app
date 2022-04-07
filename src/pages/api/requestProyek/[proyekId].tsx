@@ -1,6 +1,6 @@
-import BaseResponse from "@lib/service/baseResponse"
+import BaseResponse from "src/service/baseResponse"
 import { NextApiRequest, NextApiResponse } from "next"
-import { ApiResponse } from "@lib/hooks/useDetailProyek"
+import { ApiResponse } from "src/hooks/useDetailProyek"
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<ApiResponse>) {
   const proyekId = req.query.proyekId

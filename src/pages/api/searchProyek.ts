@@ -1,4 +1,4 @@
-import BaseResponse from "@lib/service/baseResponse"
+import BaseResponse from "src/service/baseResponse"
 import { NextApiRequest, NextApiResponse } from "next"
 
 interface ProyekData {

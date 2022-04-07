@@ -1,18 +1,17 @@
 import { Box, Text, useToast } from "@chakra-ui/react"
-import { getUser } from "src/lib/service/user"
+import { getUser } from "src/service/user"
 import { GetServerSideProps, GetServerSidePropsContext } from "next"
 import { useRouter } from "next/router"
-import PrimaryButton from "@components/Button/PrimaryButton"
-import Container from "@components/Container/Container"
-import OutlinedButton from "@components/Button/OutlinedButton"
-import Navbar from "@components/Navbar/Navbar"
+import PrimaryButton from "@components/button/PrimaryButton"
+import Container from "@components/layout/Container/Container"
+import OutlinedButton from "@components/button/OutlinedButton"
+import Navbar from "@components/layout/Navbar/Navbar"
 import Head from "next/head"
-import { showToast } from "@lib/toast/toast"
+import { showToast } from "src/service/toast"
 import { useEffect } from "react"
+import Link from "next/link"
 
-export const getServerSideProps: GetServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const cookie = context.req.headers.cookie
   const user = await getUser(cookie)
   if (user) {
@@ -31,9 +30,6 @@ export const getServerSideProps: GetServerSideProps = async (
 
 const Home = () => {
   const router = useRouter()
-  const toRegisterPage = (): void => {
-    router.push("/register")
-  }
   const toast = useToast()
   const isLoggedOut = router.query.isLoggedOut
 
@@ -46,7 +42,7 @@ const Home = () => {
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedOut])
+  }, [])
 
   return (
     <>
@@ -60,12 +56,13 @@ const Home = () => {
             Tempat Kolaborasi<br></br>Mitra Proyek Terbaik
           </Text>
           <Text fontSize="xl" my="32px" color="gray.500">
-            Membantu mengelola pengerjaan proyek bersama<br></br>mitra terbaik secara efisien dan
-            efektif
+            Membantu mengelola pengerjaan proyek bersama<br></br>mitra terbaik secara efisien dan efektif
           </Text>
-          <PrimaryButton p="10px 24px" mr="35px" onClick={toRegisterPage}>
-            Gabung Sekarang
-          </PrimaryButton>
+          <Link href="/register">
+            <PrimaryButton p="10px 24px" mr="35px">
+              Gabung Sekarang
+            </PrimaryButton>
+          </Link>
           <OutlinedButton p="10px 24px">Baca Lebih Lanjut</OutlinedButton>
         </Box>
         <Box backgroundColor="gray.200" w="662px" h="500px"></Box>

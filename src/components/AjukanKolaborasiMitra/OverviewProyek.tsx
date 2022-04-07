@@ -1,31 +1,40 @@
-import { Flex, Text } from "@chakra-ui/react"
-import PrimaryButton from "@components/Button/PrimaryButton"
-import DocumentIcon from "@components/Icon/DocumentIcon"
-import {
-  DateInput,
-  SelectInput,
-  TextArea,
-  TextIconInput,
-  TextInput
-} from "@components/Input/MeetryInput"
-import { requiredValidation } from "@lib/utils/input-validation/validation"
+import { Button, Flex, Text } from "@chakra-ui/react"
+import PrimaryButton from "@components/button/PrimaryButton"
+import DocumentIcon from "@components/icon/DocumentIcon"
+import { DateInput, SelectInput, TextArea, TextIconInput, TextInput, FileInput } from "@components/input/MeetryInput"
+import { requiredValidation } from "src/utils/input-validation/validation"
 import React, { useEffect, useRef } from "react"
+import { useFieldArray } from "react-hook-form"
+import { AddIcon } from "@chakra-ui/icons"
 
-interface OverviewProyekProps {
+type OverviewProyekProps = {
   register: any
   errors: any
   nextStep: () => void
   connectorRef: React.RefObject<HTMLDivElement>
+  control: any
+  watch: any
 }
 
-const OverviewProyek = ({ register, errors, nextStep, connectorRef }: OverviewProyekProps) => {
+const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, watch }: OverviewProyekProps) => {
   useEffect(() => {
     const node = connectorRef.current
     window.scrollTo({
       behavior: "smooth",
       top: node?.offsetTop! - 10
     })
-  }, [connectorRef])
+  }, [])
+  const {
+    fields: linkFields,
+    append: linkAppend,
+    remove: linkRemove
+  } = useFieldArray({ control, name: "linkPendukung" })
+
+  const {
+    fields: dokumenFields,
+    append: dokumenAppend,
+    remove: dokumenRemove
+  } = useFieldArray({ control, name: "dokumenPendukung" })
 
   return (
     <>
@@ -109,18 +118,18 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef }: OverviewPr
         errors={errors}
       ></TextInput>
       <TextArea
-        fieldName="ketepatanSolusi"
+        fieldName="kebermanfaatanProduk"
         register={register}
-        label="Ketepatan solusi"
+        label="Kebermanfaatan produk"
         placeholder="Bagaimana karya atau proyek ini dapat menjadi solusi yang tepat sasaran?"
         validation={requiredValidation}
         errors={errors}
       ></TextArea>
       <TextArea
-        fieldName="tolakUkurKesuksesan"
+        fieldName="indikatorKesuksesan"
         register={register}
-        label="Tolak ukur kesuksesan"
-        placeholder="Jelaskan tolak ukur kesuksesannya"
+        label="Indikator kesuksesan"
+        placeholder="Jelaskan indikator kesuksesannya"
         validation={requiredValidation}
         errors={errors}
       ></TextArea>
@@ -137,15 +146,59 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef }: OverviewPr
         errors={errors}
       ></SelectInput>
       <Text mt="32px" fontWeight="bold" fontSize="lg">
-        Unggah dokumen pendukung
+        Dokumen pendukung (link)
       </Text>
-      <TextIconInput
-        fieldName="dokumenPendukung"
-        register={register}
-        label="Dokumen pendukung"
-        placeholder="Masukkan link dokumen disini"
-        icon={<DocumentIcon />}
-      ></TextIconInput>
+      {linkFields.map((field, index) => {
+        return (
+          <Flex key={field.id} w="100%" align="flex-end" gap="32px">
+            <TextIconInput
+              fieldName={`linkPendukung.${index}.value`}
+              register={register}
+              label={`Link ${index + 1}`}
+              placeholder="Masukkan link dokumen disini"
+              icon={<DocumentIcon />}
+            ></TextIconInput>
+            {linkFields.length !== 1 && <PrimaryButton onClick={() => linkRemove(index)}>Hapus</PrimaryButton>}
+          </Flex>
+        )
+      })}
+      <Button
+        w="100%"
+        mt="32px"
+        size="sm"
+        leftIcon={<AddIcon w="10px" mr="8px"></AddIcon>}
+        onClick={() => linkAppend({ value: "" })}
+        variant="ghost"
+      >
+        Tambah Link Baru
+      </Button>
+      <Text mt="32px" fontWeight="bold" fontSize="lg">
+        Dokumen pendukung (file)
+      </Text>
+      {dokumenFields.map((field, index) => {
+        return (
+          <Flex key={field.id} w="100%" align="flex-end" gap="32px">
+            <FileInput
+              fieldName={`dokumenPendukung.${index}.value`}
+              register={register}
+              watch={watch}
+              label={`Dokumen ${index + 1}`}
+              placeholder="Pilih file"
+            ></FileInput>
+            {dokumenFields.length !== 1 && <PrimaryButton onClick={() => dokumenRemove(index)}>Hapus</PrimaryButton>}
+          </Flex>
+        )
+      })}
+      <Button
+        w="100%"
+        mt="32px"
+        size="sm"
+        leftIcon={<AddIcon w="10px" mr="8px"></AddIcon>}
+        onClick={() => dokumenAppend({ value: null })}
+        variant="ghost"
+      >
+        Tambah File Baru
+      </Button>
       <Flex w="100%" justify="end" mt="64px">
         <PrimaryButton p="10px 90px" onClick={nextStep}>
           Lanjutkan

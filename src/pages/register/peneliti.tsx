@@ -9,14 +9,14 @@ import {
   DateInput,
   TextArea,
   FileInput
-} from "@components/Input/MeetryInput"
-import Container from "@components/Container/Container"
-import Navbar from "@components/Navbar/Navbar"
+} from "@components/input/MeetryInput"
+import Container from "@components/layout/Container/Container"
+import Navbar from "@components/layout/Navbar/Navbar"
 import Head from "next/head"
 import { useForm } from "react-hook-form"
-import { emailValidation, requiredValidation } from "@lib/utils/input-validation/validation"
+import { emailValidation, requiredValidation } from "src/utils/input-validation/validation"
 import { useState } from "react"
-import { RegisterPenelitiFormValues, registerPeneliti } from "@lib/service/register"
+import { RegisterPenelitiFormValues, registerPeneliti } from "src/service/register"
 import { useRouter } from "next/router"
 
 const RegisterPeneliti = () => {

@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from "next"
-import { getUser } from "@lib/service/user"
+import { getUser } from "src/service/user"
 
 const authenticate = (authorizedRole: "peneliti" | "mitra" | "eric" | "accountofficer") => {
   return async (context: GetServerSidePropsContext) => {

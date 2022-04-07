@@ -1,20 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
-import {
-  Box,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-  HStack,
-  IconButton,
-  Image,
-  Text,
-  Flex,
-  Skeleton
-} from "@chakra-ui/react"
-import useSearchPermohonanProyek from "@lib/hooks/useSearchPermohonanProyek"
+import { Box, Table, Thead, Tr, Th, Tbody, Td, HStack, IconButton, Image, Text, Flex, Skeleton } from "@chakra-ui/react"
+import useSearchPermohonanProyek from "src/hooks/useSearchPermohonanProyek"
 import TableFooter from "./TableFooter"
 
 interface TableListProyekProps {
@@ -69,12 +55,7 @@ const TableListProyek = ({ type, searchQuery, setProyekId }: TableListProyekProp
                 <Tr key={index}>
                   <Td w="25%" p="16px auto 16px 24px">
                     <HStack spacing="12px">
-                      <Image
-                        alt="Profile Image"
-                        boxSize="40px"
-                        borderRadius="full"
-                        src={proyek.fotoProfil}
-                      ></Image>
+                      <Image alt="Profile Image" boxSize="40px" borderRadius="full" src={proyek.fotoProfil}></Image>
                       <Text fontWeight="medium" fontSize="sm">
                         {proyek.nama}
                       </Text>
