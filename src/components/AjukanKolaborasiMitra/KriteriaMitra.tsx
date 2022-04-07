@@ -1,5 +1,5 @@
 import { Box, Button, Checkbox, Divider, Flex, FormControl, FormLabel, Text } from "@chakra-ui/react"
-import OutlinedButton from "../button/OutlinedButton"
+import OutlinedButton from "@components/button/OutlinedButton"
 import PrimaryButton from "@components/button/PrimaryButton"
 import { TextArea } from "@components/input/MeetryInput"
 import { requiredValidation } from "src/utils/input-validation/validation"

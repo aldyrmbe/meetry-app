@@ -1,4 +1,4 @@
-import { Button, ButtonProps, LinkProps } from "@chakra-ui/react"
+import { Button, ButtonProps } from "@chakra-ui/react"
 
 const OutlinedButton = (props: ButtonProps) => {
   const { children, ...rest } = props
