@@ -5,23 +5,18 @@ export type AjukanKolaborasiRequest = {
   bidang: string
   latarBelakang: string
   tujuan: string
-  sasaranPengguna: string
+  sasaran: string
   output: string
   ketepatanSolusi: string
   tolakUkurKesuksesan: string
   tingkatKesiapan: string
-  linkPendukung?: {
-    value: any
-  }[]
-  dokumenPendukung?: {
-    value: any
-  }[]
+  linkPendukung?: any[]
+  dokumenPendukung?: any[]
   kebutuhanProyek: KebutuhanProyek[]
 }
 
 export type KebutuhanProyek = {
   kebutuhanProyek: string
   bentukKolaborasi: string
-  bidangMitra: string[]
   penjelasanTambahan?: string
 }

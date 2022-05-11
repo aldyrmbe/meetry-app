@@ -1,8 +1,10 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Text } from "@chakra-ui/react"
 import Linkify from "linkify-react"
 import { useRouter } from "next/router"
 
 interface AppProps {
+  mt?: string
+  fontSize?: string
   value: string
 }
 
@@ -15,7 +17,7 @@ const CustomLink = ({ value }: AppProps) => {
   )
 }
 
-const LinkifyText = ({ value }: AppProps) => {
+const LinkifyText = ({ fontSize, value, mt }: AppProps) => {
   const formatLink = (value: any, type: any) => {
     return <CustomLink value={value}></CustomLink>
   }
@@ -23,7 +25,9 @@ const LinkifyText = ({ value }: AppProps) => {
 
   return (
     <Linkify tagName="span" options={options}>
-      {value}
+      <Text mt={mt} fontSize={fontSize}>
+        {value}
+      </Text>
     </Linkify>
   )
 }

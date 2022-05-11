@@ -3,9 +3,11 @@ import PrimaryButton from "@components/button/PrimaryButton"
 import DocumentIcon from "@components/icon/DocumentIcon"
 import { DateInput, SelectInput, TextArea, TextIconInput, TextInput, FileInput } from "@components/input/MeetryInput"
 import { requiredValidation } from "src/utils/input-validation/validation"
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import { useFieldArray } from "react-hook-form"
 import { AddIcon } from "@chakra-ui/icons"
+import { groupedOptions } from "@constants/bidangMitraOptions"
+import { getOptions } from "@utils/getOptions"
 
 type OverviewProyekProps = {
   register: any
@@ -14,16 +16,54 @@ type OverviewProyekProps = {
   connectorRef: React.RefObject<HTMLDivElement>
   control: any
   watch: any
+  trigger: any
 }
 
-const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, watch }: OverviewProyekProps) => {
+const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, watch, trigger }: OverviewProyekProps) => {
   useEffect(() => {
     const node = connectorRef.current
     window.scrollTo({
       behavior: "smooth",
       top: node?.offsetTop! - 10
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const handleNext = async () => {
+    let isValid = await trigger(
+      [
+        "judul",
+        "periodeMulai",
+        "periodeSelesai",
+        "bidang",
+        "latarBelakang",
+        "tujuan",
+        "sasaran",
+        "output",
+        "kebermanfaatanProduk",
+        "indikatorKesuksesan",
+        "tingkatKesiapan"
+      ],
+      { shouldFocus: true }
+    )
+    if (isValid) {
+      nextStep()
+    }
+  }
+
+  const tingkatKesiapanOptions = [
+    "0 - Non Teknologi",
+    "1 - Asumsi Dasar",
+    "2 - Formulasi Konsep",
+    "3 - Pembuktian Konsep",
+    "4 - Validasi Laboratorium",
+    "5 - Validasi Lingkungan",
+    "6 - Purwarupa Dasar",
+    "7 - Purwarupa Final",
+    "8 - Sistem Lengkap",
+    "9 - Sistem Teruji"
+  ]
+
   const {
     fields: linkFields,
     append: linkAppend,
@@ -74,16 +114,12 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         ></DateInput>
       </Flex>
       <SelectInput
-        options={[
-          { value: "Bidang 1", text: "Bidang 1" },
-          { value: "Bidang 2", text: "Bidang 2" }
-        ]}
+        options={groupedOptions}
         fieldName="bidang"
-        register={register}
+        control={control}
         label="Bidang karya atau proyek"
         placeholder="Pilih bidang karya atau proyek"
-        validation={requiredValidation}
-        errors={errors}
+        rules={requiredValidation}
       ></SelectInput>
       <TextArea
         fieldName="latarBelakang"
@@ -102,7 +138,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         errors={errors}
       ></TextArea>
       <TextArea
-        fieldName="sasaranPengguna"
+        fieldName="sasaran"
         register={register}
         label="Sasaran"
         placeholder="Siapakah sasaran atau pengguna utamanya?"
@@ -134,16 +170,12 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         errors={errors}
       ></TextArea>
       <SelectInput
-        options={[
-          { value: "Bidang 1", text: "Fase 1" },
-          { value: "Bidang 2", text: "Fase 2" }
-        ]}
+        options={getOptions(tingkatKesiapanOptions)}
         fieldName="tingkatKesiapan"
-        register={register}
+        control={control}
         label="Tingkat kesiapan"
         placeholder="Pilih tingkat kesiapan karya atau proyek Anda"
-        validation={requiredValidation}
-        errors={errors}
+        rules={requiredValidation}
       ></SelectInput>
       <Text mt="32px" fontWeight="bold" fontSize="lg">
         Dokumen pendukung (link)
@@ -151,13 +183,12 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
       {linkFields.map((field, index) => {
         return (
           <Flex key={field.id} w="100%" align="flex-end" gap="32px">
-            <TextIconInput
+            <TextInput
               fieldName={`linkPendukung.${index}.value`}
               register={register}
               label={`Link ${index + 1}`}
               placeholder="Masukkan link dokumen disini"
-              icon={<DocumentIcon />}
-            ></TextIconInput>
+            ></TextInput>
             {linkFields.length !== 1 && <PrimaryButton onClick={() => linkRemove(index)}>Hapus</PrimaryButton>}
           </Flex>
         )
@@ -177,15 +208,20 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
       </Text>
       {dokumenFields.map((field, index) => {
         return (
-          <Flex key={field.id} w="100%" align="flex-end" gap="32px">
+          <Flex key={field.id} w="100%" align="center" gap="32px">
             <FileInput
               fieldName={`dokumenPendukung.${index}.value`}
               register={register}
               watch={watch}
               label={`Dokumen ${index + 1}`}
               placeholder="Pilih file"
+              helperText="Format: jpg, jpeg, png"
             ></FileInput>
-            {dokumenFields.length !== 1 && <PrimaryButton onClick={() => dokumenRemove(index)}>Hapus</PrimaryButton>}
+            {dokumenFields.length !== 1 && (
+              <PrimaryButton mt="38px" onClick={() => dokumenRemove(index)}>
+                Hapus
+              </PrimaryButton>
+            )}
           </Flex>
         )
       })}
@@ -200,7 +236,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         Tambah File Baru
       </Button>
       <Flex w="100%" justify="end" mt="64px">
-        <PrimaryButton p="10px 90px" onClick={nextStep}>
+        <PrimaryButton p="10px 90px" onClick={handleNext}>
           Lanjutkan
         </PrimaryButton>
       </Flex>

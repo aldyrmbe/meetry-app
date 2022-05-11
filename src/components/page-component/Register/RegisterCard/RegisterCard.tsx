@@ -11,7 +11,7 @@ const RegisterCard = ({ type, handleClick, isSelected }: RegisterCardProps) => {
   const detail = {
     peneliti: {
       title: "Peneliti",
-      description: "Kembangkan portofolio Anda agar mitra tertarik untuk bekerja sama"
+      description: "Kembangkan profil Anda dan dapatkan mitra yang tepat"
     },
     mitra: {
       title: "Mitra",

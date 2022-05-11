@@ -1,16 +1,17 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import AuthorizedPage from "@components/AuthorizedPage/AuthorizedPage"
 import Container from "@components/layout/Container/Container"
-import PermohonanPencarianMitra from "@components/page-component/Dashboard/PermohonanPencarianProyek/PermohonanPencarianMitra"
-import PermohonanPencarianPeneliti from "@components/page-component/Dashboard/PermohonanPencarianProyek/PermohonanPencarianPeneliti"
-import NavbarERIC from "@components/layout/Navbar/NavbarERIC"
-import authenticate from "src/service/auth"
+import { authenticate } from "src/service/auth"
 import { GetServerSideProps } from "next"
 import Head from "next/head"
+import PermohonanPencarianProyekTab from "@components/page-component/Dashboard/PermohonanPencarianProyek/PermohonanPencarianProyekTab"
+import AccountOfficerSection from "@components/page-component/Dashboard/AccountOfficerSection/AccountOfficerSection"
+import { Role } from "src/service/user"
+import NavbarUser from "@components/layout/Navbar/NavbarUser"
 
 export const getServerSideProps: GetServerSideProps = authenticate("eric")
 
-const DashboardERIC = () => {
+const DashboardERIC = ({ role }: { role: Role }) => {
   const _selected = {
     color: "teal.500",
     fontWeight: "bold",
@@ -22,9 +23,9 @@ const DashboardERIC = () => {
       <Head>
         <title>Meetry - Dashboard ERIC</title>
       </Head>
-      <NavbarERIC></NavbarERIC>
-      <Container gap="32px">
-        <Box boxShadow="base" borderRadius="6px" backgroundColor="#FFF" w="70%" p="32px">
+      <NavbarUser role={role}></NavbarUser>
+      <Container maxH="calc(100vh - 80px)" gap="32px">
+        <Box as="section" boxShadow="base" borderRadius="6px" backgroundColor="#FFF" w="70%" p="32px">
           <Tabs variant="unstyled">
             <TabList gap="32px">
               <Tab _selected={_selected}>Permohonan Pencarian Mitra</Tab>
@@ -32,15 +33,15 @@ const DashboardERIC = () => {
             </TabList>
             <TabPanels>
               <TabPanel p="32px 0">
-                <PermohonanPencarianMitra></PermohonanPencarianMitra>
+                <PermohonanPencarianProyekTab pemohon="PENELITI"></PermohonanPencarianProyekTab>
               </TabPanel>
               <TabPanel p="32px 0">
-                <PermohonanPencarianPeneliti></PermohonanPencarianPeneliti>
+                <PermohonanPencarianProyekTab pemohon="MITRA"></PermohonanPencarianProyekTab>
               </TabPanel>
             </TabPanels>
           </Tabs>
         </Box>
-        <Box w="30%" boxShadow="base" borderRadius="6px" backgroundColor="white" p="20px"></Box>
+        <AccountOfficerSection></AccountOfficerSection>
       </Container>
     </>
   )

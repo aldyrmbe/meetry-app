@@ -1,13 +1,15 @@
-import { ApiResponse } from "@/types/base"
+import { ApiResponse, PaginationData } from "@/types/base"
 
 export type NotificationData = {
-  sender: string
-  time: number
-  type?: string
+  id: string
+  createdAt: number
   title: string
-  body: string
+  description: string
 }
 
 export type GetNotificationResponse = ApiResponse & {
-  data: NotificationData[]
+  data: {
+    paginationData: PaginationData
+    notifications: NotificationData[]
+  }
 }

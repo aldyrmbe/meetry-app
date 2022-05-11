@@ -19,7 +19,7 @@ import { showToast } from "src/service/toast"
 import { emailValidation, passwordValidation } from "src/utils/input-validation/validation"
 import { EmailInput, PasswordInput } from "@components/input/MeetryInput"
 import { useState } from "react"
-import { User } from "src/service/user"
+import { getRoleMapping, User } from "src/service/user"
 
 interface LoginRequest {
   email: string
@@ -47,8 +47,12 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
       .post<User>("/backend/user/login", data)
       .then((res) => {
         setSending((prevState) => !prevState)
-        const role = res.data.role.toLowerCase()
-        router.push(`/${role}/dashboard`)
+        const role = res.data.role
+        if (role == "ACCOUNT_OFFICER") {
+          router.push(`/accountofficer/kolaborasi`)
+        } else {
+          router.push(`/${getRoleMapping(role)}/dashboard`)
+        }
       })
       .catch((err) => {
         setSending((prevState) => !prevState)

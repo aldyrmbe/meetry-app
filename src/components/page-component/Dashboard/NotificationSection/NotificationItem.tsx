@@ -9,22 +9,25 @@ type NotificationItemProps = {
 }
 
 const NotificationItem = ({ notification }: NotificationItemProps) => {
-  const { sender, time, type, title, body } = notification
+  const { createdAt, title, description } = notification
+
+  getDisplayTime
+
   return (
     <VStack align="start">
       <Flex align="center" gap="16px">
         <Text fontSize="md" color="gray.500">
-          {sender}
+          Tim ERIC UGM
         </Text>
         <EllipseIcon></EllipseIcon>
         <Text fontSize="md" color="gray.500">
-          {getDisplayTime(time)}
+          {getDisplayTime(createdAt)}
         </Text>
       </Flex>
       <Text fontSize="lg" fontWeight="semibold">
         {title}
       </Text>
-      <LinkifyText value={body}></LinkifyText>
+      <LinkifyText value={description}></LinkifyText>
     </VStack>
   )
 }

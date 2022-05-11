@@ -5,6 +5,25 @@ import Navbar from "@components/layout/Navbar/Navbar"
 import Head from "next/head"
 import RegisterCard from "@components/page-component/Register/RegisterCard/RegisterCard"
 import { useState } from "react"
+import { GetServerSideProps, GetServerSidePropsContext } from "next"
+import { getUser } from "src/service/user"
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+  const cookie = context.req.headers.cookie
+  const user = await getUser(cookie)
+  if (user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/${user?.role?.toLowerCase()}/dashboard`
+      },
+      props: {}
+    }
+  }
+  return {
+    props: {}
+  }
+}
 
 const Register = () => {
   const [selected, setSelected] = useState<"peneliti" | "mitra" | null>(null)
@@ -53,7 +72,6 @@ const Register = () => {
             Lanjutkan
           </Button>
         </Box>
-        <Box mt="-32px" mr="-40px" w="509px" h="568px" backgroundColor="gray.200"></Box>
       </Container>
     </>
   )

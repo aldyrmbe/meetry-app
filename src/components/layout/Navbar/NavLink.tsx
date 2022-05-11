@@ -11,15 +11,12 @@ const NavLink = ({ text, href, path, ...rest }: NavLinkProps) => {
     color: "teal",
     fontWeight: "700"
   }
-  const inactiveLinkProps = {
-    color: "",
-    fontWeight: ""
-  }
+
   const router = useRouter()
-  const pathName = router.pathname
+  const pathName = router.asPath
   path = path ? path : href
-  const color = pathName === path ? activeLinkProps.color : inactiveLinkProps.color
-  const fontWeight = pathName === path ? activeLinkProps.fontWeight : inactiveLinkProps.fontWeight
+  const color = pathName === path ? activeLinkProps.color : ""
+  const fontWeight = pathName === path ? activeLinkProps.fontWeight : ""
 
   return (
     <Link color={color} href={href} fontWeight={fontWeight} whiteSpace="nowrap" {...rest}>

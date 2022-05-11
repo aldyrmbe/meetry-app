@@ -1,4 +1,4 @@
-import { Box, Text, useToast } from "@chakra-ui/react"
+import { Box, Text, useToast, Link } from "@chakra-ui/react"
 import { getUser } from "src/service/user"
 import { GetServerSideProps, GetServerSidePropsContext } from "next"
 import { useRouter } from "next/router"
@@ -9,12 +9,20 @@ import Navbar from "@components/layout/Navbar/Navbar"
 import Head from "next/head"
 import { showToast } from "src/service/toast"
 import { useEffect } from "react"
-import Link from "next/link"
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const cookie = context.req.headers.cookie
   const user = await getUser(cookie)
   if (user) {
+    if (user.role === "ACCOUNT_OFFICER") {
+      return {
+        redirect: {
+          permanent: false,
+          destination: `/accountofficer/kolaborasi`
+        },
+        props: {}
+      }
+    }
     return {
       redirect: {
         permanent: false,
@@ -58,7 +66,7 @@ const Home = () => {
           <Text fontSize="xl" my="32px" color="gray.500">
             Membantu mengelola pengerjaan proyek bersama<br></br>mitra terbaik secara efisien dan efektif
           </Text>
-          <Link href="/register">
+          <Link href="/register" style={{ textDecoration: "none" }}>
             <PrimaryButton p="10px 24px" mr="35px">
               Gabung Sekarang
             </PrimaryButton>

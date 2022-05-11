@@ -8,13 +8,9 @@ import NotificationItem from "./NotificationItem"
 import PrimaryButton from "@components/button/PrimaryButton"
 import { NotificationData, GetNotificationResponse } from "@/types/api-response/notification"
 
-interface NotificationSectionProps {
-  role: "peneliti" | "mitra"
-}
-
-const NotificationSection = ({ role }: NotificationSectionProps) => {
+const NotificationSection = () => {
   const [notifications, setNotifications] = useState<NotificationData[]>([])
-  const [page, setPage] = useState<number>(1)
+  const [page, setPage] = useState<number>(0)
   const [hasMore, setHasMore] = useState<boolean>(true)
   const [isLoading, setLoading] = useState<boolean>(true)
   const [isFetching, setIsFetching] = useState<boolean>(false)
@@ -26,18 +22,19 @@ const NotificationSection = ({ role }: NotificationSectionProps) => {
 
   const fetchMoreData = () => {
     setIsFetching(true)
-    axiosInstance.get<GetNotificationResponse>(`/api/notification?page=${page}`).then((response) => {
-      const notificationsData = response.data.data
-      setHasMore(notificationsData.length > 0)
-      setNotifications(notifications.concat(notificationsData))
-      setPage((prevState) => prevState + 1)
+    axiosInstance.get<GetNotificationResponse>(`/backend/user/notification?page=${page}`).then((response) => {
+      const data = response.data.data
+      const { currentPage, totalPage } = data.paginationData
+      setPage((prevPage) => prevPage + 1)
+      setHasMore(totalPage !== 0 && currentPage !== totalPage)
+      setNotifications(notifications.concat(data.notifications))
       setIsFetching(false)
       setLoading(false)
     })
   }
 
   return (
-    <>
+    <section>
       <MenuHeader>
         <NotificationIcon></NotificationIcon>
         <IconLabel>Notifikasi</IconLabel>
@@ -60,8 +57,8 @@ const NotificationSection = ({ role }: NotificationSectionProps) => {
         ) : (
           <Fade in={true}>
             <VStack align="stretch" divider={<Divider></Divider>} spacing="20px">
-              {notifications.map((notification: NotificationData, index: number) => (
-                <NotificationItem key={index} notification={notification}></NotificationItem>
+              {notifications.map((notification: NotificationData) => (
+                <NotificationItem key={notification.id} notification={notification}></NotificationItem>
               ))}
             </VStack>
             {hasMore && (
@@ -84,7 +81,7 @@ const NotificationSection = ({ role }: NotificationSectionProps) => {
           </Fade>
         )}
       </Box>
-    </>
+    </section>
   )
 }
 

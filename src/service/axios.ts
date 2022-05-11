@@ -14,7 +14,7 @@ const serverSideAxiosInstance = (cookie: string | undefined) => {
     headers: {
       Cookie: cookie!
     },
-    timeout: 10000
+    timeout: 30000
   })
 }
 
