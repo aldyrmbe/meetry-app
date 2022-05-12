@@ -3,7 +3,7 @@ import axios from "axios"
 const baseURL = process.env.BASE_URL ?? "http://localhost:3000"
 
 const axiosInstance = axios.create({
-  timeout: 10000,
+  timeout: 30000,
   withCredentials: true
 })
 

@@ -24,7 +24,6 @@ export const registerPeneliti = (
   router: NextRouter,
   setSending: (isSending: boolean) => void
 ) => {
-  console.log(data)
   setSending(true)
   let { tanggalLahir, fotoProfil, ...rest } = data
   tanggalLahir = new Date(tanggalLahir).getTime()
@@ -36,24 +35,24 @@ export const registerPeneliti = (
   const formData = new FormData()
   formData.append("data", JSON.stringify(request))
   if (fotoProfil) formData.append("fotoProfil", fotoProfil)
-  // axiosInstance
-  //   .post("/backend/user/register/peneliti", formData)
-  //   .then((res) => {
-  //     showToast(toast, {
-  //       title: "Registrasi berhasil!",
-  //       description: "Registrasi peneliti berhasil dilakukan.",
-  //       status: "success"
-  //     })
-  //     router.push("/")
-  //   })
-  //   .catch((err) => {
-  //     setSending(false)
-  //     showToast(toast, {
-  //       title: "Registrasi gagal!",
-  //       description: "Cek kembali data yang dimasukkan.",
-  //       status: "error"
-  //     })
-  //   })
+  axiosInstance
+    .post("/backend/user/register/peneliti", formData)
+    .then((res) => {
+      showToast(toast, {
+        title: "Registrasi berhasil!",
+        description: "Registrasi peneliti berhasil dilakukan.",
+        status: "success"
+      })
+      router.push("/")
+    })
+    .catch((err) => {
+      setSending(false)
+      showToast(toast, {
+        title: "Registrasi gagal!",
+        description: "Cek kembali data yang dimasukkan.",
+        status: "error"
+      })
+    })
 }
 
 export type RegisterMitraFormValues = {
