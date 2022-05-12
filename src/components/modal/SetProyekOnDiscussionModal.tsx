@@ -111,7 +111,6 @@ const SetProyekOnDiscussionModal = ({ proyekData, isOpen, onClose, proyekId }: S
 
   const onSubmit = handleSubmit((data) => {
     setSending(true)
-    console.log(data)
     const partisipan = data.partisipanValue.map((partisipanObj) => partisipanObj.value)
     const requestBody = {
       accountOfficer: data.accountOfficer,

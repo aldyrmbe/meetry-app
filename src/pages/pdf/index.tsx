@@ -20,7 +20,6 @@ const MyDocument = () => {
   useEffect(() => {
     axiosInstance.get<ProyekDetailApiResponse>(`/backend/proyek/${proyekId}`).then((response) => {
       const data = response.data.data
-      console.log(data)
       setProyekData(data)
       setLoading(false)
     })
