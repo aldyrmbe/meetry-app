@@ -82,6 +82,7 @@ export const getCommentDisplayTime = (epochTime: number) => {
   if (now.getDate() == commentDate.getDate()) {
     if (now.getHours() == commentDate.getHours()) {
       const minutes = now.getMinutes() - commentDate.getMinutes()
+      if (minutes == 0) return "Baru saja"
       return `${minutes} menit lalu`
     }
     if (now.getHours() - commentDate.getDate() == 1 && now.getMinutes() - commentDate.getMinutes() >= -1) {

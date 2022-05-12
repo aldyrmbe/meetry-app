@@ -10,4 +10,5 @@ export type GetPenelitiProfileResponseData = {
   programStudi: string
   email: string
   profileUrl: string
+  fotoProfil: string
 }

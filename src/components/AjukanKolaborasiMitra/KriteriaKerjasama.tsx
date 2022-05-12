@@ -52,7 +52,7 @@ const KriteriaKerjasama = ({
               validation={requiredValidation}
               errors={errors}
               helperText="Jelaskan dengan rinci"
-            ></TextArea>
+            />
             <TextArea
               fieldName={`kebutuhanProyek.${index}.bentukKolaborasi`}
               register={register}
@@ -61,7 +61,7 @@ const KriteriaKerjasama = ({
               validation={requiredValidation}
               errors={errors}
               helperText="Jelaskan dengan rinci"
-            ></TextArea>
+            />
             <TextArea
               fieldName={`kebutuhanProyek.${index}.penjelasanTambahan`}
               register={register}
@@ -69,7 +69,7 @@ const KriteriaKerjasama = ({
               placeholder={`Penjelasan tambahan tentang ${role == "MITRA" ? "peneliti" : "mitra"} yang ingin dicari`}
               validation={requiredValidation}
               errors={errors}
-            ></TextArea>
+            />
             {fields.length !== 1 && (
               <PrimaryButton mt="32px" size="sm" onClick={() => remove(index)}>
                 Hapus

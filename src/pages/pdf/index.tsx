@@ -1,5 +1,5 @@
 import { ProyekDetailApiResponse, ProyekDetailApiResponseData } from "@/types/api-response/get-proyek-detail"
-import { Box } from "@chakra-ui/react"
+import { Box, Flex, Spinner } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
@@ -20,6 +20,7 @@ const MyDocument = () => {
   useEffect(() => {
     axiosInstance.get<ProyekDetailApiResponse>(`/backend/proyek/${proyekId}`).then((response) => {
       const data = response.data.data
+      console.log(data)
       setProyekData(data)
       setLoading(false)
     })
@@ -27,12 +28,18 @@ const MyDocument = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (isLoading) return <p>Memuat data...</p>
-
   return (
-    <Box w="100vw" h="100vh" backgroundColor="black">
-      {proyekData && <PDFView proyekData={proyekData} />}
-    </Box>
+    <>
+      {isLoading ? (
+        <Flex w="100vw" h="100vh" justify="center" align="center">
+          <Spinner />
+        </Flex>
+      ) : (
+        <Box w="100vw" h="100vh">
+          {proyekData && <PDFView proyekData={proyekData} />}
+        </Box>
+      )}
+    </>
   )
 }
 

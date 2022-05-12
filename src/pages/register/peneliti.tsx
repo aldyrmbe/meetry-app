@@ -72,7 +72,7 @@ const RegisterPeneliti = () => {
                 placeholder="Nama lengkap"
                 validation={requiredValidation}
                 errors={errors}
-              ></TextInput>
+              />
               <EmailInput
                 fieldName="email"
                 register={register}
@@ -80,7 +80,7 @@ const RegisterPeneliti = () => {
                 placeholder="example@gmail.com"
                 validation={emailValidation}
                 errors={errors}
-              ></EmailInput>
+              />
               <PasswordInput
                 fieldName="password"
                 register={register}
@@ -88,7 +88,7 @@ const RegisterPeneliti = () => {
                 placeholder="Password baru"
                 validation={requiredValidation}
                 errors={errors}
-              ></PasswordInput>
+              />
               <NumberInput
                 fieldName="NIDN"
                 register={register}
@@ -96,7 +96,7 @@ const RegisterPeneliti = () => {
                 placeholder="NIDN"
                 validation={requiredValidation}
                 errors={errors}
-              ></NumberInput>
+              />
               <AsyncSelectInput
                 control={control}
                 fieldName="perguruanTinggi"
@@ -104,7 +104,7 @@ const RegisterPeneliti = () => {
                 placeholder="Perguruan Tinggi"
                 rules={requiredValidation}
                 loadOptions={fetchPerguruanTinggiOptions}
-              ></AsyncSelectInput>
+              />
               <TextInput
                 fieldName="programStudi"
                 register={register}
@@ -112,7 +112,7 @@ const RegisterPeneliti = () => {
                 placeholder="Program studi"
                 validation={requiredValidation}
                 errors={errors}
-              ></TextInput>
+              />
               <SelectInput
                 control={control}
                 fieldName="jenisKelamin"
@@ -123,16 +123,19 @@ const RegisterPeneliti = () => {
                   { label: "Laki-laki", value: "Laki-laki" },
                   { label: "Perempuan", value: "Perempuan" }
                 ]}
-              ></SelectInput>
+              />
               <Grid alignItems="center" templateColumns="1fr 1fr" gap={6} mt="32px">
                 <DateInput
                   mt="0"
                   fieldName="tanggalLahir"
                   register={register}
                   label="Tanggal lahir"
-                  validation={requiredValidation}
+                  validation={{
+                    ...requiredValidation,
+                    validate: (value: string) => new Date(value).getTime() < new Date().getTime()
+                  }}
                   errors={errors}
-                ></DateInput>
+                />
                 <NumberInput
                   mt="0"
                   fieldName="nomorKTP"
@@ -141,7 +144,7 @@ const RegisterPeneliti = () => {
                   placeholder="Nomor KTP"
                   validation={requiredValidation}
                   errors={errors}
-                ></NumberInput>
+                />
               </Grid>
               <NumberInput
                 fieldName="nomorTelepon"
@@ -150,7 +153,7 @@ const RegisterPeneliti = () => {
                 placeholder="Nomor telepon"
                 validation={requiredValidation}
                 errors={errors}
-              ></NumberInput>
+              />
               <TextArea
                 fieldName="alamatLengkap"
                 register={register}
@@ -158,7 +161,7 @@ const RegisterPeneliti = () => {
                 placeholder="Alamat lengkap"
                 validation={requiredValidation}
                 errors={errors}
-              ></TextArea>
+              />
               <TextInput
                 fieldName="acadstaffLink"
                 register={register}
@@ -166,7 +169,7 @@ const RegisterPeneliti = () => {
                 validation={acadstaffLinkValidation}
                 placeholder="cth: https://acadstaff.ugm.ac.id/example_user"
                 errors={errors}
-              ></TextInput>
+              />
               <FileInput
                 fieldName="fotoProfil"
                 register={register}
@@ -174,7 +177,7 @@ const RegisterPeneliti = () => {
                 label="Foto profil (opsional)"
                 placeholder="Pilih file"
                 helperText="Format: jpg, jpeg, png"
-              ></FileInput>
+              />
               <Button
                 isDisabled={!isValid}
                 isLoading={isSending}

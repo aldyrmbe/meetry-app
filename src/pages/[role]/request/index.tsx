@@ -13,7 +13,7 @@ import RequestProyekSuccessModal from "@components/modal/RequestProyekSuccessMod
 import { axiosInstance } from "src/service/axios"
 import BaseResponse from "src/service/baseResponse"
 import NavbarUser from "@components/layout/Navbar/NavbarUser"
-import { getUser, Role } from "src/service/user"
+import { Role } from "src/service/user"
 import Error from "next/error"
 import { customAuthenticate } from "src/service/auth"
 
@@ -29,6 +29,7 @@ const AjukanKolaborasi = ({ error, role }: { error: boolean; role: Role }) => {
     trigger,
     control,
     watch,
+    getValues,
     formState: { errors }
   } = useForm<AjukanKolaborasiRequest>({
     defaultValues: {
@@ -130,6 +131,7 @@ const AjukanKolaborasi = ({ error, role }: { error: boolean; role: Role }) => {
                   control={control}
                   watch={watch}
                   trigger={trigger}
+                  getValues={getValues}
                 ></OverviewProyek>
               )}
               {activeStep === 2 && (

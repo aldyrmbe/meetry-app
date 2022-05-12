@@ -17,9 +17,19 @@ type OverviewProyekProps = {
   control: any
   watch: any
   trigger: any
+  getValues: any
 }
 
-const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, watch, trigger }: OverviewProyekProps) => {
+const OverviewProyek = ({
+  register,
+  errors,
+  nextStep,
+  connectorRef,
+  control,
+  watch,
+  trigger,
+  getValues
+}: OverviewProyekProps) => {
   useEffect(() => {
     const node = connectorRef.current
     window.scrollTo({
@@ -88,7 +98,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         placeholder="Judul karya atau proyek yang sedang Anda kerjakan"
         validation={requiredValidation}
         errors={errors}
-      ></TextInput>
+      />
       <Flex align="center" mt="32px">
         <Text w="20%" whiteSpace="nowrap" fontSize="md" fontWeight="medium" color="blackAlpha.600">
           Periode Mulai
@@ -97,9 +107,12 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
           mt="0"
           fieldName="periodeMulai"
           register={register}
-          validation={requiredValidation}
+          validation={{
+            ...requiredValidation,
+            validate: (value: string) => new Date(value).getTime() > new Date().getTime() || "Periode tidak valid"
+          }}
           errors={errors}
-        ></DateInput>
+        />
       </Flex>
       <Flex align="center" mt="32px">
         <Text w="20%" whiteSpace="nowrap" fontSize="md" fontWeight="medium" color="blackAlpha.600">
@@ -109,9 +122,14 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
           mt="0"
           fieldName="periodeSelesai"
           register={register}
-          validation={requiredValidation}
+          validation={{
+            ...requiredValidation,
+            validate: (value: string) =>
+              new Date(value).getTime() > new Date(getValues("periodeMulai")).getTime() ||
+              "Periode selesai tidak boleh sama atau mendahului periode mulai"
+          }}
           errors={errors}
-        ></DateInput>
+        />
       </Flex>
       <SelectInput
         options={groupedOptions}
@@ -120,7 +138,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         label="Bidang karya atau proyek"
         placeholder="Pilih bidang karya atau proyek"
         rules={requiredValidation}
-      ></SelectInput>
+      />
       <TextArea
         fieldName="latarBelakang"
         register={register}
@@ -128,7 +146,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         placeholder="Apa latar belakang karya atau proyek Anda?"
         validation={requiredValidation}
         errors={errors}
-      ></TextArea>
+      />
       <TextArea
         fieldName="tujuan"
         register={register}
@@ -136,7 +154,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         placeholder="Apa tujuannya?"
         validation={requiredValidation}
         errors={errors}
-      ></TextArea>
+      />
       <TextArea
         fieldName="sasaran"
         register={register}
@@ -144,7 +162,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         placeholder="Siapakah sasaran atau pengguna utamanya?"
         validation={requiredValidation}
         errors={errors}
-      ></TextArea>
+      />
       <TextInput
         fieldName="output"
         register={register}
@@ -152,7 +170,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         placeholder="Apa outputnya?"
         validation={requiredValidation}
         errors={errors}
-      ></TextInput>
+      />
       <TextArea
         fieldName="kebermanfaatanProduk"
         register={register}
@@ -160,7 +178,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         placeholder="Bagaimana karya atau proyek ini dapat menjadi solusi yang tepat sasaran?"
         validation={requiredValidation}
         errors={errors}
-      ></TextArea>
+      />
       <TextArea
         fieldName="indikatorKesuksesan"
         register={register}
@@ -168,7 +186,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         placeholder="Jelaskan indikator kesuksesannya"
         validation={requiredValidation}
         errors={errors}
-      ></TextArea>
+      />
       <SelectInput
         options={getOptions(tingkatKesiapanOptions)}
         fieldName="tingkatKesiapan"
@@ -176,7 +194,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
         label="Tingkat kesiapan"
         placeholder="Pilih tingkat kesiapan karya atau proyek Anda"
         rules={requiredValidation}
-      ></SelectInput>
+      />
       <Text mt="32px" fontWeight="bold" fontSize="lg">
         Dokumen pendukung (link)
       </Text>
@@ -188,7 +206,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
               register={register}
               label={`Link ${index + 1}`}
               placeholder="Masukkan link dokumen disini"
-            ></TextInput>
+            />
             {linkFields.length !== 1 && <PrimaryButton onClick={() => linkRemove(index)}>Hapus</PrimaryButton>}
           </Flex>
         )
@@ -216,7 +234,7 @@ const OverviewProyek = ({ register, errors, nextStep, connectorRef, control, wat
               label={`Dokumen ${index + 1}`}
               placeholder="Pilih file"
               helperText="Format: jpg, jpeg, png"
-            ></FileInput>
+            />
             {dokumenFields.length !== 1 && (
               <PrimaryButton mt="38px" onClick={() => dokumenRemove(index)}>
                 Hapus

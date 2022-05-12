@@ -76,7 +76,44 @@ const PDFView = ({ proyekData: { pemohon, overviewProyek, kebutuhanProyek } }: P
                   </View>
                 </View>
                 <View style={styles.imageWrapper}>
-                  <Image src="https://i.ibb.co/qN41H2F/foto-Profil.png"></Image>
+                  <Image src={peneliti.fotoProfil}></Image>
+                </View>
+              </View>
+            )}
+            {mitra && (
+              <View style={styles.sectionWrapper}>
+                <View style={{ width: "80%" }}>
+                  <View style={sectionStyles.columnWrapper}>
+                    <View style={sectionStyles.tableHeader}>
+                      <Text>Nama</Text>
+                      <Text>perusahaan</Text>
+                    </View>
+                    <Text style={sectionStyles.tableData}>{mitra.namaPerusahaan}</Text>
+                  </View>
+                  <View style={sectionStyles.columnWrapper}>
+                    <View style={sectionStyles.tableHeader}>
+                      <Text>Bidang</Text>
+                      <Text>perusahaan</Text>
+                    </View>
+                    <Text style={sectionStyles.tableData}>{mitra.bidangPerusahaan.join(", ")}</Text>
+                  </View>
+                  <View style={sectionStyles.columnWrapper}>
+                    <Text style={sectionStyles.tableHeader}>Alamat</Text>
+                    <Text style={sectionStyles.tableData}>{mitra.alamat}</Text>
+                  </View>
+                  <View style={sectionStyles.columnWrapper}>
+                    <Text style={sectionStyles.tableHeader}>Email</Text>
+                    <Text style={sectionStyles.tableData}>{mitra.email}</Text>
+                  </View>
+                  <View style={sectionStyles.columnWrapper}>
+                    <Text style={sectionStyles.tableHeader}>Website</Text>
+                    <Text style={sectionStyles.tableData}>
+                      <Link src={`https://${mitra.website}`}>{mitra.website}</Link>
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.imageWrapper}>
+                  <Image src={mitra.fotoProfil}></Image>
                 </View>
               </View>
             )}

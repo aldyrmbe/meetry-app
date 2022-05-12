@@ -82,7 +82,7 @@ const RegisterMitra = () => {
                 placeholder="Nama perusahaan"
                 validation={requiredValidation}
                 errors={errors}
-              ></TextInput>
+              />
               <EmailInput
                 fieldName="email"
                 register={register}
@@ -90,7 +90,7 @@ const RegisterMitra = () => {
                 placeholder="example@gmail.com"
                 validation={emailValidation}
                 errors={errors}
-              ></EmailInput>
+              />
               <PasswordInput
                 fieldName="password"
                 register={register}
@@ -98,7 +98,7 @@ const RegisterMitra = () => {
                 placeholder="Password baru"
                 validation={requiredValidation}
                 errors={errors}
-              ></PasswordInput>
+              />
               <SelectInput
                 control={control}
                 fieldName="jenisPerusahaan"
@@ -106,7 +106,7 @@ const RegisterMitra = () => {
                 placeholder="Pilih salah satu"
                 rules={requiredValidation}
                 options={getOptions(jenisPerusahaanOptions)}
-              ></SelectInput>
+              />
               <MultiSelectInput
                 control={control}
                 fieldName="bidangPerusahaan"
@@ -114,7 +114,7 @@ const RegisterMitra = () => {
                 placeholder="Pilih semua yang terkait"
                 rules={requiredValidation}
                 options={getOptions(bidangPerushaanOptions)}
-              ></MultiSelectInput>
+              />
               <NumberInput
                 fieldName="nomorTelepon"
                 register={register}
@@ -122,7 +122,7 @@ const RegisterMitra = () => {
                 placeholder="Nomor telepon"
                 validation={requiredValidation}
                 errors={errors}
-              ></NumberInput>
+              />
               <TextArea
                 fieldName="alamat"
                 register={register}
@@ -130,7 +130,7 @@ const RegisterMitra = () => {
                 placeholder="Alamat lengkap"
                 validation={requiredValidation}
                 errors={errors}
-              ></TextArea>
+              />
               <TextArea
                 fieldName="profilSingkat"
                 register={register}
@@ -138,14 +138,14 @@ const RegisterMitra = () => {
                 placeholder="Profil singkat perusahaan"
                 validation={requiredValidation}
                 errors={errors}
-              ></TextArea>
+              />
               <TextInput
                 fieldName="website"
                 register={register}
                 label="Website"
                 placeholder="Alamat website (opsional)"
                 errors={errors}
-              ></TextInput>
+              />
               <FileInput
                 fieldName="fotoProfil"
                 register={register}
@@ -153,7 +153,7 @@ const RegisterMitra = () => {
                 label="Foto profil (opsional)"
                 placeholder="Pilih file"
                 helperText="Format: jpg, jpeg, png"
-              ></FileInput>
+              />
               <Button
                 isDisabled={!isValid}
                 isLoading={isSending}

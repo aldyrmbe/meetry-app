@@ -152,7 +152,6 @@ export const NumberInput = ({ fieldName, register, label, placeholder, validatio
 
 export const DateInput = ({ fieldName, register, label, placeholder, validation, errors, mt }: DefaultInputProps) => {
   let error = errors?.[fieldName]?.message
-
   return (
     <FormControl isInvalid={Boolean(error)} mt={mt ?? "32px"}>
       <FormLabel htmlFor={fieldName}>{label}</FormLabel>
