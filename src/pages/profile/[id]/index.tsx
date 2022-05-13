@@ -1,8 +1,10 @@
 import { GetMitraProfileResponse, GetMitraProfileResponseData } from "@/types/api-response/get-mitra-profile"
-import { EmailIcon, ExternalLinkIcon, PhoneIcon } from "@chakra-ui/icons"
 import { Box, Divider, Flex, Image, Link, Text } from "@chakra-ui/react"
 import OutlinedButton from "@components/button/OutlinedButton"
+import ExternalLinkIcon from "@components/icon/ExternalLinkIcon"
 import IndustrialIcon from "@components/icon/IndustrialIcon"
+import MailIcon from "@components/icon/MailIcon"
+import PhoneIcon from "@components/icon/PhoneIcon"
 import Container from "@components/layout/Container/Container"
 import NavbarUser from "@components/layout/Navbar/NavbarUser"
 import { GetServerSideProps, GetServerSidePropsContext } from "next"
@@ -94,8 +96,8 @@ const ProfilePage = ({ role }: { role: Role }) => {
               <Divider borderWidth="1px"></Divider>
               <Flex p="32px 20px" flexDir="column" gap="32px">
                 <InfoItem icon={<IndustrialIcon />} text={mitraData?.bidangPerusahaan.join(", ")!}></InfoItem>
-                <InfoItem icon={<PhoneIcon boxSize="24px" />} text={mitraData?.nomorTelepon!}></InfoItem>
-                <InfoItem icon={<EmailIcon boxSize="24px" />} text={mitraData?.email!}></InfoItem>
+                <InfoItem icon={<PhoneIcon />} text={mitraData?.nomorTelepon!}></InfoItem>
+                <InfoItem icon={<MailIcon />} text={mitraData?.email!}></InfoItem>
               </Flex>
               <Divider borderWidth="1px"></Divider>
               <Flex p="32px">

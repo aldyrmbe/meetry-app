@@ -19,7 +19,7 @@ const Mitra = ({ mitra }: MitraType) => {
     <Flex align="center" gap="16px" mt="32px">
       <Image h="32px" w="32px" borderRadius="full" alt="Mitra" src={mitra.fotoProfil}></Image>
       <Text fontSize="lg">{mitra.nama} (Mitra)</Text>
-      <Link target="_blank" href={`/profile${mitra.profilePageUrl}`}>
+      <Link href={`/profile${mitra.profilePageUrl}`}>
         <OutlinedButton size="sm">Lihat Profil</OutlinedButton>
       </Link>
     </Flex>

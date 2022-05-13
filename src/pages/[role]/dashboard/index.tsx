@@ -19,7 +19,7 @@ const Dashboard = ({ error, id, role }: { error: boolean; id: string; role: Role
   return (
     <>
       <Head>
-        <title>Meetry - Dashboard Peneliti</title>
+        <title>Meetry - Dashboard {role.charAt(0) + role.slice(1).toLowerCase()}</title>
       </Head>
       <NavbarUser role={role}></NavbarUser>
       <Container gap="32px">

@@ -65,9 +65,15 @@ const ProyekOperations = ({ status }: ProyekOperationsType) => {
               cursor="pointer"
               fontSize="lg"
             >
-              <Text _hover={{ backgroundColor: "gray.200" }} p="10px 20px 10px 20px" onClick={onCloseProyekDialogOpen}>
-                Selesai
-              </Text>
+              {status == "AKTIF" && (
+                <Text
+                  _hover={{ backgroundColor: "gray.200" }}
+                  p="10px 20px 10px 20px"
+                  onClick={onCloseProyekDialogOpen}
+                >
+                  Selesai
+                </Text>
+              )}
               <Text _hover={{ backgroundColor: "gray.200" }} p="10px 20px 10px 20px" onClick={onCancelProyekDialogOpen}>
                 Batalkan proyek
               </Text>

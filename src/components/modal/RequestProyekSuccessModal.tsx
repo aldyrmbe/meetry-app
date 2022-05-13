@@ -1,13 +1,20 @@
 import { Box, Flex, Modal, ModalContent, ModalOverlay, Text } from "@chakra-ui/react"
 import PrimaryButton from "@components/button/PrimaryButton"
-import Link from "next/link"
+import { useRouter } from "next/router"
+import { Role } from "src/service/user"
 
 type RequestProyekSuccessModalProps = {
   isOpen: boolean
   onClose: () => void
+  role: Role
 }
 
-const RequestProyekSuccessModal = ({ isOpen, onClose }: RequestProyekSuccessModalProps) => {
+const RequestProyekSuccessModal = ({ isOpen, onClose, role }: RequestProyekSuccessModalProps) => {
+  const router = useRouter()
+  const redirectToDashboard = () => {
+    router.push(`/${role.toLowerCase()}/dashboard`)
+  }
+
   return (
     <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
@@ -21,8 +28,8 @@ const RequestProyekSuccessModal = ({ isOpen, onClose }: RequestProyekSuccessModa
             Kami akan memberi tahu Anda di bagian Notifikasi jika kami sudah<br></br> menemukan mitra yang tepat untuk
             Anda. Anda bisa melihat riwayat pengajuan ini di halaman Kolaborasi Saya
           </Text>
-          <PrimaryButton px="116px">
-            <Link href="/peneliti/dashboard">Kembali ke Beranda</Link>
+          <PrimaryButton onClick={redirectToDashboard} px="116px">
+            Kembali ke Beranda
           </PrimaryButton>
         </Flex>
       </ModalContent>

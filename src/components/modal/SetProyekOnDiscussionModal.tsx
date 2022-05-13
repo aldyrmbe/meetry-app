@@ -139,14 +139,6 @@ const SetProyekOnDiscussionModal = ({ proyekData, isOpen, onClose, proyekId }: S
               placeholder={getPemohonName()}
               leftIcon={<SearchIcon color="gray.400" />}
             />
-            <AsyncSelectInput
-              control={control}
-              fieldName="accountOfficer"
-              label="Masukkan nama Account Officer"
-              placeholder="Pilih salah satu"
-              loadOptions={fetchAccountOfficersOptions}
-              rules={requiredValidation}
-            />
             {fields.map((field, index) => (
               <AsyncSelectInput
                 key={field.id}
@@ -158,7 +150,14 @@ const SetProyekOnDiscussionModal = ({ proyekData, isOpen, onClose, proyekId }: S
                 loadOptions={pemohon == "MITRA" ? fetchPenelitiOptions : fetchMitraOptions}
               />
             ))}
-
+            <AsyncSelectInput
+              control={control}
+              fieldName="accountOfficer"
+              label="Masukkan nama Account Officer"
+              placeholder="Pilih salah satu"
+              loadOptions={fetchAccountOfficersOptions}
+              rules={requiredValidation}
+            />
             <TextInput
               fieldName="whatsappGroupLink"
               register={register}

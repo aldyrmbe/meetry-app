@@ -17,7 +17,7 @@ const DALAM_PENGAJUAN: FilterKeyValue = {
 
 const DALAM_DISKUSI: FilterKeyValue = {
   value: "DALAM_DISKUSI",
-  text: "Dalam Diskusi"
+  text: "Dalam diskusi"
 }
 
 const AKTIF: FilterKeyValue = {

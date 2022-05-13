@@ -76,6 +76,13 @@ const AjukanKolaborasi = ({ error, role }: { error: boolean; role: Role }) => {
     })
   })
 
+  const getTitle = () => {
+    if (role == "PENELITI") {
+      return "Ajukan Pencarian Mitra"
+    }
+    return "Ajukan Pencarian Peneliti"
+  }
+
   if (error) {
     return <Error statusCode={404}></Error>
   }
@@ -83,7 +90,7 @@ const AjukanKolaborasi = ({ error, role }: { error: boolean; role: Role }) => {
   return (
     <>
       <Head>
-        <title>Meetry - Ajukan Pencarian Mitra</title>
+        <title>Meetry - {getTitle()}</title>
       </Head>
       <NavbarUser role={role}></NavbarUser>
       <Container>
@@ -92,7 +99,7 @@ const AjukanKolaborasi = ({ error, role }: { error: boolean; role: Role }) => {
             <ArrowBackIcon w="23px" h="32px" />
           </Box>
           <Text fontSize="3xl" fontWeight="bold">
-            Ajukan Pencarian Mitra
+            {getTitle()}
           </Text>
         </Flex>
         <Box w="70%" m="0 auto">
@@ -149,7 +156,7 @@ const AjukanKolaborasi = ({ error, role }: { error: boolean; role: Role }) => {
           </Box>
         </Box>
       </Container>
-      <RequestProyekSuccessModal isOpen={isOpen} onClose={onClose}></RequestProyekSuccessModal>
+      <RequestProyekSuccessModal isOpen={true} onClose={onClose} role={role}></RequestProyekSuccessModal>
     </>
   )
 }

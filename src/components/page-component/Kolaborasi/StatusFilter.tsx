@@ -1,18 +1,17 @@
-import { Box, Flex, Radio, RadioGroup } from "@chakra-ui/react"
+import { Box, Flex, Radio, RadioGroup, useOutsideClick } from "@chakra-ui/react"
 import { getFiltersByRole } from "@utils/getFiltersByRole"
-import { useContext } from "react"
+import { useContext, useRef } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 
 const StatusFilter = () => {
-  const { filter, setFilter, toggleFilter, role } = useContext(KolaborasiPageContext)
+  const { filter, setFilter, toggleFilter, role, closeFilter } = useContext(KolaborasiPageContext)
+  const filterRef = useRef(null)
+  useOutsideClick({ ref: filterRef, handler: () => closeFilter() })
   const filters = getFiltersByRole(role!)
 
   const _setFilter = (e: any) => {
     setFilter(e)
     toggleFilter()
-    // setTimeout(() => {
-    //   toggleFilter()
-    // }, 150)
   }
 
   return (

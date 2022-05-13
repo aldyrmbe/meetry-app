@@ -60,7 +60,7 @@ const RegisterMitra = () => {
   return (
     <>
       <Head>
-        <title>Daftar Sebagai Peneliti</title>
+        <title>Daftar Sebagai Mitra</title>
       </Head>
       <Navbar></Navbar>
       <Container justify="space-between">

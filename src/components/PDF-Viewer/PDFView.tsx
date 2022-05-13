@@ -76,13 +76,13 @@ const PDFView = ({ proyekData: { pemohon, overviewProyek, kebutuhanProyek } }: P
                   </View>
                 </View>
                 <View style={styles.imageWrapper}>
-                  <Image src={peneliti.fotoProfil}></Image>
+                  <Image debug style={styles.image} src={peneliti.fotoProfil}></Image>
                 </View>
               </View>
             )}
             {mitra && (
               <View style={styles.sectionWrapper}>
-                <View style={{ width: "80%" }}>
+                <View debug style={{ width: "80%" }}>
                   <View style={sectionStyles.columnWrapper}>
                     <View style={sectionStyles.tableHeader}>
                       <Text>Nama</Text>
@@ -113,7 +113,7 @@ const PDFView = ({ proyekData: { pemohon, overviewProyek, kebutuhanProyek } }: P
                   </View>
                 </View>
                 <View style={styles.imageWrapper}>
-                  <Image src={mitra.fotoProfil}></Image>
+                  <Image debug src={mitra.fotoProfil}></Image>
                 </View>
               </View>
             )}
@@ -303,6 +303,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 10,
     border: "0.5px solid black"
+  },
+  image: {
+    maxHeight: "150px",
+    objectFit: "cover"
   }
 })
 

@@ -109,7 +109,7 @@ const OverviewProyek = ({
           register={register}
           validation={{
             ...requiredValidation,
-            validate: (value: string) => new Date(value).getTime() > new Date().getTime() || "Periode tidak valid"
+            validate: (value: string) => new Date(value).getDate() >= new Date().getDate() || "Periode tidak valid"
           }}
           errors={errors}
         />

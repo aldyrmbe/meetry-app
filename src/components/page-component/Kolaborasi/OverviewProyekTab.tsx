@@ -24,7 +24,7 @@ const OverviewProyekTab = ({ data, isLoading }: OverviewProyekTabType) => {
         </Flex>
       ) : (
         <Box w="100%">
-          {role == "ERIC" || (role == "ACCOUNT_OFFICER" && <ProyekOperations status={data.status}></ProyekOperations>)}
+          {(role == "ERIC" || role == "ACCOUNT_OFFICER") && <ProyekOperations status={data.status}></ProyekOperations>}
           <DalamDiskusiAlert status={data.status} role={role!} pemohon={role!}></DalamDiskusiAlert>
           <Text fontSize="xl" fontWeight="semibold">
             {data.overviewProyek.judul}
