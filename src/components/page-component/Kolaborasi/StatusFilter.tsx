@@ -16,6 +16,7 @@ const StatusFilter = () => {
 
   return (
     <Box
+      ref={filterRef}
       border="1px solid #E2E8F0"
       borderRadius="6px"
       boxShadow="md"

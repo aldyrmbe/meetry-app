@@ -156,7 +156,7 @@ const AjukanKolaborasi = ({ error, role }: { error: boolean; role: Role }) => {
           </Box>
         </Box>
       </Container>
-      <RequestProyekSuccessModal isOpen={true} onClose={onClose} role={role}></RequestProyekSuccessModal>
+      <RequestProyekSuccessModal isOpen={isOpen} onClose={onClose} role={role}></RequestProyekSuccessModal>
     </>
   )
 }

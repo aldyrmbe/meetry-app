@@ -1,7 +1,6 @@
 import { StatusType } from "@/types/api-response/get-proyek-list"
 import { Box, useDisclosure } from "@chakra-ui/react"
 import Container from "@components/layout/Container/Container"
-import NavbarERIC from "@components/layout/Navbar/NavERIC"
 import NavbarUser from "@components/layout/Navbar/NavbarUser"
 import DetailProyekSection from "@components/page-component/Kolaborasi/DetailProyekSection"
 import ListProyekSection from "@components/page-component/Kolaborasi/ListProyekSection"

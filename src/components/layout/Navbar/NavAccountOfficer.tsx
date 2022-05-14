@@ -12,7 +12,7 @@ const NavAccountOfficer = () => {
     <nav>
       <NavWrapper>
         <Flex h="80px" gap="16px" align="center">
-          <Box as="a" href="/accountofficer/dashboard">
+          <Box as="a" href="/accountofficer/kolaborasi">
             <Image src="/logo.svg" alt="Meetry Logo"></Image>
           </Box>
           <Spacer></Spacer>

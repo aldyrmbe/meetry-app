@@ -1,4 +1,4 @@
-import { ProyekData, StatusTypeMapping, StatusTypeMappingForAccountOfficer } from "@/types/api-response/get-proyek-list"
+import { ProyekData, StatusTypeMapping } from "@/types/api-response/get-proyek-list"
 import { Box, Flex, Text } from "@chakra-ui/react"
 import { useContext } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
@@ -8,7 +8,7 @@ type ProyekListProps = {
 }
 
 const ProyekList = ({ data }: ProyekListProps) => {
-  const { role, proyekId, setProyekId, setFolderId, setSubFolderId } = useContext(KolaborasiPageContext)
+  const { proyekId, setProyekId, setFolderId, setSubFolderId } = useContext(KolaborasiPageContext)
 
   const getParticipant = () => {
     if (data.partisipan.length === 0) {
@@ -26,9 +26,6 @@ const ProyekList = ({ data }: ProyekListProps) => {
   }
 
   const getStatus = () => {
-    if (role == "ACCOUNT_OFFICER") {
-      return StatusTypeMappingForAccountOfficer[data.status]
-    }
     return StatusTypeMapping[data.status]
   }
 

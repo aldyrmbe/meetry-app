@@ -206,7 +206,7 @@ const PDFView = ({ proyekData: { pemohon, overviewProyek, kebutuhanProyek } }: P
                     <View key={item.value} style={{ display: "flex", flexDirection: "row", marginTop: 2 }}>
                       <Text style={{ marginRight: 4 }}>•</Text>
                       <Text>
-                        Link {index + 1}: <Link src={getLink(item.value)}>{item.value}</Link>
+                        File {index + 1}: <Link src={getLink(item.value)}>{item.value}</Link>
                       </Text>
                     </View>
                   ))}
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
     border: "0.5px solid black"
   },
   image: {
-    maxHeight: "150px",
+    maxHeight: "130",
     objectFit: "cover"
   }
 })

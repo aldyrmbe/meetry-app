@@ -32,11 +32,3 @@ export const StatusTypeMapping: StatusTypeMappingType = {
   SELESAI: "Selesai",
   DIBATALKAN: "Dibatalkan"
 }
-
-export const StatusTypeMappingForAccountOfficer: StatusTypeMappingType = {
-  DALAM_PENGAJUAN: "Dalam pengajuan",
-  DALAM_DISKUSI: "Belum aktif",
-  AKTIF: "Aktif",
-  SELESAI: "Selesai",
-  DIBATALKAN: "Dibatalkan"
-}

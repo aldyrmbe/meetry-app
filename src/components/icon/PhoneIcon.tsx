@@ -3,26 +3,14 @@ import { Icon } from "@chakra-ui/react"
 const PhoneIcon = () => {
   return (
     <Icon boxSize="24px" viewBox="0 0 24 24">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-      >
-        <rect width="24" height="24" fill="url(#pattern0)" />
-        <defs>
-          <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-            <use xlinkHref="#image0_1935_27459" transform="scale(0.0104167)" />
-          </pattern>
-          <image
-            id="image0_1935_27459"
-            width="96"
-            height="96"
-            xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAAESElEQVR4nO2d3YtWVRSHH2d0qJwpafLCHD+xj9FM0ww0UQO9lLKIpNsoL70S8V76B4LKe5U+QBO10QsRQ1QUbASVuikDSRnLcAZRTOf1Ys2L+jrM2We/++ucvR7Yd2fW+Z31e8/X2mufAUVRFEVRFEVRFEVRFEWZmHnAXuA60LAcI8BPwPzA2ivPG8At7BPfOoaBBUGPoOIcwl3ym2Mg6BFUnGHcG3AP6Ax5EKnQYfE3zzlXAVOAFzzETR4bA+45VyH4MDZ5UjJgqqe4SWNjwB3nKoRuT3GTxsaAm85VCC95ips0Ngb861yF0OcpbtLYGPCPcxXCTE9xk8bGgKvOVQizPcVNGhsD/nKuQnjbU9yksTHginMVwmLgeU+xk8XGgN+dqxA6gHc8xU4WWwN8vYyt8xS3dlzAfUGuAfwa8iBSwOYMADHAB0vI7HHU1oDTTlU8YhKw1lPsJLE14JRTFU8yw2Ps5LA14CIyLekDX09ZtWMf7m/Cl5HJmWywPQMAjjpTIQwBHwH/O45bW+bg7pc/hLwJKyU5T/vJvwksCy28Luyg/eQvD666RszHPvn/ocl3whnskp9l+dkHn1M++SuiKK0p3Zh3y2nyPfEtesONyuvAKBMbcCCaukw4TPFZsCGaugxYS7EBg2TaBR2K4xSbsCWaugxYg1ndpzeWwBwYoNiE76Kpy4B+pKRcZMInsQTmwNeYvZRl2ZAbgl7kWl9kwgDtTQpVHl+PhHeQNcSbCrZbgBhw3JOO7DlK8VkwCnwYS2DdmYks6CgyYQRZAK544FPMKqV/kFlXXEj2YmbCJTJdK+abbiS5JiYMAtPiyKw3/ci13sSEX8hwsUYINgEPMDPhHH4vR13A+8A25D6Vzf1nG2YGNJBWRR+JWQj81rKvUWR9wpfAeqDHw36fYlKInYzDLuALw22vABuRhmAXLAaOAdMLtnswts+zyMrQq8DfwA3gNnAXaVAeAe470haMTuAHzM+EEaRvtF3exKxEUmbcR144K/fRqS7gZ8wPdBTYiX3taAny63WZ/MfHMBX8/NqzlDOhARwBXi65n6XICn9fyW+O/SV1JUEX5S5HDaS8sdkw/luESX7zLKgknZj1FrWO75l4enMZZrUol6PSbMX8PeHxs2ErT5fWQ/7ya2MAwAfYfRhwEHhvLMZypBMvdPJrYQBIp51p7ah1HCBe8mtjAEgBbzfxEpm9AU0+JvyNVA1oYRby/B87udka0GQjUpOJneRsDQB4EfgKs+YvNcAj/Zi1xKsBnlkJHCR+4rM1oMlqxIiyb9JqgGNeA77BfP5ZDfBED/AZ8m0jNSAyc5CC3UmKFxO2M66FOqAq04ecGT/ivma0p6yYWJPyqdCBPM6+C6xC5owXIZNEZbmFlMD/LPNHuRswHpOBV4FXgLnIv+zqQ3qUesfGM2Pb9SA3+xPAdqSNRlEURVEURVEURVEURVHG5SHO0bLslgejNQAAAABJRU5ErkJggg=="
-          />
-        </defs>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M10.5542 6.24003L7.17123 2.33503C6.78123 1.88503 6.06623 1.88703 5.61323 2.34103L2.83123 5.12803C2.00323 5.95703 1.76623 7.18803 2.24523 8.17503C5.10685 14.1 9.88528 18.8851 15.8062 21.755C16.7922 22.234 18.0222 21.997 18.8502 21.168L21.6582 18.355C22.1132 17.9 22.1142 17.181 21.6602 16.791L17.7402 13.426C17.3302 13.074 16.6932 13.12 16.2822 13.532L14.9182 14.898C14.8484 14.9712 14.7565 15.0195 14.6566 15.0354C14.5567 15.0513 14.4543 15.0339 14.3652 14.986C12.1357 13.7021 10.2862 11.8503 9.00523 9.61903C8.95726 9.52978 8.93989 9.42726 8.95578 9.32719C8.97168 9.22711 9.01996 9.13502 9.09323 9.06503L10.4532 7.70403C10.8652 7.29003 10.9102 6.65003 10.5542 6.23903V6.24003Z"
+          stroke="#2D3748"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     </Icon>
   )
