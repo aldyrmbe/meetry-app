@@ -37,7 +37,13 @@ const MainMenuSection = ({ id, role }: MainMenuSectionProps) => {
         {roleString == "peneliti" && (
           <>
             <GridItem rowSpan={2} colSpan={1}>
-              <MenuCard text="Profil Acadstaff Saya" href={acadstaffLink} externalLink openInNewTab></MenuCard>
+              <MenuCard
+                text="Profil Acadstaff Saya"
+                href={acadstaffLink}
+                externalLink
+                openInNewTab
+                isProfile
+              ></MenuCard>
             </GridItem>
             <GridItem rowSpan={2}>
               <MenuCard text="Ajukan Pencarian Mitra" href={`/peneliti/request`}></MenuCard>
@@ -47,7 +53,7 @@ const MainMenuSection = ({ id, role }: MainMenuSectionProps) => {
         {roleString == "mitra" && (
           <>
             <GridItem rowSpan={2} colSpan={1}>
-              <MenuCard text="Profil Saya" href={`/profile/${id}`} openInNewTab></MenuCard>
+              <MenuCard text="Profil Saya" href={`/profile/${id}`} openInNewTab isProfile></MenuCard>
             </GridItem>
             <GridItem rowSpan={2}>
               <MenuCard text="Ajukan Pencarian Peneliti" href={`/mitra/request`}></MenuCard>

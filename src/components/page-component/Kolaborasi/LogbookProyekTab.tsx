@@ -1,6 +1,6 @@
 import { ProyekDetailApiResponseData } from "@/types/api-response/get-proyek-detail"
 import { StatusType } from "@/types/api-response/get-proyek-list"
-import { Box, Flex, Spinner, Text } from "@chakra-ui/react"
+import { Box, Flex, Image, Spinner, Text } from "@chakra-ui/react"
 import { useContext, useState } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import DalamDiskusiAlert from "./DalamDiskusiAlert"
@@ -41,8 +41,10 @@ const LogbookProyekTab = ({ isLoading, data }: LogbookProyekTabType) => {
               <Text fontSize="xl" fontWeight="semibold">
                 Belum ada logbook disini
               </Text>
-              <Flex mt="64px" gap="32px" flexDir="column" align="center">
-                <Box w="350px" h="270px" backgroundColor="gray.100"></Box>
+              <Flex mt="32px" gap="32px" flexDir="column" align="center">
+                <Box w="300px" h="300px">
+                  <Image alt="Logbook empty" w="100%" h="100%" src="/logbook-kosong-illustration.webp"></Image>
+                </Box>
                 <Text align="center">
                   Logbook akan diisi oleh Account Officer setelah kami berhasil<br></br> menemukan mitra yang potensial
                   untuk Anda

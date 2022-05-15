@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from "@chakra-ui/icons"
-import { Box, Flex, Text, IconButton, Link } from "@chakra-ui/react"
+import { Box, Flex, Text, IconButton, Link, Image } from "@chakra-ui/react"
 import { ExternalLinkIcon } from "@chakra-ui/icons"
 import { useRouter } from "next/router"
 
@@ -8,9 +8,10 @@ interface MenuCardProps {
   href: string | undefined
   externalLink?: boolean
   openInNewTab?: boolean
+  isProfile?: boolean
 }
 
-const MenuCard = ({ text, href, externalLink, openInNewTab = false }: MenuCardProps) => {
+const MenuCard = ({ text, href, externalLink, openInNewTab = false, isProfile = false }: MenuCardProps) => {
   const router = useRouter()
 
   return (
@@ -31,7 +32,14 @@ const MenuCard = ({ text, href, externalLink, openInNewTab = false }: MenuCardPr
         backgroundColor="white"
       >
         <Flex flexDir="column" gap="32px" h="100%">
-          <Box backgroundColor="gray.100" h="100%" w="100%" borderRadius="6px"></Box>
+          <Box h="100%" w="100%" borderRadius="6px">
+            <Image
+              alt="Main menu"
+              width="100%"
+              height="100%"
+              src={isProfile ? "/my-profile-illustration.webp" : "/ajukan-pencarian-illustration.webp"}
+            ></Image>
+          </Box>
           <Flex w="100%" justify="space-between" align="center">
             <Text fontSize="lg" fontWeight="semibold">
               {text}

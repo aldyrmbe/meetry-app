@@ -1,4 +1,4 @@
-import { Box, Text, useToast, Link } from "@chakra-ui/react"
+import { Box, Text, useToast, Link, Image, Heading, Flex } from "@chakra-ui/react"
 import { getUser } from "src/service/user"
 import { GetServerSideProps, GetServerSidePropsContext } from "next"
 import { useRouter } from "next/router"
@@ -9,6 +9,8 @@ import Navbar from "@components/layout/Navbar/Navbar"
 import Head from "next/head"
 import { showToast } from "src/service/toast"
 import { useEffect } from "react"
+import ManfaatCard from "@components/page-component/Home/ManfaatCard"
+import CaraKerjaCard from "@components/page-component/Home/CaraKerjaCard"
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const cookie = context.req.headers.cookie
@@ -58,13 +60,14 @@ const Home = () => {
         <title>Meetry App</title>
       </Head>
       <Navbar></Navbar>
-      <Container mt="32px" align="center" justify="space-between">
+      <Container p="32px 64px" mt="64px" align="center" justify="space-between">
         <Box w="50%">
           <Text fontSize="5xl">
-            Tempat Kolaborasi<br></br>Mitra Proyek Terbaik
+            Temukan Mitra
+            <br /> Proyek Terbaik di Sini
           </Text>
           <Text fontSize="xl" my="32px" color="gray.500">
-            Membantu mengelola pengerjaan proyek bersama<br></br>mitra terbaik secara efisien dan efektif
+            Kami membantu Anda menemukan mitra yang tepat <br /> sesuai kebutuhan dan memfasilitasi kegiatan kolaborasi
           </Text>
           <Link href="/register" style={{ textDecoration: "none" }}>
             <PrimaryButton p="10px 24px" mr="35px">
@@ -73,10 +76,106 @@ const Home = () => {
           </Link>
           <OutlinedButton p="10px 24px">Baca Lebih Lanjut</OutlinedButton>
         </Box>
-        <Box backgroundColor="gray.200" w="662px" h="500px"></Box>
+        <Image alt="Hero" w="650px" h="434" src="/online-collab-illustration.webp" />
       </Container>
+      <Box id="manfaat" p="64px 40px" backgroundColor="#F0FFF4">
+        <Heading textAlign="center" size="lg">
+          Manfaat Penggunaan Produk
+        </Heading>
+        <Flex gap="64px" mt="64px">
+          <ManfaatCard data={manfaatPeneliti} />
+          <ManfaatCard data={manfaatMitra} />
+        </Flex>
+      </Box>
+      <Box p="64px 40px" w="100%">
+        <Heading textAlign="center" size="lg">
+          Cara Kerja Sistem
+        </Heading>
+        <Flex mt="64px" justify="space-between">
+          {caraKerja.map((data, index) => (
+            <CaraKerjaCard key={data.image} index={index} data={data} />
+          ))}
+        </Flex>
+      </Box>
+      <Flex p="64px" backgroundColor="#F0FFF4" w="100%" gap="64px">
+        <Image alt="Footer" src="/footer-illustration.webp"></Image>
+        <Flex flexDir="column" justify="space-between">
+          <Text fontSize="3xl">
+            Bergabunglah bersama Meetry, temukan mitra yang cocok <br /> sesuai kebutuhan, dan mulailah kolaborasi
+            terbaik Anda <br /> sekarang juga
+          </Text>
+          <PrimaryButton w="200px">Gabung Sekarang</PrimaryButton>
+        </Flex>
+      </Flex>
     </>
   )
 }
+
+const manfaatPeneliti = {
+  title: {
+    image: "/peneliti-title-image.webp",
+    text: "Peneliti",
+    description: "Dosen Universitas Gadjah Mada"
+  },
+  body: [
+    {
+      image: "/list-1-peneliti.webp",
+      text: "Terhubung dengan para mitra dari industri-industri unggulan"
+    },
+    {
+      image: "/list-2-peneliti.webp",
+      text: "Mudah dalam menemukan mitra yang sesuai kebutuhan proyek"
+    },
+    {
+      image: "/list-3-peneliti.webp",
+      text: "Kolaborasi difasilitasi dan dikelola secara sistematis dengan bantuan tim kami"
+    }
+  ]
+}
+
+const manfaatMitra = {
+  title: {
+    image: "/mitra-title-image.webp",
+    text: "Mitra Industri",
+    description: "Perusahaan swasta, BUMN/D, Asosiasi, dan sebagainya"
+  },
+  body: [
+    {
+      image: "/list-1-mitra.webp",
+      text: "Berjejaring dengan para peneliti terbaik dari kalangan dosen Universitas Gadjah Mada"
+    },
+    {
+      image: "/list-2-mitra.webp",
+      text: "Temukan kriteria peneliti yang diinginkan dengan proses yang mudah"
+    },
+    {
+      image: "/list-3-mitra.webp",
+      text: "Kolaborasi difasilitasi dan dikelola secara sistematis dengan bantuan tim kami"
+    }
+  ]
+}
+
+const caraKerja = [
+  {
+    image: "/cara-kerja-sistem-daftar.webp",
+    title: "Daftar",
+    description: "Buat akun baru, lengkapi profil, dan tunjukkan karya-karya terbaik Anda"
+  },
+  {
+    image: "/cara-kerja-sistem-ajukan-pencarian.webp",
+    title: "Ajukan Pencarian",
+    description: "Isi formulir kebutuhan proyek dan cantumkan kriteria mitra yang ingin dicari"
+  },
+  {
+    image: "/cara-kerja-sistem-tunggu.webp",
+    title: "Tunggu",
+    description: "Kami akan menghubungkan Anda dengan mitra yang cocok berdasarkan formulir yang diisii"
+  },
+  {
+    image: "/cara-kerja-sistem-kolaborasi-dimulai.webp",
+    title: "Kolaborasi Dimulai",
+    description: "Diskusi dengan mitra, pantau kegiatan, dan lanjutkan kolaborasi"
+  }
+]
 
 export default Home

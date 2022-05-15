@@ -1,4 +1,4 @@
-import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react"
+import { Box, Flex, Image, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react"
 import { useContext, useEffect, useState } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import { ProyekDetailApiResponse, ProyekDetailApiResponseData } from "@/types/api-response/get-proyek-detail"
@@ -65,7 +65,9 @@ const DetailProyekSection = () => {
           justify="center"
           gap="44px"
         >
-          <Box w="350px" h="275px" backgroundColor="gray.100"></Box>
+          <Box w="350px" h="275px" backgroundColor="gray.100">
+            <Image alt="No project selected" w="100%" h="100%" src="/belum-memilih-proyek-illustration.webp"></Image>
+          </Box>
           <Text>Silakan pilih satu judul proyek terlebih dahulu di sebelah kiri untuk melihat detailnya</Text>
         </Flex>
       )}

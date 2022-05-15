@@ -1,4 +1,4 @@
-import { Box, Flex, Modal, ModalContent, ModalOverlay, Text } from "@chakra-ui/react"
+import { Box, Flex, Image, Modal, ModalContent, ModalOverlay, Text } from "@chakra-ui/react"
 import PrimaryButton from "@components/button/PrimaryButton"
 import { useRouter } from "next/router"
 import { Role } from "src/service/user"
@@ -20,7 +20,14 @@ const RequestProyekSuccessModal = ({ isOpen, onClose, role }: RequestProyekSucce
       <ModalOverlay />
       <ModalContent p="32px">
         <Flex flexDir="column" align="center" gap="32px">
-          <Box w="200px" h="200px" backgroundColor="gray.200"></Box>
+          <Box w="200px" h="200px" backgroundColor="gray.200">
+            <Image
+              alt="Success"
+              width="100%"
+              height="100%"
+              src="/ajukan-proyek-success-pop-up-illustration.webp"
+            ></Image>
+          </Box>
           <Text fontSize="lg" fontWeight="semibold" color="gray.900">
             Berhasil mengirimkan pengajuan
           </Text>
