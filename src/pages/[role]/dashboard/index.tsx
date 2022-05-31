@@ -21,13 +21,13 @@ const Dashboard = ({ error, id, role }: { error: boolean; id: string; role: Role
       <Head>
         <title>Meetry - Dashboard {role.charAt(0) + role.slice(1).toLowerCase()}</title>
       </Head>
-      <NavbarUser role={role}></NavbarUser>
+      <NavbarUser id={id} role={role}></NavbarUser>
       <Container gap="32px">
         <Box w="55%">
           <MainMenuSection id={id} role={role}></MainMenuSection>
         </Box>
         <Box w="45%">
-          <NotificationSection></NotificationSection>
+          <NotificationSection id={id}></NotificationSection>
         </Box>
       </Container>
     </>

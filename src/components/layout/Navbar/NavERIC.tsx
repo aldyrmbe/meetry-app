@@ -26,7 +26,7 @@ const NavERIC = () => {
       <NavWrapper>
         <Flex h="80px" gap="32px" align="center">
           <Box w="200px" as="a" href="/peneliti/dashboard">
-            <Image src="/logo.svg" alt="Meetry Logo"></Image>
+            <Image src="/meetry-eric-logo.svg" alt="Meetry Logo"></Image>
           </Box>
           <SearchBarInput
             defaultValue={defaultValue}

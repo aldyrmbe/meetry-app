@@ -15,6 +15,8 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@react-pdf/renderer": "^2.1.1",
+    "@types/sockjs-client": "^1.5.1",
+    "@types/stompjs": "^2.3.5",
     "axios": "^0.26.1",
     "chakra-react-select": "^3.1.2",
     "chakra-ui-steps": "^1.7.2",
@@ -22,10 +24,13 @@
     "linkify-react": "^3.0.4",
     "linkifyjs": "^3.0.5",
     "lodash": "^4.17.21",
+    "net": "^1.0.2",
     "next": "12.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-hook-form": "^7.28.1"
+    "react-hook-form": "^7.28.1",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3"
   },
   "devDependencies": {
     "@types/node": "17.0.23",

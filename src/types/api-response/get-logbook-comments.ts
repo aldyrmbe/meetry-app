@@ -9,4 +9,10 @@ export type Comment = {
   pengirim: string
   waktu: number
   isi: string
+  files: FileData[] | null
+}
+
+export type FileData = {
+  fileName: string
+  fileUrl: string
 }

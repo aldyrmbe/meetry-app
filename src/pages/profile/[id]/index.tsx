@@ -19,6 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   if (user) {
     return {
       props: {
+        id: user.id,
         role: user.role
       }
     }
@@ -56,7 +57,7 @@ const InfoCard = ({ title, text }: { title: string; text: string }) => {
   )
 }
 
-const ProfilePage = ({ role }: { role: Role }) => {
+const ProfilePage = ({ id, role }: { id: string; role: Role }) => {
   const [mitraData, setMitraData] = useState<GetMitraProfileResponseData>()
   const [isLoading, setLoading] = useState<boolean>(false)
   const router = useRouter()
@@ -75,7 +76,7 @@ const ProfilePage = ({ role }: { role: Role }) => {
       <Head>
         <title>Profil Mitra</title>
       </Head>
-      <NavbarUser role={role}></NavbarUser>
+      <NavbarUser id={id} role={role}></NavbarUser>
       {isLoading ? (
         <Container>
           <p>Loading...</p>

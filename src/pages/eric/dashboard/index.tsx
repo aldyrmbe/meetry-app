@@ -11,7 +11,7 @@ import NavbarUser from "@components/layout/Navbar/NavbarUser"
 
 export const getServerSideProps: GetServerSideProps = authenticate("eric")
 
-const DashboardERIC = ({ role }: { role: Role }) => {
+const DashboardERIC = ({ id, role }: { id: string; role: Role }) => {
   const _selected = {
     color: "teal.500",
     fontWeight: "bold",
@@ -23,7 +23,7 @@ const DashboardERIC = ({ role }: { role: Role }) => {
       <Head>
         <title>Meetry - Dashboard ERIC</title>
       </Head>
-      <NavbarUser role={role}></NavbarUser>
+      <NavbarUser id={id} role={role}></NavbarUser>
       <Container maxH="calc(100vh - 80px)" gap="32px">
         <Box as="section" boxShadow="base" borderRadius="6px" backgroundColor="#FFF" w="70%" p="32px">
           <Tabs variant="unstyled">

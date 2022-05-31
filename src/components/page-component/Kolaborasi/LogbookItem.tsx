@@ -83,7 +83,8 @@ const LogbookItem = ({ data, status }: LogbookItemType) => {
         <Item title="Waktu Kegiatan" content={getWaktuKegiatanLogbook(data.waktu)}></Item>
         <Item title="Nomor Logbook" content={data.id}></Item>
         <Text fontSize="lg">{data.deskripsi}</Text>
-        <LogbookComments logbookId={data.id}></LogbookComments>
+        <Box w="100%" h="2px" backgroundColor="gray.200"></Box>
+        <LogbookComments status={status} logbookId={data.id}></LogbookComments>
       </Flex>
       <EditLogbookModal
         isOpen={isEditLogbookModalOpen}

@@ -19,7 +19,7 @@ import { customAuthenticate } from "src/service/auth"
 
 export const getServerSideProps: GetServerSideProps = customAuthenticate(["peneliti", "mitra"])
 
-const AjukanKolaborasi = ({ error, role }: { error: boolean; role: Role }) => {
+const AjukanKolaborasi = ({ error, id, role }: { error: boolean; id: string; role: Role }) => {
   const [isLoading, setLoading] = useState<boolean>(false)
   const { activeStep, nextStep, prevStep } = useSteps()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -92,7 +92,7 @@ const AjukanKolaborasi = ({ error, role }: { error: boolean; role: Role }) => {
       <Head>
         <title>Meetry - {getTitle()}</title>
       </Head>
-      <NavbarUser role={role}></NavbarUser>
+      <NavbarUser id={id} role={role}></NavbarUser>
       <Container>
         <Flex align="center" mb="32px" gap="16px">
           <Box as="a" href="/peneliti/dashboard">

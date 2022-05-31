@@ -76,13 +76,13 @@ const PDFView = ({ proyekData: { pemohon, overviewProyek, kebutuhanProyek } }: P
                   </View>
                 </View>
                 <View style={styles.imageWrapper}>
-                  <Image debug style={styles.image} src={peneliti.fotoProfil}></Image>
+                  <Image style={styles.image} src={peneliti.fotoProfil}></Image>
                 </View>
               </View>
             )}
             {mitra && (
               <View style={styles.sectionWrapper}>
-                <View debug style={{ width: "80%" }}>
+                <View style={{ width: "80%" }}>
                   <View style={sectionStyles.columnWrapper}>
                     <View style={sectionStyles.tableHeader}>
                       <Text>Nama</Text>
@@ -113,7 +113,7 @@ const PDFView = ({ proyekData: { pemohon, overviewProyek, kebutuhanProyek } }: P
                   </View>
                 </View>
                 <View style={styles.imageWrapper}>
-                  <Image debug src={mitra.fotoProfil}></Image>
+                  <Image src={mitra.fotoProfil}></Image>
                 </View>
               </View>
             )}

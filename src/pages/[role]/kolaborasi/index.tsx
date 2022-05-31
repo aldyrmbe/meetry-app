@@ -33,6 +33,8 @@ type KolaborasiPageContextType = {
   setSubFolderId: (subFolderId: string | undefined) => void
   subFolderName: string | undefined
   setSubFolderName: (subFolderName: string | undefined) => void
+  tabIndex: number
+  setTabIndex: (tabIndex: number) => void
 }
 
 export const KolaborasiPageContext = React.createContext<KolaborasiPageContextType>({
@@ -49,16 +51,19 @@ export const KolaborasiPageContext = React.createContext<KolaborasiPageContextTy
   subFolderId: undefined,
   setSubFolderId: () => {},
   subFolderName: undefined,
-  setSubFolderName: () => {}
+  setSubFolderName: () => {},
+  tabIndex: 0,
+  setTabIndex: () => {}
 })
 
-const Kolaborasi = ({ error, role }: { error: any; role: Role }) => {
+const Kolaborasi = ({ error, id, role }: { error: any; id: string; role: Role }) => {
   const { isOpen: isFilterOpen, onToggle: toggleFilter, onClose: closeFilter } = useDisclosure()
   const [filter, setFilter] = useState<StatusType | undefined>(undefined)
   const [proyekId, setProyekId] = useState<string | undefined>(undefined)
   const [folderId, setFolderId] = useState<string | undefined>(undefined)
   const [subFolderId, setSubFolderId] = useState<string | undefined>(undefined)
   const [subFolderName, setSubFolderName] = useState<string | undefined>(undefined)
+  const [tabIndex, setTabIndex] = useState<number>(0)
 
   const contextValue = {
     isFilterOpen,
@@ -74,7 +79,9 @@ const Kolaborasi = ({ error, role }: { error: any; role: Role }) => {
     subFolderId,
     setSubFolderId,
     subFolderName,
-    setSubFolderName
+    setSubFolderName,
+    tabIndex,
+    setTabIndex
   }
 
   if (error) {
@@ -86,7 +93,7 @@ const Kolaborasi = ({ error, role }: { error: any; role: Role }) => {
       <Head>
         <title>Meetry - Kolaborasi Saya</title>
       </Head>
-      <NavbarUser role={role}></NavbarUser>
+      <NavbarUser id={id} role={role}></NavbarUser>
       <KolaborasiPageContext.Provider value={contextValue}>
         <Container gap="32px">
           <Box w="33%">

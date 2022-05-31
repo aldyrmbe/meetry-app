@@ -109,7 +109,7 @@ const OverviewProyek = ({
           register={register}
           validation={{
             ...requiredValidation,
-            validate: (value: string) => new Date(value).getDate() >= new Date().getDate() || "Periode tidak valid"
+            validate: (value: string) => new Date(value).getTime() >= new Date().getTime() || "Periode tidak valid"
           }}
           errors={errors}
         />
@@ -233,7 +233,7 @@ const OverviewProyek = ({
               watch={watch}
               label={`Dokumen ${index + 1}`}
               placeholder="Pilih file"
-              helperText="Format: jpg, jpeg, png"
+              helperText="Format: jpg, jpeg, png, pdf"
             />
             {dokumenFields.length !== 1 && (
               <PrimaryButton mt="38px" onClick={() => dokumenRemove(index)}>

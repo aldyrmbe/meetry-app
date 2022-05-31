@@ -27,7 +27,7 @@ const LogbookProyekTab = ({ isLoading, data }: LogbookProyekTabType) => {
   }
 
   return (
-    <Box h="calc(100vh - 80px - 200px)" overflowX="hidden" overflowY="scroll">
+    <Box h="calc(100vh - 80px - 200px)" overflowY="scroll">
       {isLoading ? (
         <Flex w="100%" h="100%" flexDir="column" justifyContent="center" align="center" gap="32px">
           <Spinner></Spinner>
@@ -35,7 +35,7 @@ const LogbookProyekTab = ({ isLoading, data }: LogbookProyekTabType) => {
         </Flex>
       ) : (
         <>
-          <DalamDiskusiAlert status={data.status} role={role!} pemohon={role!}></DalamDiskusiAlert>
+          <DalamDiskusiAlert status={data.status} role={role!} pemohon={data.pemohon}></DalamDiskusiAlert>
           {data.folders == null ? (
             <Box>
               <Text fontSize="xl" fontWeight="semibold">

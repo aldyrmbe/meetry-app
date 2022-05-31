@@ -6,9 +6,10 @@ import { axiosInstance } from "src/service/axios"
 import OverviewProyekTab from "./OverviewProyekTab"
 import KebutuhanProyekTab from "./KebutuhanProyekTab"
 import LogbookProyekTab from "./LogbookProyekTab"
+import FilesProyekTab from "./FilesProyekTab"
 
 const DetailProyekSection = () => {
-  const { proyekId } = useContext(KolaborasiPageContext)
+  const { proyekId, tabIndex, setTabIndex } = useContext(KolaborasiPageContext)
   const [isFetchingProyekDetail, setFetchingProyekDetail] = useState<boolean>(true)
   const [proyekDetail, setProyekDetail] = useState<ProyekDetailApiResponseData>()
 
@@ -34,21 +35,33 @@ const DetailProyekSection = () => {
     <Box h="calc(100vh - 80px - 80px)">
       {proyekId ? (
         <Box boxShadow="base" borderRadius="6px" backgroundColor="#FFF" p="32px">
-          <Tabs defaultIndex={0} variant="unstyled">
+          <Tabs index={tabIndex} variant="unstyled">
             <TabList gap="32px">
-              <Tab _selected={_selected}>Overview Proyek</Tab>
-              <Tab _selected={_selected}>Kebutuhan Proyek</Tab>
-              <Tab _selected={_selected}>Logbook</Tab>
+              <Tab onClick={() => setTabIndex(0)} _selected={_selected}>
+                Overview Proyek
+              </Tab>
+              <Tab onClick={() => setTabIndex(1)} _selected={_selected}>
+                Kebutuhan Proyek
+              </Tab>
+              <Tab onClick={() => setTabIndex(2)} _selected={_selected}>
+                Logbook
+              </Tab>
+              <Tab onClick={() => setTabIndex(3)} _selected={_selected}>
+                Files
+              </Tab>
             </TabList>
             <TabPanels>
               <TabPanel p="32px 0 0 0">
-                <OverviewProyekTab isLoading={isFetchingProyekDetail} data={proyekDetail!}></OverviewProyekTab>
+                <OverviewProyekTab isLoading={isFetchingProyekDetail} data={proyekDetail!} />
               </TabPanel>
               <TabPanel p="32px 0 0 0">
-                <KebutuhanProyekTab isLoading={isFetchingProyekDetail} data={proyekDetail!}></KebutuhanProyekTab>
+                <KebutuhanProyekTab isLoading={isFetchingProyekDetail} data={proyekDetail!} />
               </TabPanel>
               <TabPanel p="32px 0 0 0">
-                <LogbookProyekTab isLoading={isFetchingProyekDetail} data={proyekDetail!}></LogbookProyekTab>
+                <LogbookProyekTab isLoading={isFetchingProyekDetail} data={proyekDetail!} />
+              </TabPanel>
+              <TabPanel p="32px 0 0 0">
+                <FilesProyekTab data={proyekDetail} />
               </TabPanel>
             </TabPanels>
           </Tabs>

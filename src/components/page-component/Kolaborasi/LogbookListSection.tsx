@@ -15,6 +15,10 @@ type LogbookListSectionType = {
   status: StatusType
 }
 
+const Divider = () => {
+  return <Box w="100%" my="32px" h="4px" backgroundColor="gray.200" borderRadius="full"></Box>
+}
+
 const LogbookListSection = ({ status }: LogbookListSectionType) => {
   const { role, proyekId, subFolderId, setSubFolderId, subFolderName } = useContext(KolaborasiPageContext)
   const {
@@ -73,9 +77,9 @@ const LogbookListSection = ({ status }: LogbookListSectionType) => {
               Tambah Logbook
             </OutlinedButton>
           )}
-          <VStack mt="32px" divider={<StackDivider borderWidth="1px"></StackDivider>} spacing="32px" align="start">
+          <VStack mt="32px" divider={<Divider />} spacing="32px" align="start">
             {logbookData.map((logbook) => (
-              <LogbookItem status={status} key={logbook.id} data={logbook}></LogbookItem>
+              <LogbookItem status={status} key={logbook.id} data={logbook} />
             ))}
           </VStack>
           {hasMore && (

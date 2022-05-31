@@ -8,7 +8,7 @@ type ProyekListProps = {
 }
 
 const ProyekList = ({ data }: ProyekListProps) => {
-  const { proyekId, setProyekId, setFolderId, setSubFolderId } = useContext(KolaborasiPageContext)
+  const { proyekId, setProyekId, setFolderId, setSubFolderId, setTabIndex } = useContext(KolaborasiPageContext)
 
   const getParticipant = () => {
     if (data.partisipan.length === 0) {
@@ -36,6 +36,7 @@ const ProyekList = ({ data }: ProyekListProps) => {
   }
 
   const onProyekClick = (proyekId: string) => {
+    setTabIndex(0)
     setProyekId(proyekId)
     setFolderId(undefined)
     setSubFolderId(undefined)

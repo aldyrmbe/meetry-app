@@ -32,14 +32,14 @@ const MenuCard = ({ text, href, externalLink, openInNewTab = false, isProfile = 
         backgroundColor="white"
       >
         <Flex flexDir="column" gap="32px" h="100%">
-          <Box h="100%" w="100%" borderRadius="6px">
+          <Flex align="center" justify="center" h="100%" w="100%" borderRadius="6px">
             <Image
               alt="Main menu"
-              width="100%"
-              height="100%"
+              width="250px"
+              height="230px"
               src={isProfile ? "/my-profile-illustration.webp" : "/ajukan-pencarian-illustration.webp"}
             ></Image>
-          </Box>
+          </Flex>
           <Flex w="100%" justify="space-between" align="center">
             <Text fontSize="lg" fontWeight="semibold">
               {text}

@@ -7,7 +7,7 @@ import MenuCard from "@components/page-component/Dashboard/MainMenuSection/MenuC
 import { useEffect, useState } from "react"
 import { axiosInstance } from "src/service/axios"
 import { GetAcadstaffLinkResponse } from "@/types/api-response/get-acadstaff-link"
-import { getReverseRoleMapping, getRoleMapping, Role } from "src/service/user"
+import { getRoleMapping, Role } from "src/service/user"
 
 type MainMenuSectionProps = {
   id?: string

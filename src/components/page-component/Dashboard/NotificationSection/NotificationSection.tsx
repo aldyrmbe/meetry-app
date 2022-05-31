@@ -7,8 +7,11 @@ import { useEffect, useState } from "react"
 import NotificationItem from "./NotificationItem"
 import PrimaryButton from "@components/button/PrimaryButton"
 import { NotificationData, GetNotificationResponse } from "@/types/api-response/notification"
+import SockJS from "sockjs-client"
+import { over } from "stompjs"
+import { WEB_SOCKET_URL } from "@hooks/useRealtimeNotification"
 
-const NotificationSection = () => {
+const NotificationSection = ({ id }: { id: string }) => {
   const [notifications, setNotifications] = useState<NotificationData[]>([])
   const [page, setPage] = useState<number>(0)
   const [hasMore, setHasMore] = useState<boolean>(true)
@@ -33,8 +36,24 @@ const NotificationSection = () => {
     })
   }
 
+  const clearNewNotificationBadge = () => {
+    console.log("OK")
+    const sockJSClient = new SockJS(WEB_SOCKET_URL)
+    const stompJSClient = over(sockJSClient)
+
+    const onConnected = () => {
+      stompJSClient.send(`/app/clearNotification/${id}`, {})
+    }
+
+    const onError = (error: any) => {
+      console.log(error)
+    }
+
+    stompJSClient.connect({}, onConnected, onError)
+  }
+
   return (
-    <section>
+    <section onMouseEnter={clearNewNotificationBadge}>
       <MenuHeader>
         <NotificationIcon></NotificationIcon>
         <IconLabel>Notifikasi</IconLabel>
