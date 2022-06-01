@@ -5,7 +5,12 @@ import { useRealtimeNotification } from "@hooks/useRealtimeNotification"
 import { useRouter } from "next/router"
 import handleLogout from "src/utils/handleLogout"
 
-const NavPeneliti = ({ id }: { id: string }) => {
+type NavPenelitiType = {
+  id: string
+  onOpen: () => void
+}
+
+const NavPeneliti = ({ id, onOpen }: NavPenelitiType) => {
   const router = useRouter()
   const toast = useToast()
   const { hasNewNotification, error } = useRealtimeNotification(id)
@@ -21,7 +26,7 @@ const NavPeneliti = ({ id }: { id: string }) => {
           <Flex align="center" justify="center">
             <NavLink hasBadge={hasNewNotification} text="Beranda" href={`/peneliti/dashboard`} mr="32px"></NavLink>
             <NavLink text="Kolaborasi Saya" href={`/peneliti/kolaborasi`} mr="32px"></NavLink>
-            <Link onClick={() => handleLogout(router, toast)}>Logout</Link>
+            <Link onClick={onOpen}>Logout</Link>
           </Flex>
         </Flex>
       </NavWrapper>

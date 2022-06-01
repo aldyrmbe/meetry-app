@@ -1,5 +1,5 @@
 import { MitraDetail, SearchMitraApiResponse } from "@/types/api-response/search-mitra"
-import { ChevronDownIcon } from "@chakra-ui/icons"
+import { ChevronDownIcon, ExternalLinkIcon } from "@chakra-ui/icons"
 import { Box, Button, Divider, Fade, Flex, Image, Link, StackDivider, Text, VStack } from "@chakra-ui/react"
 import OutlinedButton from "@components/button/OutlinedButton"
 import { useRouter } from "next/router"
@@ -86,7 +86,9 @@ const MitraSearchResult = () => {
                   </Text>
                 </Flex>
                 <Link target="_blank" href={`${window.location.origin}/profile${mitra.profileUrl}`}>
-                  <OutlinedButton size="sm">Lihat Profil</OutlinedButton>
+                  <OutlinedButton size="sm" rightIcon={<ExternalLinkIcon />}>
+                    Lihat Profil
+                  </OutlinedButton>
                 </Link>
               </Flex>
             ))}

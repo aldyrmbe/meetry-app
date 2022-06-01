@@ -4,7 +4,11 @@ import NavWrapper from "@components/layout/Navbar/NavWrapper"
 import { useRouter } from "next/router"
 import handleLogout from "src/utils/handleLogout"
 
-const NavAccountOfficer = () => {
+type NavAccountOfficerType = {
+  onOpen: () => void
+}
+
+const NavAccountOfficer = ({ onOpen }: NavAccountOfficerType) => {
   const router = useRouter()
   const toast = useToast()
 
@@ -18,7 +22,7 @@ const NavAccountOfficer = () => {
           <Spacer></Spacer>
           <Flex align="center" justify="center">
             <NavLink text="Kolaborasi Saya" href={`/accountofficer/kolaborasi`} mr="32px"></NavLink>
-            <Link onClick={() => handleLogout(router, toast)}>Logout</Link>
+            <Link onClick={onOpen}>Logout</Link>
           </Flex>
         </Flex>
       </NavWrapper>

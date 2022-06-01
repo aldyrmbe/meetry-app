@@ -1,4 +1,4 @@
-import { Box, Text, useToast, Link, Image, Heading, Flex } from "@chakra-ui/react"
+import { Box, Text, useToast, Link, Image, Heading, Flex, Divider } from "@chakra-ui/react"
 import { getUser } from "src/service/user"
 import { GetServerSideProps, GetServerSidePropsContext } from "next"
 import { useRouter } from "next/router"
@@ -78,7 +78,8 @@ const Home = () => {
         </Box>
         <Image alt="Hero" w="650px" h="434" src="/online-collab-illustration.webp" />
       </Container>
-      <Box id="manfaat" p="64px 40px" backgroundColor="#F0FFF4">
+      <Box id="manfaat" h="80px" mt="-80px"></Box>
+      <Box p="64px 40px" backgroundColor="#F0FFF4">
         <Heading textAlign="center" size="lg">
           Manfaat Penggunaan Produk
         </Heading>
@@ -86,6 +87,7 @@ const Home = () => {
           <ManfaatCard data={manfaatPeneliti} />
           <ManfaatCard data={manfaatMitra} />
         </Flex>
+        <Box id="carakerja" mb="-64px" h="64px"></Box>
       </Box>
       <Box p="64px 40px" w="100%">
         <Heading textAlign="center" size="lg">
@@ -97,16 +99,27 @@ const Home = () => {
           ))}
         </Flex>
       </Box>
-      <Flex p="64px" backgroundColor="#F0FFF4" w="100%" gap="64px">
-        <Image alt="Footer" src="/footer-illustration.webp"></Image>
-        <Flex flexDir="column" justify="space-between">
-          <Text fontSize="3xl">
-            Bergabunglah bersama Meetry, temukan mitra yang cocok <br /> sesuai kebutuhan, dan mulailah kolaborasi
-            terbaik Anda <br /> sekarang juga
-          </Text>
-          <PrimaryButton w="200px">Gabung Sekarang</PrimaryButton>
+      <Box backgroundColor="#F0FFF4" w="100%">
+        <Flex p="64px" backgroundColor="#F0FFF4" w="100%" gap="64px">
+          <Image alt="Footer" src="/footer-illustration.webp"></Image>
+          <Flex flexDir="column" justify="space-between">
+            <Text fontSize="3xl">
+              Bergabunglah bersama Meetry, temukan mitra yang cocok <br /> sesuai kebutuhan, dan mulailah kolaborasi
+              terbaik Anda <br /> sekarang juga
+            </Text>
+            <PrimaryButton w="200px">Gabung Sekarang</PrimaryButton>
+          </Flex>
         </Flex>
-      </Flex>
+        <Box p="64px" w="100%">
+          <Box backgroundColor="gray.200" h="2px" w="100%"></Box>
+        </Box>
+        <Text color="gray.500" pb="64px" textAlign="center">
+          @2022. Fakultas Teknik Universitas Gadjah Mada |{" "}
+          <Link color="gray.900" textDecoration="underline" href="mailto:eric@ugm.ac.id">
+            Email
+          </Link>
+        </Text>
+      </Box>
     </>
   )
 }

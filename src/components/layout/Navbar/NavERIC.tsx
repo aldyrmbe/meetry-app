@@ -8,7 +8,11 @@ import { useRouter } from "next/router"
 import handleLogout from "src/utils/handleLogout"
 import SearchBarInput from "@components/input/SearchBarInput"
 
-const NavERIC = () => {
+type NavERIC = {
+  onOpen: () => void
+}
+
+const NavERIC = ({ onOpen }: NavERIC) => {
   const router = useRouter()
   const toast = useToast()
   const defaultValue = router.query.searchQuery
@@ -36,7 +40,7 @@ const NavERIC = () => {
           <Flex align="center" justify="center">
             <NavLink text="Beranda" href="/eric/dashboard" mr="32px"></NavLink>
             <NavLink text="Kolaborasi Saya" href="/eric/kolaborasi" mr="32px"></NavLink>
-            <Link onClick={() => handleLogout(router, toast)}>Logout</Link>
+            <Link onClick={onOpen}>Logout</Link>
           </Flex>
         </Flex>
       </NavWrapper>

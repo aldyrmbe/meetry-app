@@ -11,7 +11,7 @@ import PrimaryButton from "@components/button/PrimaryButton"
 import useDebounce from "@hooks/useDebounce"
 
 const ListProyekSection = () => {
-  const { toggleFilter, isFilterOpen, filter, closeFilter } = useContext(KolaborasiPageContext)
+  const { toggleFilter, isFilterOpen, filter, setProyekEmpty } = useContext(KolaborasiPageContext)
   const [page, setPage] = useState<number>(0)
   const [searchQuery, setSearchQuery] = useState<string>("")
   const debouncedSearchQuery = useDebounce(searchQuery)
@@ -34,6 +34,7 @@ const ListProyekSection = () => {
         const data = response.data.data
         const { currentPage, totalPage } = data.paginationData
         setHasMore(totalPage !== 0 && currentPage !== totalPage)
+        setProyekEmpty(data.proyekData.length == 0)
         setProyekData(proyekData.concat(data.proyekData))
         setLoading(false)
         setFetching(false)
@@ -85,7 +86,6 @@ const ListProyekSection = () => {
         <SearchBarInput
           placeholder="Cari judul proyek"
           onChange={(e: any) => setSearchQuery(e.target.value)}
-          onFocus={() => closeFilter()}
         ></SearchBarInput>
         <Box position="relative">
           <IconButton onClick={toggleFilter} aria-label="next" icon={<FilterIcon />}></IconButton>

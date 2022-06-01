@@ -53,7 +53,7 @@ const NotificationSection = ({ id }: { id: string }) => {
   }
 
   return (
-    <section onMouseEnter={clearNewNotificationBadge}>
+    <section>
       <MenuHeader>
         <NotificationIcon></NotificationIcon>
         <IconLabel>Notifikasi</IconLabel>
@@ -75,11 +75,16 @@ const NotificationSection = ({ id }: { id: string }) => {
           </Center>
         ) : (
           <Fade in={true}>
-            <VStack align="stretch" divider={<Divider></Divider>} spacing="20px">
+            {/* <VStack align="stretch" divider={<Divider></Divider>} spacing="20px">
               {notifications.map((notification: NotificationData) => (
                 <NotificationItem key={notification.id} notification={notification}></NotificationItem>
               ))}
-            </VStack>
+            </VStack> */}
+            <Flex flexDir="column" gap="16px">
+              {notifications.map((notification) => (
+                <NotificationItem key={notification.id} notification={notification} />
+              ))}
+            </Flex>
             {hasMore && (
               <Box h="40px" mt="20px">
                 <PrimaryButton

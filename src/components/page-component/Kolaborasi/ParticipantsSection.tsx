@@ -19,8 +19,10 @@ const Mitra = ({ mitra }: MitraType) => {
     <Flex align="center" gap="16px" mt="32px">
       <Image h="32px" w="32px" borderRadius="full" alt="Mitra" src={mitra.fotoProfil}></Image>
       <Text fontSize="lg">{mitra.nama} (Mitra)</Text>
-      <Link href={`/profile${mitra.profilePageUrl}`}>
-        <OutlinedButton size="sm">Lihat Profil</OutlinedButton>
+      <Link href={`/profile${mitra.profilePageUrl}`} target="_blank">
+        <OutlinedButton size="sm" rightIcon={<ExternalLinkIcon />}>
+          Lihat Profil
+        </OutlinedButton>
       </Link>
     </Flex>
   )
@@ -36,7 +38,7 @@ const Peneliti = ({ peneliti }: PenelitiType) => {
       <Image h="32px" w="32px" borderRadius="full" alt="Mitra" src={peneliti.fotoProfil}></Image>
       <Text fontSize="lg">{peneliti.nama} (Peneliti)</Text>
       <Link target="_blank" href={peneliti.profilePageUrl}>
-        <OutlinedButton rightIcon={<ExternalLinkIcon></ExternalLinkIcon>} size="sm">
+        <OutlinedButton rightIcon={<ExternalLinkIcon />} size="sm">
           Lihat Profil
         </OutlinedButton>
       </Link>

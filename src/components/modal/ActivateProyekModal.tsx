@@ -1,6 +1,6 @@
 import { BaseResponse } from "@/types/base"
 import { AddIcon } from "@chakra-ui/icons"
-import { Flex, Modal, ModalContent, ModalOverlay, ModalCloseButton, Heading, Button } from "@chakra-ui/react"
+import { Flex, Modal, ModalContent, ModalOverlay, ModalCloseButton, Heading, Button, Text } from "@chakra-ui/react"
 import PrimaryButton from "@components/button/PrimaryButton"
 import { FileInput } from "@components/input/MeetryInput"
 import { requiredValidation } from "@utils/input-validation/validation"
@@ -33,12 +33,14 @@ const ActivateProyekModal = ({ proyekId, isOpen, onClose }: ActivateProyekModalT
     mode: "onChange"
   })
   const [isSending, setSending] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<boolean>(false)
   const router = useRouter()
 
   const { fields: fileFields, append: appendFile, remove: removeFile } = useFieldArray({ control, name: "files" })
 
   const onSubmit = handleSubmit((data: ActivateProyekFormValues) => {
     setSending(true)
+    setErrorMessage(false)
     const { files } = data
     const formData = new FormData()
     if (files) {
@@ -55,6 +57,7 @@ const ActivateProyekModal = ({ proyekId, isOpen, onClose }: ActivateProyekModalT
         router.reload()
       })
       .catch((err) => {
+        setErrorMessage(err.response.data.message)
         setSending(false)
       })
   })
@@ -68,7 +71,7 @@ const ActivateProyekModal = ({ proyekId, isOpen, onClose }: ActivateProyekModalT
         <form onSubmit={onSubmit}>
           {fileFields.map((field, index) => {
             return (
-              <Flex key={field.id} w="100%" align="flex-end" gap="32px">
+              <Flex key={field.id} w="100%" gap="32px">
                 <FileInput
                   validation={requiredValidation}
                   fieldName={`files.${index}.value`}
@@ -77,11 +80,21 @@ const ActivateProyekModal = ({ proyekId, isOpen, onClose }: ActivateProyekModalT
                   label={`File ${index + 1}`}
                   placeholder="Pilih file"
                   errors={errors}
+                  helperText="Format: .pdf"
                 ></FileInput>
-                {fileFields.length !== 1 && <PrimaryButton onClick={() => removeFile(index)}>Hapus</PrimaryButton>}
+                {fileFields.length !== 1 && (
+                  <PrimaryButton mt="65px" onClick={() => removeFile(index)}>
+                    Hapus
+                  </PrimaryButton>
+                )}
               </Flex>
             )
           })}
+          {errorMessage && (
+            <Text mt="32px" color="red.500">
+              {errorMessage}
+            </Text>
+          )}
           <Button
             w="100%"
             mt="32px"

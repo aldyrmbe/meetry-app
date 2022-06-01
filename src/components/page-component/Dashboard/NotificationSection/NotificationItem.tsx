@@ -14,7 +14,20 @@ const NotificationItem = ({ notification }: NotificationItemProps) => {
   getDisplayTime
 
   return (
-    <VStack align="start">
+    <Flex
+      flexDir="column"
+      p="32px"
+      gap="12px"
+      border="1px"
+      borderColor="gray.200"
+      borderRadius="base"
+      boxShadow="base"
+      cursor="pointer"
+      transition="linear 0.2s"
+      _hover={{
+        backgroundColor: "#EDEDED"
+      }}
+    >
       <Flex align="center" gap="16px">
         <Text fontSize="md" color="gray.500">
           Tim ERIC UGM
@@ -28,7 +41,7 @@ const NotificationItem = ({ notification }: NotificationItemProps) => {
         {title}
       </Text>
       <LinkifyText value={description}></LinkifyText>
-    </VStack>
+    </Flex>
   )
 }
 

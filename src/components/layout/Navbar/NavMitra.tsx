@@ -5,7 +5,12 @@ import { useRealtimeNotification } from "@hooks/useRealtimeNotification"
 import { useRouter } from "next/router"
 import handleLogout from "src/utils/handleLogout"
 
-const NavMitra = ({ id }: { id: string }) => {
+type NavMitraType = {
+  id: string
+  onOpen: () => void
+}
+
+const NavMitra = ({ id, onOpen }: NavMitraType) => {
   const router = useRouter()
   const toast = useToast()
 
@@ -22,7 +27,7 @@ const NavMitra = ({ id }: { id: string }) => {
           <Flex align="center" justify="center">
             <NavLink hasBadge={hasNewNotification} text="Beranda" href={`/mitra/dashboard`} mr="32px"></NavLink>
             <NavLink text="Kolaborasi Saya" href={`/mitra/kolaborasi`} mr="32px"></NavLink>
-            <Link onClick={() => handleLogout(router, toast)}>Logout</Link>
+            <Link onClick={onOpen}>Logout</Link>
           </Flex>
         </Flex>
       </NavWrapper>

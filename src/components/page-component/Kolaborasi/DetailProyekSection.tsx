@@ -9,7 +9,7 @@ import LogbookProyekTab from "./LogbookProyekTab"
 import FilesProyekTab from "./FilesProyekTab"
 
 const DetailProyekSection = () => {
-  const { proyekId, tabIndex, setTabIndex } = useContext(KolaborasiPageContext)
+  const { proyekId, tabIndex, setTabIndex, isProyekEmpty } = useContext(KolaborasiPageContext)
   const [isFetchingProyekDetail, setFetchingProyekDetail] = useState<boolean>(true)
   const [proyekDetail, setProyekDetail] = useState<ProyekDetailApiResponseData>()
 
@@ -81,7 +81,11 @@ const DetailProyekSection = () => {
           <Box w="350px" h="275px" backgroundColor="gray.100">
             <Image alt="No project selected" w="100%" h="100%" src="/belum-memilih-proyek-illustration.webp"></Image>
           </Box>
-          <Text>Silakan pilih satu judul proyek terlebih dahulu di sebelah kiri untuk melihat detailnya</Text>
+          <Text>
+            {isProyekEmpty
+              ? "Anda belum punya proyek apapun di sini"
+              : "Silakan pilih satu judul proyek terlebih dahulu di sebelah kiri untuk melihat detailnya"}
+          </Text>
         </Flex>
       )}
     </Box>

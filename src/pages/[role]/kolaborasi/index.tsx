@@ -35,6 +35,8 @@ type KolaborasiPageContextType = {
   setSubFolderName: (subFolderName: string | undefined) => void
   tabIndex: number
   setTabIndex: (tabIndex: number) => void
+  isProyekEmpty: boolean
+  setProyekEmpty: (isEmpty: boolean) => void
 }
 
 export const KolaborasiPageContext = React.createContext<KolaborasiPageContextType>({
@@ -53,7 +55,9 @@ export const KolaborasiPageContext = React.createContext<KolaborasiPageContextTy
   subFolderName: undefined,
   setSubFolderName: () => {},
   tabIndex: 0,
-  setTabIndex: () => {}
+  setTabIndex: () => {},
+  isProyekEmpty: false,
+  setProyekEmpty: () => {}
 })
 
 const Kolaborasi = ({ error, id, role }: { error: any; id: string; role: Role }) => {
@@ -64,6 +68,7 @@ const Kolaborasi = ({ error, id, role }: { error: any; id: string; role: Role })
   const [subFolderId, setSubFolderId] = useState<string | undefined>(undefined)
   const [subFolderName, setSubFolderName] = useState<string | undefined>(undefined)
   const [tabIndex, setTabIndex] = useState<number>(0)
+  const [isProyekEmpty, setProyekEmpty] = useState<boolean>(true)
 
   const contextValue = {
     isFilterOpen,
@@ -81,7 +86,9 @@ const Kolaborasi = ({ error, id, role }: { error: any; id: string; role: Role })
     subFolderName,
     setSubFolderName,
     tabIndex,
-    setTabIndex
+    setTabIndex,
+    isProyekEmpty,
+    setProyekEmpty
   }
 
   if (error) {

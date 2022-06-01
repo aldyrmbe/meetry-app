@@ -16,8 +16,9 @@ const Navbar = () => {
               <Image src="/logo.svg" alt="Meetry Logo"></Image>
             </Box>
             <Spacer></Spacer>
-            <NavLink text="Beranda" href="/" path="/" mr="60px"></NavLink>
-            <NavLink text="Tentang Kami" href="/about" path="/about" mr="60px"></NavLink>
+            <NavLink text="Beranda" href="/" path="/" mr="60px" />
+            <NavLink text="Manfaat" href="/#manfaat" path="/#manfaat" mr="60px" />
+            <NavLink text="Cara Kerja" href="/#carakerja" path="/#carakerja" mr="60px" />
             <PrimaryButton onClick={onOpen} variant="solid" p="8px 16px">
               Masuk
             </PrimaryButton>

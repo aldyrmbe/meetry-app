@@ -149,6 +149,8 @@ const LogbookComments = ({ logbookId, status }: LogbookCommentsType) => {
                             align="center"
                             justify="center"
                             p="12px 8px"
+                            onClick={() => window.open(file.fileUrl, "_blank")}
+                            cursor="pointer"
                           >
                             <FileIcon fileName={file.fileName} />
                             <Text>{file.fileName}</Text>
