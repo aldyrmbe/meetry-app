@@ -2,8 +2,6 @@ import { Box, Flex, Image, Link, Spacer, useToast } from "@chakra-ui/react"
 import NavLink from "@components/layout/Navbar/NavLink"
 import NavWrapper from "@components/layout/Navbar/NavWrapper"
 import { useRealtimeNotification } from "@hooks/useRealtimeNotification"
-import { useRouter } from "next/router"
-import handleLogout from "src/utils/handleLogout"
 
 type NavPenelitiType = {
   id: string
@@ -11,8 +9,6 @@ type NavPenelitiType = {
 }
 
 const NavPeneliti = ({ id, onOpen }: NavPenelitiType) => {
-  const router = useRouter()
-  const toast = useToast()
   const { hasNewNotification, error } = useRealtimeNotification(id)
 
   return (

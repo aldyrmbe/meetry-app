@@ -8,11 +8,12 @@ import NotificationItem from "./NotificationItem"
 import PrimaryButton from "@components/button/PrimaryButton"
 import { NotificationData, GetNotificationResponse } from "@/types/api-response/notification"
 import SockJS from "sockjs-client"
-import { over } from "stompjs"
-import { WEB_SOCKET_URL } from "@hooks/useRealtimeNotification"
+import { Client, Message, over } from "stompjs"
+import { WEB_SOCKET_URL } from "@constants/websocketUrl"
 
-const NotificationSection = ({ id }: { id: string }) => {
+const NotificationSection = ({ id: userId }: { id: string }) => {
   const [notifications, setNotifications] = useState<NotificationData[]>([])
+  const [newNotification, setNewNotification] = useState<NotificationData>()
   const [page, setPage] = useState<number>(0)
   const [hasMore, setHasMore] = useState<boolean>(true)
   const [isLoading, setLoading] = useState<boolean>(true)
@@ -20,8 +21,37 @@ const NotificationSection = ({ id }: { id: string }) => {
 
   useEffect(() => {
     fetchMoreData()
+    let sockJSClient = new SockJS(WEB_SOCKET_URL)
+    let stompJSClient = over(sockJSClient)
+
+    const onMessageReceived = (message: Message) => {
+      const response = JSON.parse(message.body) as NotificationData
+      setNewNotification(response)
+    }
+
+    const onConnected = () => {
+      stompJSClient.subscribe(`/getLatestNotification/${userId}`, onMessageReceived)
+    }
+
+    const onError = (error: any) => {
+      console.log(error)
+    }
+
+    stompJSClient.connect({}, onConnected, onError)
+
+    return () => {
+      stompJSClient.disconnect(() => {
+        console.log("Websocket disconnected")
+      })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (newNotification) {
+      setNotifications([newNotification].concat(notifications))
+    }
+  }, [newNotification])
 
   const fetchMoreData = () => {
     setIsFetching(true)
@@ -34,22 +64,6 @@ const NotificationSection = ({ id }: { id: string }) => {
       setIsFetching(false)
       setLoading(false)
     })
-  }
-
-  const clearNewNotificationBadge = () => {
-    console.log("OK")
-    const sockJSClient = new SockJS(WEB_SOCKET_URL)
-    const stompJSClient = over(sockJSClient)
-
-    const onConnected = () => {
-      stompJSClient.send(`/app/clearNotification/${id}`, {})
-    }
-
-    const onError = (error: any) => {
-      console.log(error)
-    }
-
-    stompJSClient.connect({}, onConnected, onError)
   }
 
   return (
@@ -75,14 +89,9 @@ const NotificationSection = ({ id }: { id: string }) => {
           </Center>
         ) : (
           <Fade in={true}>
-            {/* <VStack align="stretch" divider={<Divider></Divider>} spacing="20px">
-              {notifications.map((notification: NotificationData) => (
-                <NotificationItem key={notification.id} notification={notification}></NotificationItem>
-              ))}
-            </VStack> */}
             <Flex flexDir="column" gap="16px">
               {notifications.map((notification) => (
-                <NotificationItem key={notification.id} notification={notification} />
+                <NotificationItem userId={userId} key={notification.id} notification={notification} />
               ))}
             </Flex>
             {hasMore && (
@@ -96,11 +105,6 @@ const NotificationSection = ({ id }: { id: string }) => {
                   Muat lebih banyak
                 </PrimaryButton>
               </Box>
-            )}
-            {!isFetching && !hasMore && (
-              <Flex h="40px" mt="20px" justify="center" align="center">
-                <Text align="center">Tidak ada data yang bisa ditampilkan lagi</Text>
-              </Flex>
             )}
           </Fade>
         )}

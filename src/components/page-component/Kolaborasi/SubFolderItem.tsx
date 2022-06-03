@@ -6,6 +6,7 @@ import OutlinedButton from "@components/button/OutlinedButton"
 import PrimaryButton from "@components/button/PrimaryButton"
 import FolderIcon from "@components/icon/FolderIcon"
 import { isLogbookOperationsAvailable } from "@utils/logbookOperation"
+import { useRouter } from "next/router"
 import { useContext, useEffect, useRef, useState } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import { axiosInstance } from "src/service/axios"
@@ -14,10 +15,13 @@ type SubFolderItemType = {
   subFolder: SubFolder
   onSubFolderClick: (subFolderId: string, subFolderName: string) => void
   status: StatusType
+  getSubFolders: (folderId: string) => void
 }
 
-const SubFolderItem = ({ subFolder, onSubFolderClick, status }: SubFolderItemType) => {
-  const { role, folderId, setFolderId } = useContext(KolaborasiPageContext)
+const SubFolderItem = ({ subFolder, onSubFolderClick, status, getSubFolders }: SubFolderItemType) => {
+  const router = useRouter()
+  const folderId = router.query.folderId as string
+  const { role } = useContext(KolaborasiPageContext)
   const [isEditing, setEditing] = useState<boolean>(false)
   const [isSending, setSending] = useState<boolean>(false)
   const [editedSubFolderName, setEditedSubFolderName] = useState<string>(subFolder.namaSubFolder)
@@ -43,8 +47,7 @@ const SubFolderItem = ({ subFolder, onSubFolderClick, status }: SubFolderItemTyp
         .then((res) => {
           setEditing(false)
           setSending(false)
-          setFolderId(undefined)
-          setFolderId(folderId)
+          getSubFolders(folderId)
         })
     }
   }
@@ -76,6 +79,7 @@ const SubFolderItem = ({ subFolder, onSubFolderClick, status }: SubFolderItemTyp
         )}
       </Flex>
       <DeleteSubFolderDialog
+        getSubFolders={getSubFolders}
         isOpen={isDeleteSubFolderDialogOpen}
         onClose={onDeleteSubFolderDialogClose}
         cancelRef={cancelRef}

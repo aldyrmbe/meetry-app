@@ -6,6 +6,7 @@ import OutlinedButton from "@components/button/OutlinedButton"
 import EditLogbookModal from "@components/modal/EditLogbookModal"
 import { getLogbookDisplayTime, getWaktuKegiatanLogbook } from "@utils/date"
 import { isLogbookOperationsAvailable } from "@utils/logbookOperation"
+import { useRouter } from "next/router"
 import { useContext, useRef } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import LogbookComments from "./LogbookComments"
@@ -13,6 +14,7 @@ import LogbookComments from "./LogbookComments"
 type LogbookItemType = {
   data: LogbookData
   status: StatusType
+  reFetchLogbooks: (proyekId: string, subFolderId: string) => void
 }
 
 type ItemType = {
@@ -33,7 +35,7 @@ const Item = ({ title, content }: ItemType) => {
   )
 }
 
-const LogbookItem = ({ data, status }: LogbookItemType) => {
+const LogbookItem = ({ data, status, reFetchLogbooks }: LogbookItemType) => {
   const { role } = useContext(KolaborasiPageContext)
   const {
     isOpen: isEditLogbookModalOpen,
@@ -90,12 +92,14 @@ const LogbookItem = ({ data, status }: LogbookItemType) => {
         isOpen={isEditLogbookModalOpen}
         onClose={onEditLogbookModalClose}
         data={data}
+        reFetchLogbooks={reFetchLogbooks}
       ></EditLogbookModal>
       <DeleteLogbookDialog
         isOpen={isDeleteLogbookDialogOpen}
         onClose={onDeleteLogbookDialogClose}
         logbookId={data.id}
         cancelRef={cancelRef}
+        reFetchLogbooks={reFetchLogbooks}
       ></DeleteLogbookDialog>
     </>
   )

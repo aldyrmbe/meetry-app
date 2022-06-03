@@ -6,6 +6,7 @@ import OutlinedButton from "@components/button/OutlinedButton"
 import PrimaryButton from "@components/button/PrimaryButton"
 import FolderIcon from "@components/icon/FolderIcon"
 import { isLogbookOperationsAvailable } from "@utils/logbookOperation"
+import { useRouter } from "next/router"
 import { useEffect, useState, useContext } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import { axiosInstance } from "src/service/axios"
@@ -17,17 +18,22 @@ type SubFolderSectionType = {
 }
 
 const SubFolderSection = ({ status }: SubFolderSectionType) => {
-  const { role, folderId, setFolderId, setSubFolderId, setSubFolderName } = useContext(KolaborasiPageContext)
+  const router = useRouter()
+  const folderId = router.query.folderId as string
+  const { role } = useContext(KolaborasiPageContext)
   const [subFolders, setSubFolders] = useState<SubFolder[]>()
   const [folderName, setFolderName] = useState<string>()
   const [isLoading, setLoading] = useState<boolean>(true)
   const [isAddingSubFolder, setAddingSubFolder] = useState<boolean>(false)
-  const getSubFolders = () => {
-    axiosInstance.get<GetSubFoldersApiResponse>(`/backend/proyek/folder/${folderId}`).then((response) => {
-      setLoading(false)
-      setSubFolders(response.data.data.subFolders)
-      setFolderName(response.data.data.folderName)
-    })
+
+  const getSubFolders = (folderIdParam?: string) => {
+    axiosInstance
+      .get<GetSubFoldersApiResponse>(`/backend/proyek/folder/${folderIdParam ?? folderId}`)
+      .then((response) => {
+        setLoading(false)
+        setSubFolders(response.data.data.subFolders)
+        setFolderName(response.data.data.folderName)
+      })
   }
 
   useEffect(() => {
@@ -37,9 +43,29 @@ const SubFolderSection = ({ status }: SubFolderSectionType) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [folderId])
 
+  const setSubFolderAttribute = (subFolderId: string, subFolderName: string) => {
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        subFolderId,
+        subFolderName
+      }
+    })
+  }
+
+  const removeFolderId = () => {
+    delete router.query.folderId
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query
+      }
+    })
+  }
+
   const onSubFolderClick = (subFolderId: string, subFolderName: string) => {
-    setSubFolderId(subFolderId)
-    setSubFolderName(subFolderName)
+    setSubFolderAttribute(subFolderId, subFolderName)
   }
 
   return (
@@ -52,7 +78,7 @@ const SubFolderSection = ({ status }: SubFolderSectionType) => {
         <Box>
           <Flex justify="space-between" align="center">
             <Flex align="center" gap="16px">
-              <ArrowBackIcon w="23px" h="32px" onClick={() => setFolderId(undefined)} cursor="pointer"></ArrowBackIcon>
+              <ArrowBackIcon w="23px" h="32px" onClick={removeFolderId} cursor="pointer"></ArrowBackIcon>
               <Text fontSize="xl" fontWeight="semibold">
                 {folderName}
               </Text>
@@ -66,7 +92,7 @@ const SubFolderSection = ({ status }: SubFolderSectionType) => {
               {!isAddingSubFolder && <Text mt="32px">Subfolder kosong</Text>}
               {isAddingSubFolder && (
                 <Box mt="32px">
-                  <AddSubFolderSection setAddingSubFolder={setAddingSubFolder}></AddSubFolderSection>
+                  <AddSubFolderSection getSubFolders={getSubFolders} setAddingSubFolder={setAddingSubFolder} />
                 </Box>
               )}
             </>
@@ -74,13 +100,19 @@ const SubFolderSection = ({ status }: SubFolderSectionType) => {
             <VStack mt="32px" divider={<StackDivider></StackDivider>} spacing="20px" align="start">
               {subFolders?.map((subFolder) => (
                 <SubFolderItem
+                  getSubFolders={getSubFolders}
                   key={subFolder.id}
                   subFolder={subFolder}
                   onSubFolderClick={onSubFolderClick}
                   status={status}
                 ></SubFolderItem>
               ))}
-              {isAddingSubFolder && <AddSubFolderSection setAddingSubFolder={setAddingSubFolder}></AddSubFolderSection>}
+              {isAddingSubFolder && (
+                <AddSubFolderSection
+                  getSubFolders={getSubFolders}
+                  setAddingSubFolder={setAddingSubFolder}
+                ></AddSubFolderSection>
+              )}
             </VStack>
           )}
         </Box>

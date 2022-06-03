@@ -1,4 +1,5 @@
 import { AddLogbookRequest } from "@/types/api-request/add-logbook-request"
+import { LogbookData } from "@/types/api-response/get-logbooks"
 import {
   Modal,
   ModalOverlay,
@@ -13,19 +14,22 @@ import {
 import PrimaryButton from "@components/button/PrimaryButton"
 import { CustomMultiSelectInput, DateInput, TextArea, TextInput } from "@components/input/MeetryInput"
 import { requiredValidation } from "@utils/input-validation/validation"
-import { useContext, useState } from "react"
+import { useRouter } from "next/router"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import { axiosInstance } from "src/service/axios"
 
 type AddLogbookModalType = {
   isOpen: boolean
   onClose: () => void
-  subFolderId: string
+  reFetchLogbooks: (proyekId: string, subFolderId: string) => void
 }
 
-const AddLogbookModal = ({ isOpen, onClose, subFolderId }: AddLogbookModalType) => {
-  const { proyekId, setSubFolderId } = useContext(KolaborasiPageContext)
+const AddLogbookModal = ({ isOpen, onClose, reFetchLogbooks }: AddLogbookModalType) => {
+  const router = useRouter()
+  const proyekId = router.query.proyekId as string
+  const subFolderId = router.query.subFolderId as string
+
   const [isSending, setSending] = useState<boolean>(false)
 
   const {
@@ -46,10 +50,9 @@ const AddLogbookModal = ({ isOpen, onClose, subFolderId }: AddLogbookModalType) 
     axiosInstance
       .post(`/backend/logbook/${proyekId}/${subFolderId}`, requestBody)
       .then((res) => {
-        setSubFolderId(undefined)
-        setSubFolderId(subFolderId)
         onClose()
         setSending(false)
+        reFetchLogbooks(proyekId, subFolderId)
       })
       .catch((error) => {
         setSending(false)

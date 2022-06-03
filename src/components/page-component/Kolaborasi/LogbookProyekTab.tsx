@@ -1,6 +1,7 @@
 import { ProyekDetailApiResponseData } from "@/types/api-response/get-proyek-detail"
 import { StatusType } from "@/types/api-response/get-proyek-list"
 import { Box, Flex, Image, Spinner, Text } from "@chakra-ui/react"
+import { useRouter } from "next/router"
 import { useContext, useState } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import DalamDiskusiAlert from "./DalamDiskusiAlert"
@@ -14,7 +15,10 @@ type LogbookProyekTabType = {
 }
 
 const LogbookProyekTab = ({ isLoading, data }: LogbookProyekTabType) => {
-  const { role, folderId, subFolderId } = useContext(KolaborasiPageContext)
+  const router = useRouter()
+  const folderId = router.query.folderId as string
+  const subFolderId = router.query.subFolderId as string
+  const { role } = useContext(KolaborasiPageContext)
 
   const getSection = (status: StatusType) => {
     if (folderId && subFolderId) {

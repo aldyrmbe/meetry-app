@@ -1,9 +1,10 @@
+/* eslint-disable react/no-children-prop */
 import { ProyekDetailApiResponseData } from "@/types/api-response/get-proyek-detail"
 import { FileData, GetProyekFilesApiResponse } from "@/types/api-response/get-proyek-files"
-import { Box, Flex, Spinner, StackDivider, Text, VStack, Image } from "@chakra-ui/react"
-import DocumentAttachmentIcon from "@components/icon/DocumentAttachmentIcon"
+import { RepeatIcon } from "@chakra-ui/icons"
+import { Box, Flex, Spinner, StackDivider, Text, VStack, Image, IconButton } from "@chakra-ui/react"
 import FileIcon from "@components/icon/FileIcon"
-import ImageAttachmentIcon from "@components/icon/ImageAttachmentIcon"
+import { useRouter } from "next/router"
 import { useContext, useEffect, useState } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import { axiosInstance } from "src/service/axios"
@@ -14,17 +15,23 @@ type FilesProyekTabType = {
 }
 
 const FilesProyekTab = ({ data }: FilesProyekTabType) => {
-  const { proyekId, role } = useContext(KolaborasiPageContext)
+  const router = useRouter()
+  const proyekId = router.query.proyekId as string
+
+  const { role } = useContext(KolaborasiPageContext)
   const [files, setFiles] = useState<FileData[]>()
   const [isLoading, setLoading] = useState<boolean>(false)
 
-  useEffect(() => {
+  const fetchFiles = () => {
     setLoading(true)
     axiosInstance.get<GetProyekFilesApiResponse>(`/backend/proyek/${proyekId}/files`).then((response) => {
       setFiles(response.data.data)
       setLoading(false)
-      console.log(response)
     })
+  }
+
+  useEffect(() => {
+    fetchFiles()
   }, [proyekId])
 
   const openFile = (url: string) => {
@@ -41,9 +48,19 @@ const FilesProyekTab = ({ data }: FilesProyekTabType) => {
         </Flex>
       ) : files ? (
         <>
-          <Text fontSize="xl" fontWeight="semibold">
-            Semua File Proyek
-          </Text>
+          <Flex gap="8px" align="center">
+            <Text fontSize="xl" fontWeight="semibold">
+              Semua File Proyek
+            </Text>
+            <IconButton
+              aria-label="Refresh files"
+              children={<RepeatIcon />}
+              variant="ghost"
+              size="sm"
+              borderRadius="full"
+              onClick={fetchFiles}
+            />
+          </Flex>
           <VStack divider={<StackDivider />} mt="32px" spacing="20px" align="start">
             {files.map((file) => (
               <Flex key={file.url} gap="16px" cursor="pointer" onClick={() => openFile(file.url)}>

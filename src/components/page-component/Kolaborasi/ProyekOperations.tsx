@@ -7,13 +7,15 @@ import ActivateProyekModal from "@components/modal/ActivateProyekModal"
 import { ChevronDownIcon } from "@chakra-ui/icons"
 import CancelProyekDialog from "@components/alert-dialog/CancelProyekDialog"
 import CloseProyekDialog from "@components/alert-dialog/CloseProyekDialog"
+import { useRouter } from "next/router"
 
 type ProyekOperationsType = {
   status: StatusType
 }
 
 const ProyekOperations = ({ status }: ProyekOperationsType) => {
-  const { proyekId } = useContext(KolaborasiPageContext)
+  const router = useRouter()
+  const proyekId = router.query.proyekId as string
   const {
     isOpen: isActivateProyekModalOpen,
     onOpen: onActivateProyekModalOpen,

@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react"
 import { Message, over } from "stompjs"
 import SockJS from "sockjs-client"
-
-export const WEB_SOCKET_URL = "https://meetry.herokuapp.com/meetry-ws"
-// export const WEB_SOCKET_URL = "http://localhost:8080/meetry-ws"
+import { WEB_SOCKET_URL } from "@constants/websocketUrl"
 
 export const useRealtimeNotification = (userId: string) => {
   const [hasNewNotification, setNewNotification] = useState<any>()

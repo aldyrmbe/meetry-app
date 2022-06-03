@@ -1,5 +1,6 @@
 import { ProyekData, StatusTypeMapping } from "@/types/api-response/get-proyek-list"
 import { Box, Flex, Text } from "@chakra-ui/react"
+import { useRouter } from "next/router"
 import { useContext } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 
@@ -8,7 +9,9 @@ type ProyekListProps = {
 }
 
 const ProyekList = ({ data }: ProyekListProps) => {
-  const { proyekId, setProyekId, setFolderId, setSubFolderId, setTabIndex } = useContext(KolaborasiPageContext)
+  const router = useRouter()
+  const { setTabIndex } = useContext(KolaborasiPageContext)
+  const proyekId = router.query.proyekId as string
 
   const getParticipant = () => {
     if (data.partisipan.length === 0) {
@@ -37,9 +40,17 @@ const ProyekList = ({ data }: ProyekListProps) => {
 
   const onProyekClick = (proyekId: string) => {
     setTabIndex(0)
-    setProyekId(proyekId)
-    setFolderId(undefined)
-    setSubFolderId(undefined)
+    const neededQueries = ["role", "searchQuery"]
+    Object.keys(router.query).forEach((key) => {
+      if (!neededQueries.includes(key)) delete router.query[key]
+    })
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        proyekId
+      }
+    })
   }
 
   return (

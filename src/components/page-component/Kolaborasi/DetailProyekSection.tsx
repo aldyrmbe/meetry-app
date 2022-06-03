@@ -6,12 +6,19 @@ import { axiosInstance } from "src/service/axios"
 import OverviewProyekTab from "./OverviewProyekTab"
 import KebutuhanProyekTab from "./KebutuhanProyekTab"
 import LogbookProyekTab from "./LogbookProyekTab"
-import FilesProyekTab from "./FilesProyekTab"
+import { useRouter } from "next/router"
+import dynamic from "next/dynamic"
+
+const FilesProyekTab = dynamic(() => import("@components/page-component/Kolaborasi/FilesProyekTab"))
 
 const DetailProyekSection = () => {
-  const { proyekId, tabIndex, setTabIndex, isProyekEmpty } = useContext(KolaborasiPageContext)
+  const router = useRouter()
+  const { tabIndex, setTabIndex, isProyekEmpty } = useContext(KolaborasiPageContext)
   const [isFetchingProyekDetail, setFetchingProyekDetail] = useState<boolean>(true)
   const [proyekDetail, setProyekDetail] = useState<ProyekDetailApiResponseData>()
+
+  const proyekId = router.query.proyekId as string
+  const tabIndexParams = router.query.tabIndex as string
 
   useEffect(() => {
     if (proyekId) {
@@ -30,6 +37,12 @@ const DetailProyekSection = () => {
     borderBottomWidth: "2px",
     borderBottomColor: "teal.500"
   }
+
+  useEffect(() => {
+    if (tabIndexParams) {
+      setTabIndex(2)
+    }
+  }, [])
 
   return (
     <Box h="calc(100vh - 80px - 80px)">

@@ -24,15 +24,7 @@ type KolaborasiPageContextType = {
   closeFilter: () => void
   filter: StatusType | undefined
   setFilter: (filter: StatusType) => void
-  proyekId: string | undefined
-  setProyekId: (proyekId: string) => void
   role: Role | undefined
-  folderId: string | undefined
-  setFolderId: (folderId: string | undefined) => void
-  subFolderId: string | undefined
-  setSubFolderId: (subFolderId: string | undefined) => void
-  subFolderName: string | undefined
-  setSubFolderName: (subFolderName: string | undefined) => void
   tabIndex: number
   setTabIndex: (tabIndex: number) => void
   isProyekEmpty: boolean
@@ -45,15 +37,7 @@ export const KolaborasiPageContext = React.createContext<KolaborasiPageContextTy
   closeFilter: () => {},
   filter: undefined,
   setFilter: () => {},
-  proyekId: undefined,
-  setProyekId: () => {},
   role: undefined,
-  folderId: undefined,
-  setFolderId: () => {},
-  subFolderId: undefined,
-  setSubFolderId: () => {},
-  subFolderName: undefined,
-  setSubFolderName: () => {},
   tabIndex: 0,
   setTabIndex: () => {},
   isProyekEmpty: false,
@@ -63,10 +47,6 @@ export const KolaborasiPageContext = React.createContext<KolaborasiPageContextTy
 const Kolaborasi = ({ error, id, role }: { error: any; id: string; role: Role }) => {
   const { isOpen: isFilterOpen, onToggle: toggleFilter, onClose: closeFilter } = useDisclosure()
   const [filter, setFilter] = useState<StatusType | undefined>(undefined)
-  const [proyekId, setProyekId] = useState<string | undefined>(undefined)
-  const [folderId, setFolderId] = useState<string | undefined>(undefined)
-  const [subFolderId, setSubFolderId] = useState<string | undefined>(undefined)
-  const [subFolderName, setSubFolderName] = useState<string | undefined>(undefined)
   const [tabIndex, setTabIndex] = useState<number>(0)
   const [isProyekEmpty, setProyekEmpty] = useState<boolean>(true)
 
@@ -76,15 +56,7 @@ const Kolaborasi = ({ error, id, role }: { error: any; id: string; role: Role })
     closeFilter,
     filter,
     setFilter,
-    proyekId,
-    setProyekId,
     role,
-    folderId,
-    setFolderId,
-    subFolderId,
-    setSubFolderId,
-    subFolderName,
-    setSubFolderName,
     tabIndex,
     setTabIndex,
     isProyekEmpty,

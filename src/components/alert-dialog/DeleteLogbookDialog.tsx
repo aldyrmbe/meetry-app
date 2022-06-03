@@ -7,6 +7,7 @@ import {
   AlertDialogFooter,
   Button
 } from "@chakra-ui/react"
+import { useRouter } from "next/router"
 import { useContext, useState } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import { axiosInstance } from "src/service/axios"
@@ -16,10 +17,13 @@ type DeleteLogbookDialogType = {
   onClose: () => void
   logbookId: string
   cancelRef: any
+  reFetchLogbooks: (proyekId: string, subFolderId: string) => void
 }
 
-const DeleteLogbookDialog = ({ isOpen, onClose, logbookId, cancelRef }: DeleteLogbookDialogType) => {
-  const { proyekId, setSubFolderId, subFolderId } = useContext(KolaborasiPageContext)
+const DeleteLogbookDialog = ({ isOpen, onClose, logbookId, cancelRef, reFetchLogbooks }: DeleteLogbookDialogType) => {
+  const router = useRouter()
+  const proyekId = router.query.proyekId as string
+  const subFolderId = router.query.subFolderId as string
   const [isLoading, setLoading] = useState<boolean>(false)
 
   const onLogbookDelete = () => {
@@ -28,9 +32,8 @@ const DeleteLogbookDialog = ({ isOpen, onClose, logbookId, cancelRef }: DeleteLo
       .delete(`/backend/logbook/${proyekId}/${logbookId}`)
       .then((res) => {
         setLoading(false)
-        setSubFolderId(undefined)
-        setSubFolderId(subFolderId)
         onClose()
+        reFetchLogbooks(proyekId, subFolderId)
       })
       .catch((error) => {
         setLoading(false)

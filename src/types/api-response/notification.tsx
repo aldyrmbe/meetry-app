@@ -5,6 +5,8 @@ export type NotificationData = {
   createdAt: number
   title: string
   description: string
+  opened: string
+  redirectionUrl: string
 }
 
 export type GetNotificationResponse = ApiResponse & {

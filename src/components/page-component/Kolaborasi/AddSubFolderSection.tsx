@@ -2,16 +2,20 @@ import { Flex, Input } from "@chakra-ui/react"
 import OutlinedButton from "@components/button/OutlinedButton"
 import PrimaryButton from "@components/button/PrimaryButton"
 import FolderIcon from "@components/icon/FolderIcon"
+import { useRouter } from "next/router"
 import { useContext, useState } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import { axiosInstance } from "src/service/axios"
 
 type AddSubFolderSectionType = {
   setAddingSubFolder: (param: boolean) => void
+  getSubFolders: (folderId: string) => void
 }
 
-const AddSubFolderSection = ({ setAddingSubFolder }: AddSubFolderSectionType) => {
-  const { folderId, setFolderId } = useContext(KolaborasiPageContext)
+const AddSubFolderSection = ({ setAddingSubFolder, getSubFolders }: AddSubFolderSectionType) => {
+  const router = useRouter()
+  const folderId = router.query.folderId as string
+
   const [newSubFolderName, setNewSubFolderName] = useState<string>("")
   const [isDisabled, setDisabled] = useState<boolean>(true)
   const [isLoading, setLoading] = useState<boolean>(false)
@@ -31,8 +35,8 @@ const AddSubFolderSection = ({ setAddingSubFolder }: AddSubFolderSectionType) =>
       .post(`/backend/proyek/folder/${folderId}/addSubFolder?subFolderName=${newSubFolderName}`)
       .then((res) => {
         setLoading(false)
-        setFolderId(undefined)
-        setFolderId(folderId)
+        setAddingSubFolder(false)
+        getSubFolders(folderId)
       })
       .catch((err) => {
         setLoading(false)

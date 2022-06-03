@@ -27,6 +27,7 @@ import { useFieldArray, useForm } from "react-hook-form"
 import AttachmentIcon from "@components/icon/AttachmentIcon"
 import { requiredValidation } from "@utils/input-validation/validation"
 import FileIcon from "@components/icon/FileIcon"
+import { useRouter } from "next/router"
 
 type LogbookCommentsType = {
   logbookId: string
@@ -39,7 +40,11 @@ type LogbookCommentFormData = {
 }
 
 const LogbookComments = ({ logbookId, status }: LogbookCommentsType) => {
-  const { proyekId, subFolderId } = useContext(KolaborasiPageContext)
+  const router = useRouter()
+  const proyekId = router.query.proyekId as string
+  const folderId = router.query.folderId as string
+  const subFolderId = router.query.subFolderId as string
+  const subFolderName = router.query.subFolderName as string
   const { isOpen, onToggle } = useDisclosure()
   const [isLoading, setLoading] = useState<boolean>(true)
   const [comments, setComments] = useState<Comment[]>([])
@@ -76,7 +81,6 @@ const LogbookComments = ({ logbookId, status }: LogbookCommentsType) => {
   const isCommentAvailable = status === "DALAM_DISKUSI" || status === "AKTIF"
 
   const onSubmit = handleSubmit(({ content, files }) => {
-    console.log({ content, files })
     const formData = new FormData()
     formData.append("content", content)
     if (files) {
@@ -86,10 +90,12 @@ const LogbookComments = ({ logbookId, status }: LogbookCommentsType) => {
         }
       }
     }
-    console.log(formData.get("files"))
     setSending(true)
     axiosInstance
-      .post<BaseResponse>(`/backend/logbook/${proyekId}/${subFolderId}/${logbookId}/comment`, formData)
+      .post<BaseResponse>(
+        `/backend/logbook/${proyekId}/${folderId}/${subFolderId}/${subFolderName}/${logbookId}/comment`,
+        formData
+      )
       .then((response) => {
         getComments()
         setSending(false)

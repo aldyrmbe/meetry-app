@@ -17,8 +17,12 @@ const NavLink = ({ text, hasBadge, href, path, mr, ...rest }: NavLinkProps) => {
   const router = useRouter()
   const pathName = router.asPath
   path = path ? path : href
-  const color = pathName === path ? activeLinkProps.color : ""
-  const fontWeight = pathName === path ? activeLinkProps.fontWeight : ""
+  const color = pathName.includes(path!) ? activeLinkProps.color : ""
+  const fontWeight = pathName.includes(path!) ? activeLinkProps.fontWeight : ""
+
+  if (pathName.includes("/dashboard")) {
+    hasBadge = false
+  }
 
   return (
     <Flex align="center" justify="start" mr={mr} gap="4px">

@@ -14,19 +14,22 @@ import {
 import PrimaryButton from "@components/button/PrimaryButton"
 import { CustomMultiSelectInput, DateInput, TextArea, TextInput } from "@components/input/MeetryInput"
 import { requiredValidation } from "@utils/input-validation/validation"
-import { useContext, useState } from "react"
+import { useRouter } from "next/router"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import { axiosInstance } from "src/service/axios"
 
 type EditLogbookModalType = {
   isOpen: boolean
   onClose: () => void
   data: LogbookData
+  reFetchLogbooks: (proyekId: string, subFolderId: string) => void
 }
 
-const EditLogbookModal = ({ isOpen, onClose, data }: EditLogbookModalType) => {
-  const { proyekId, setSubFolderId, subFolderId } = useContext(KolaborasiPageContext)
+const EditLogbookModal = ({ isOpen, onClose, data, reFetchLogbooks }: EditLogbookModalType) => {
+  const router = useRouter()
+  const proyekId = router.query.proyekId as string
+  const subFolderId = router.query.subFolderId as string
   const [isSending, setSending] = useState<boolean>(false)
 
   const getDefaultTags = () => {
@@ -62,10 +65,9 @@ const EditLogbookModal = ({ isOpen, onClose, data }: EditLogbookModalType) => {
     axiosInstance
       .put(`/backend/logbook/${proyekId}/${data.id}`, requestBody)
       .then((res) => {
-        setSubFolderId(undefined)
-        setSubFolderId(subFolderId)
         onClose()
         setSending(false)
+        reFetchLogbooks(proyekId, subFolderId)
       })
       .catch((error) => {
         setSending(false)

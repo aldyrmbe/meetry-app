@@ -6,7 +6,8 @@ import OutlinedButton from "@components/button/OutlinedButton"
 import PrimaryButton from "@components/button/PrimaryButton"
 import AddLogbookModal from "@components/modal/AddLogbookModal"
 import { isLogbookOperationsAvailable } from "@utils/logbookOperation"
-import { useContext, useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { useContext, useEffect, useRef, useState } from "react"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import { axiosInstance } from "src/service/axios"
 import LogbookItem from "./LogbookItem"
@@ -20,7 +21,13 @@ const Divider = () => {
 }
 
 const LogbookListSection = ({ status }: LogbookListSectionType) => {
-  const { role, proyekId, subFolderId, setSubFolderId, subFolderName } = useContext(KolaborasiPageContext)
+  const router = useRouter()
+
+  const proyekId = router.query.proyekId as string
+  const subFolderId = router.query.subFolderId as string
+  const subFolderName = router.query.subFolderName as string
+
+  const { role } = useContext(KolaborasiPageContext)
   const {
     isOpen: isAddLogbookModalOpen,
     onOpen: onAddLogbookModalOpen,
@@ -47,10 +54,35 @@ const LogbookListSection = ({ status }: LogbookListSectionType) => {
       })
   }
 
+  const reFetchLogbooks = (proyekIdParam: string, subFolderIdParam: string) => {
+    setFetching(true)
+    axiosInstance
+      .get<GetLogbooksApiResponse>(`/backend/logbook/${proyekId}/${subFolderId}/getLogbooks?page=0`)
+      .then((response) => {
+        const data = response.data.data
+        const { currentPage, totalPage } = data.paginationData
+        setPage(1)
+        setHasMore(totalPage !== 0 && currentPage !== totalPage)
+        setLogbookData(data.logbookData)
+        setFetching(false)
+        setLoading(false)
+      })
+  }
+
   useEffect(() => {
     fetchLogbooks()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const removeSubFolderId = () => {
+    delete router.query.subFolderId
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query
+      }
+    })
+  }
 
   return (
     <>
@@ -61,7 +93,7 @@ const LogbookListSection = ({ status }: LogbookListSectionType) => {
       ) : (
         <Box>
           <Flex align="center" gap="16px">
-            <ArrowBackIcon w="23px" h="32px" onClick={() => setSubFolderId(undefined)} cursor="pointer"></ArrowBackIcon>
+            <ArrowBackIcon w="23px" h="32px" onClick={removeSubFolderId} cursor="pointer"></ArrowBackIcon>
             <Text fontSize="xl" fontWeight="semibold">
               {subFolderName}
             </Text>
@@ -79,7 +111,7 @@ const LogbookListSection = ({ status }: LogbookListSectionType) => {
           )}
           <VStack mt="32px" divider={<Divider />} spacing="32px" align="start">
             {logbookData.map((logbook) => (
-              <LogbookItem status={status} key={logbook.id} data={logbook} />
+              <LogbookItem reFetchLogbooks={reFetchLogbooks} status={status} key={logbook.id} data={logbook} />
             ))}
           </VStack>
           {hasMore && (
@@ -102,10 +134,10 @@ const LogbookListSection = ({ status }: LogbookListSectionType) => {
         </Box>
       )}
       <AddLogbookModal
+        reFetchLogbooks={reFetchLogbooks}
         isOpen={isAddLogbookModalOpen}
         onClose={onAddLogbookModalClose}
-        subFolderId={subFolderId!}
-      ></AddLogbookModal>
+      />
     </>
   )
 }

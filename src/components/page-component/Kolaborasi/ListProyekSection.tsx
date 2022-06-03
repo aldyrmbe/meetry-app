@@ -9,11 +9,13 @@ import { axiosInstance } from "src/service/axios"
 import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import PrimaryButton from "@components/button/PrimaryButton"
 import useDebounce from "@hooks/useDebounce"
+import { useRouter } from "next/router"
 
 const ListProyekSection = () => {
+  const router = useRouter()
   const { toggleFilter, isFilterOpen, filter, setProyekEmpty } = useContext(KolaborasiPageContext)
   const [page, setPage] = useState<number>(0)
-  const [searchQuery, setSearchQuery] = useState<string>("")
+  const searchQuery = (router.query.searchQuery as string) ?? ""
   const debouncedSearchQuery = useDebounce(searchQuery)
   const [isLoading, setLoading] = useState<boolean>(true)
   const [isFetching, setFetching] = useState<boolean>(false)
@@ -27,7 +29,7 @@ const ListProyekSection = () => {
         params: {
           page,
           status: filter,
-          searchQuery: debouncedSearchQuery
+          searchQuery: router.query.searchQuery ?? debouncedSearchQuery
         }
       })
       .then((response) => {
@@ -62,6 +64,13 @@ const ListProyekSection = () => {
       })
   }
 
+  const onSearchInputChange = (e: any) => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, searchQuery: e }
+    })
+  }
+
   useEffect(() => {
     if (page > 0) fetchKolaborasiData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,7 +84,6 @@ const ListProyekSection = () => {
   useEffect(() => {
     setProyekData([])
     setPage(0)
-    // setTimeout(() => getKolaborasiData())
     getKolaborasiData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, debouncedSearchQuery])
@@ -84,8 +92,9 @@ const ListProyekSection = () => {
     <Box h="calc(100vh - 80px - 80px)">
       <Flex gap="16px">
         <SearchBarInput
+          defaultValue={router.query.searchQuery}
           placeholder="Cari judul proyek"
-          onChange={(e: any) => setSearchQuery(e.target.value)}
+          onChange={(e: any) => onSearchInputChange(e.target.value)}
         ></SearchBarInput>
         <Box position="relative">
           <IconButton onClick={toggleFilter} aria-label="next" icon={<FilterIcon />}></IconButton>

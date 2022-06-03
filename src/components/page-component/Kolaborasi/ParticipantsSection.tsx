@@ -2,8 +2,6 @@ import { DetailPartisipan, Partisipan } from "@/types/api-response/get-proyek-de
 import { ExternalLinkIcon } from "@chakra-ui/icons"
 import { Flex, Text, Image, Link, Box, useFormControlProps } from "@chakra-ui/react"
 import OutlinedButton from "@components/button/OutlinedButton"
-import { useContext } from "react"
-import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
 import { Role } from "src/service/user"
 
 type ParticipantsSectionType = {
@@ -71,8 +69,6 @@ const EmptyParticipant = ({ role }: { role: Role }) => {
 }
 
 const ParticipantsSection = ({ data }: ParticipantsSectionType) => {
-  const { role } = useContext(KolaborasiPageContext)
-
   return (
     <>
       {data.peneliti.length !== 0 ? (

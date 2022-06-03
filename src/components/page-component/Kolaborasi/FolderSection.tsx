@@ -1,15 +1,24 @@
 import { Text, VStack, StackDivider, Flex } from "@chakra-ui/react"
 import FolderIcon from "@components/icon/FolderIcon"
 import { Folder } from "@/types/api-response/get-proyek-detail"
-import { useContext } from "react"
-import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
+import { useRouter } from "next/router"
 
 type FolderSectionType = {
   folders: Folder[]
 }
 
 const FolderSection = ({ folders }: FolderSectionType) => {
-  const { setFolderId } = useContext(KolaborasiPageContext)
+  const router = useRouter()
+
+  const setFolderId = (folderId: string) => {
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        folderId
+      }
+    })
+  }
 
   return (
     <>

@@ -8,8 +8,8 @@ import {
   Button,
   Flex
 } from "@chakra-ui/react"
-import { useContext, useState } from "react"
-import { KolaborasiPageContext } from "src/pages/[role]/kolaborasi"
+import { useRouter } from "next/router"
+import { useState } from "react"
 import { axiosInstance } from "src/service/axios"
 
 type DeleteSubFolderDialogType = {
@@ -17,10 +17,24 @@ type DeleteSubFolderDialogType = {
   onClose: () => void
   subFolderId: string
   cancelRef: any
+  getSubFolders: (folderId: string) => void
 }
 
-const DeleteSubFolderDialog = ({ isOpen, onClose, subFolderId, cancelRef }: DeleteSubFolderDialogType) => {
-  const { setFolderId, folderId } = useContext(KolaborasiPageContext)
+const DeleteSubFolderDialog = ({
+  isOpen,
+  onClose,
+  subFolderId,
+  cancelRef,
+  getSubFolders
+}: DeleteSubFolderDialogType) => {
+  const router = useRouter()
+  const folderId = router.query.folderId as string
+  const setFolderId = (folderId: string) => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, folderId }
+    })
+  }
   const [isLoading, setLoading] = useState<boolean>(false)
 
   const onSubFolderDelete = () => {
@@ -29,9 +43,9 @@ const DeleteSubFolderDialog = ({ isOpen, onClose, subFolderId, cancelRef }: Dele
       .delete(`/backend/proyek/subFolder/${subFolderId}`)
       .then((res) => {
         setLoading(false)
-        setFolderId(undefined)
         setFolderId(folderId)
         onClose()
+        getSubFolders(folderId)
       })
       .catch((error) => {
         setLoading(false)
