@@ -83,7 +83,7 @@ const TableListProyek = ({ pemohon, searchQuery, setProyekId }: TableListProyekT
           <Tr>
             <TableHead>{pemohon.charAt(0) + pemohon.slice(1).toLowerCase()}</TableHead>
             <TableHead>Judul Proyek</TableHead>
-            <TableHead>Bidang Mitra yang Dicari</TableHead>
+            <TableHead>Bidang Proyek</TableHead>
             <TableHead></TableHead>
           </Tr>
         </Thead>

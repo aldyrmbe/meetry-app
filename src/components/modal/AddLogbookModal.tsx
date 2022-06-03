@@ -82,7 +82,7 @@ const AddLogbookModal = ({ isOpen, onClose, reFetchLogbooks }: AddLogbookModalTy
               register={register}
               fieldName="deskripsi"
               label="Deskripsi"
-              placeholder="Mengadakan pertemuan terkait pembahasan Rancangan Anggaran Biaya proyek yang akan dikerjakan"
+              placeholder="Contoh: Mengadakan pertemuan terkait pembahasan Rancangan Anggaran Biaya proyek yang akan dikerjakan"
               validation={requiredValidation}
               errors={errors}
             ></TextArea>
