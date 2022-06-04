@@ -1,8 +1,8 @@
 import { Box, Flex, Image, Spacer, useDisclosure } from "@chakra-ui/react"
-import NavLink from "@components/layout/Navbar/NavLink"
 import LoginModal from "@components/modal/LoginModal"
 import PrimaryButton from "@components/button/PrimaryButton"
 import NavWrapper from "./NavWrapper"
+import NonLoginNavbarLink from "./NonLoginNavbarLink"
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -16,9 +16,9 @@ const Navbar = () => {
               <Image src="/logo.svg" alt="Meetry Logo"></Image>
             </Box>
             <Spacer></Spacer>
-            <NavLink text="Beranda" href="/" path="/" mr="60px" />
-            <NavLink text="Manfaat" href="/#manfaat" path="/#manfaat" mr="60px" />
-            <NavLink text="Cara Kerja" href="/#carakerja" path="/#carakerja" mr="60px" />
+            <NonLoginNavbarLink text="Beranda" href="/" mr="60px" />
+            <NonLoginNavbarLink text="Manfaat" href="/#manfaat" mr="60px" />
+            <NonLoginNavbarLink text="Cara Kerja" href="/#carakerja" mr="60px" />
             <PrimaryButton onClick={onOpen} variant="solid" p="8px 16px">
               Masuk
             </PrimaryButton>

@@ -74,7 +74,9 @@ const Home = () => {
               Gabung Sekarang
             </PrimaryButton>
           </Link>
-          <OutlinedButton p="10px 24px">Baca Lebih Lanjut</OutlinedButton>
+          <OutlinedButton p="10px 24px" onClick={() => router.push("/#manfaat")}>
+            Baca Lebih Lanjut
+          </OutlinedButton>
         </Box>
         <Image alt="Hero" w="650px" h="434" src="/online-collab-illustration.webp" />
       </Container>
@@ -107,7 +109,9 @@ const Home = () => {
               Bergabunglah bersama Meetry, temukan mitra yang cocok <br /> sesuai kebutuhan, dan mulailah kolaborasi
               terbaik Anda <br /> sekarang juga
             </Text>
-            <PrimaryButton w="200px">Gabung Sekarang</PrimaryButton>
+            <Link href="/register" style={{ textDecoration: "none" }}>
+              <PrimaryButton w="200px">Gabung Sekarang</PrimaryButton>
+            </Link>
           </Flex>
         </Flex>
         <Box p="64px" w="100%">
