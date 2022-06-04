@@ -67,7 +67,6 @@ const KriteriaKerjasama = ({
               register={register}
               label="Penjelasan tambahan (opsional)"
               placeholder={`Penjelasan tambahan tentang ${role == "MITRA" ? "peneliti" : "mitra"} yang ingin dicari`}
-              validation={requiredValidation}
               errors={errors}
             />
             {fields.length !== 1 && (
