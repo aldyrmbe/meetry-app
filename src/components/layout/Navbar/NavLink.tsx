@@ -1,14 +1,16 @@
 import { Box, Flex, Link, LinkProps, Text } from "@chakra-ui/react"
 import { useRouter } from "next/router"
+import NextLink from "next/link"
 
-interface NavLinkProps extends LinkProps {
+interface NavLinkProps {
   text: string
   path?: string
   hasBadge?: boolean
   mr?: string
+  href: string
 }
 
-const NavLink = ({ text, hasBadge, href, path, mr, ...rest }: NavLinkProps) => {
+const NavLink = ({ text, hasBadge, href, path, mr }: NavLinkProps) => {
   const activeLinkProps = {
     color: "teal",
     fontWeight: "700"
@@ -26,9 +28,22 @@ const NavLink = ({ text, hasBadge, href, path, mr, ...rest }: NavLinkProps) => {
 
   return (
     <Flex align="center" justify="start" mr={mr} gap="4px">
-      <Link color={color} href={href} fontWeight={fontWeight} whiteSpace="nowrap" {...rest}>
+      {/* <Link color={color} href={href} fontWeight={fontWeight} whiteSpace="nowrap" {...rest}>
         {text}
-      </Link>
+      </Link> */}
+      <NextLink href={href}>
+        <Text
+          cursor="pointer"
+          _hover={{
+            color: "#2C7A7B"
+          }}
+          color={color}
+          fontWeight={fontWeight}
+          whiteSpace="nowrap"
+        >
+          {text}
+        </Text>
+      </NextLink>
       {hasBadge && <Box h="8px" w="8px" backgroundColor="red.500" borderRadius="full" />}
     </Flex>
   )

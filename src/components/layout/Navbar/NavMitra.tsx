@@ -1,7 +1,8 @@
-import { Box, Flex, Image, Link, Spacer, useToast } from "@chakra-ui/react"
+import { Box, Flex, Image, Spacer, Text } from "@chakra-ui/react"
 import NavLink from "@components/layout/Navbar/NavLink"
 import NavWrapper from "@components/layout/Navbar/NavWrapper"
 import { useRealtimeNotification } from "@hooks/useRealtimeNotification"
+import Link from "next/link"
 
 type NavMitraType = {
   id: string
@@ -15,14 +16,24 @@ const NavMitra = ({ id, onOpen }: NavMitraType) => {
     <nav>
       <NavWrapper>
         <Flex h="80px" gap="16px" align="center">
-          <Box as="a" href="/mitra/dashboard">
-            <Image src="/meetry-mitra-logo.svg" alt="Meetry Logo"></Image>
-          </Box>
+          <Link href="/mitra/dashboard">
+            <Box cursor="pointer">
+              <Image src="/meetry-mitra-logo.svg" alt="Meetry Logo"></Image>
+            </Box>
+          </Link>
           <Spacer></Spacer>
           <Flex align="center" justify="center">
             <NavLink hasBadge={hasNewNotification} text="Beranda" href={`/mitra/dashboard`} mr="32px"></NavLink>
             <NavLink text="Kolaborasi Saya" href={`/mitra/kolaborasi`} mr="32px"></NavLink>
-            <Link onClick={onOpen}>Logout</Link>
+            <Text
+              cursor="pointer"
+              _hover={{
+                color: "#2C7A7B"
+              }}
+              onClick={onOpen}
+            >
+              Logout
+            </Text>
           </Flex>
         </Flex>
       </NavWrapper>
