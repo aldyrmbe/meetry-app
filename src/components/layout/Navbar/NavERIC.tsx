@@ -39,7 +39,7 @@ const NavERIC = ({ onOpen }: NavERIC) => {
           ></SearchBarInput>
           <Flex align="center" justify="center">
             <NavLink text="Beranda" href="/eric/dashboard" mr="32px"></NavLink>
-            <NavLink text="Kolaborasi Saya" href="/eric/kolaborasi" mr="32px"></NavLink>
+            <NavLink text="Semua Kolaborasi" href="/eric/kolaborasi" mr="32px"></NavLink>
             <Text
               cursor="pointer"
               _hover={{

@@ -20,7 +20,7 @@ const NavAccountOfficer = ({ onOpen }: NavAccountOfficerType) => {
           </Link>
           <Spacer></Spacer>
           <Flex align="center" justify="center">
-            <NavLink text="Kolaborasi Saya" href={`/accountofficer/kolaborasi`} mr="32px"></NavLink>
+            <NavLink text="Proyek" href={`/accountofficer/kolaborasi`} mr="32px"></NavLink>
             <Text
               cursor="pointer"
               _hover={{
