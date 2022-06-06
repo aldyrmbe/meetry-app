@@ -10,10 +10,11 @@ export const useRealtimeNotification = (userId: string) => {
   useEffect(() => {
     let sockJSClient = new SockJS(WEB_SOCKET_URL)
     let stompJSClient = over(sockJSClient)
-    stompJSClient.debug = () => {}
+    // stompJSClient.debug = () => {}
 
     const onMessageReceived = (message: Message) => {
       const response = JSON.parse(message.body).hasNewNotification
+      console.log(response)
       setNewNotification(response)
     }
 

@@ -76,12 +76,16 @@ const LogbookListSection = ({ status }: LogbookListSectionType) => {
 
   const removeSubFolderId = () => {
     delete router.query.subFolderId
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query
-      }
-    })
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query
+        }
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   return (

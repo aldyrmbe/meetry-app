@@ -11,13 +11,17 @@ const FolderSection = ({ folders }: FolderSectionType) => {
   const router = useRouter()
 
   const setFolderId = (folderId: string) => {
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query,
-        folderId
-      }
-    })
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          folderId
+        }
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   return (

@@ -44,24 +44,32 @@ const SubFolderSection = ({ status }: SubFolderSectionType) => {
   }, [folderId])
 
   const setSubFolderAttribute = (subFolderId: string, subFolderName: string) => {
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query,
-        subFolderId,
-        subFolderName
-      }
-    })
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          subFolderId,
+          subFolderName
+        }
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   const removeFolderId = () => {
     delete router.query.folderId
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query
-      }
-    })
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query
+        }
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   const onSubFolderClick = (subFolderId: string, subFolderName: string) => {

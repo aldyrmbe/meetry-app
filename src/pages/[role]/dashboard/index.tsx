@@ -31,24 +31,26 @@ const Dashboard = ({ error, id, role }: { error: boolean; id: string; role: Role
     stompJSClient.connect({}, onConnected, onError)
   }, [])
 
-  if (error) {
-    return <Error statusCode={404}></Error>
-  }
-
   return (
     <>
-      <Head>
-        <title>Meetry - Dashboard {role.charAt(0) + role.slice(1).toLowerCase()}</title>
-      </Head>
-      <NavbarUser id={id} role={role}></NavbarUser>
-      <Container gap="32px">
-        <Box w="55%">
-          <MainMenuSection id={id} role={role}></MainMenuSection>
-        </Box>
-        <Box w="45%">
-          <NotificationSection id={id}></NotificationSection>
-        </Box>
-      </Container>
+      {error ? (
+        <Error statusCode={404} />
+      ) : (
+        <>
+          <Head>
+            <title>Meetry - Dashboard {role.charAt(0) + role.slice(1).toLowerCase()}</title>
+          </Head>
+          <NavbarUser id={id} role={role}></NavbarUser>
+          <Container gap="32px">
+            <Box w="55%">
+              <MainMenuSection id={id} role={role}></MainMenuSection>
+            </Box>
+            <Box w="45%">
+              <NotificationSection id={id}></NotificationSection>
+            </Box>
+          </Container>
+        </>
+      )}
     </>
   )
 }

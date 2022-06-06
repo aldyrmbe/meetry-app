@@ -65,10 +65,14 @@ const ListProyekSection = () => {
   }
 
   const onSearchInputChange = (e: any) => {
-    router.push({
-      pathname: router.pathname,
-      query: { ...router.query, searchQuery: e }
-    })
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { ...router.query, searchQuery: e }
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   useEffect(() => {

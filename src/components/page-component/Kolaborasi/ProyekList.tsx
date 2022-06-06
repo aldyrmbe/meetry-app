@@ -44,13 +44,17 @@ const ProyekList = ({ data }: ProyekListProps) => {
     Object.keys(router.query).forEach((key) => {
       if (!neededQueries.includes(key)) delete router.query[key]
     })
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query,
-        proyekId
-      }
-    })
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          proyekId
+        }
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   return (

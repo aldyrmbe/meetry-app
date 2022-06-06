@@ -30,10 +30,16 @@ const DeleteSubFolderDialog = ({
   const router = useRouter()
   const folderId = router.query.folderId as string
   const setFolderId = (folderId: string) => {
-    router.push({
-      pathname: router.pathname,
-      query: { ...router.query, folderId }
-    })
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { ...router.query, folderId }
+      },
+      undefined,
+      {
+        shallow: true
+      }
+    )
   }
   const [isLoading, setLoading] = useState<boolean>(false)
 
