@@ -1,6 +1,7 @@
 import { axiosInstance } from "src/service/axios"
 import { showToast } from "src/service/toast"
 import { NextRouter } from "next/router"
+import { getRoleMapping, User } from "./user"
 
 export type RegisterPenelitiFormValues = {
   namaLengkap: string
@@ -43,7 +44,7 @@ export const registerPeneliti = (
         description: "Registrasi peneliti berhasil dilakukan.",
         status: "success"
       })
-      router.push("/")
+      logUserIn(router, toast, data.email, data.password)
     })
     .catch((err) => {
       setSending(false)
@@ -88,7 +89,7 @@ export const registerMitra = (
         description: "Registrasi mitra berhasil dilakukan.",
         status: "success"
       })
-      router.push("/")
+      logUserIn(router, toast, data.email, data.password)
     })
     .catch((err) => {
       setSending(false)
@@ -97,5 +98,34 @@ export const registerMitra = (
         description: "Cek kembali data yang dimasukkan.",
         status: "error"
       })
+    })
+}
+
+const logUserIn = (router: NextRouter, toast: any, email: string, password: string) => {
+  const data = { email, password }
+  axiosInstance
+    .post<User>("/backend/user/login", data)
+    .then((res) => {
+      const role = res.data.role
+      if (role == "ACCOUNT_OFFICER") {
+        router.push(`/accountofficer/kolaborasi`)
+      } else {
+        router.push(`/${getRoleMapping(role)}/dashboard`)
+      }
+    })
+    .catch((err) => {
+      if (err.response.status >= 500) {
+        showToast(toast, {
+          title: "Server sedang bermasalah",
+          description: "Silakan coba beberapa saat lagi.",
+          status: "error"
+        })
+      } else {
+        showToast(toast, {
+          title: "Informasi akun salah!",
+          description: err.response.data.message,
+          status: "error"
+        })
+      }
     })
 }
