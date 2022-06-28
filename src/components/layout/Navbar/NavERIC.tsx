@@ -13,7 +13,7 @@ type NavERIC = {
 
 const NavERIC = ({ onOpen }: NavERIC) => {
   const router = useRouter()
-  const defaultValue = router.query.searchQuery
+  const defaultValue = router.query.searchUserQuery
 
   const handleSearchInput = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
