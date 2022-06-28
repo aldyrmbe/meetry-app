@@ -104,6 +104,13 @@ const DetailProyek = ({ proyekId, setProyekId }: DetailProyekType) => {
     return <Info title="Profil lengkap mitra" text={mitraProfileUrl} isLink></Info>
   }
 
+  const getReversedLabel = (pemohon: "PENELITI" | "MITRA") => {
+    if (pemohon == "MITRA") {
+      return "Peneliti"
+    }
+    return "Mitra"
+  }
+
   return (
     <Box>
       <Flex align="center" gap="16px">
@@ -172,7 +179,7 @@ const DetailProyek = ({ proyekId, setProyekId }: DetailProyekType) => {
             ))}
           </VStack>
           <PrimaryButton w="100%" mt="32px" onClick={onOpen}>
-            Masukkan Nama Mitra & Account Officer
+            Masukkan Nama {getReversedLabel(proyekData.pemohon)} & Account Officer
           </PrimaryButton>
           {proyekId && (
             <SetProyekOnDiscussionModal

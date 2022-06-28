@@ -128,7 +128,7 @@ const SetProyekOnDiscussionModal = ({ proyekData, isOpen, onClose, proyekId }: S
       <ModalOverlay />
       <ModalContent>
         <ModalHeader fontWeight="700" p="32px 32px 0 32px">
-          Masukkan Nama Mitra & Account Officer
+          Masukkan Nama {getReversedLabel()} & Account Officer
         </ModalHeader>
         <ModalCloseButton mt="24px" mr="16px"></ModalCloseButton>
         <form onSubmit={onSubmit}>
