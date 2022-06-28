@@ -23,10 +23,14 @@ const FilterItem = ({ filterName }: { filterName: string }) => {
   }
 
   const handleClick = () => {
-    router.push({
-      pathname: "/eric/search",
-      query: { ...router.query, filter: filterName.toLowerCase() }
-    })
+    router.push(
+      {
+        pathname: "/eric/search",
+        query: { ...router.query, filter: filterName.toLowerCase() }
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   return (
