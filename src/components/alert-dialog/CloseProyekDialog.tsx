@@ -23,7 +23,7 @@ const CloseProyekDialog = ({ isOpen, onClose, proyekId, cancelRef }: CloseProyek
   const router = useRouter()
   const [isLoading, setLoading] = useState<boolean>(false)
 
-  const onProyekCancel = () => {
+  const onProyekClose = () => {
     setLoading(true)
     axiosInstance
       .put(`/backend/proyek/${proyekId}/close`)
@@ -54,7 +54,7 @@ const CloseProyekDialog = ({ isOpen, onClose, proyekId, cancelRef }: CloseProyek
               <Button w="50%" colorScheme="teal" ref={cancelRef} onClick={onClose}>
                 Tidak
               </Button>
-              <Button w="50%" onClick={onProyekCancel} isLoading={isLoading} loadingText="Memperbarui status...">
+              <Button w="50%" onClick={onProyekClose} isLoading={isLoading} loadingText="Memperbarui status...">
                 Iya
               </Button>
             </Flex>

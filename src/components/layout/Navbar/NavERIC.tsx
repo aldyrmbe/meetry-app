@@ -19,7 +19,7 @@ const NavERIC = ({ onOpen }: NavERIC) => {
     if (e.key === "Enter") {
       const input = e.target as HTMLInputElement
       const searchQuery = input.value
-      router.push(getRoleBasedPath("eric", `/search?searchQuery=${searchQuery}`))
+      router.push(getRoleBasedPath("eric", `/search?searchUserQuery=${searchQuery}`))
     }
   }
 

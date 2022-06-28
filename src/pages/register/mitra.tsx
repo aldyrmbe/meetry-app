@@ -8,7 +8,6 @@ import {
   EmailInput,
   PasswordInput,
   SelectInput,
-  DateInput,
   TextArea,
   FileInput,
   NumberInput,

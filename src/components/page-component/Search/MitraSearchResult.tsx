@@ -9,7 +9,7 @@ import SearchResultWrapper from "./SearchResultWrapper"
 
 const MitraSearchResult = () => {
   const router = useRouter()
-  const searchQuery = router.query.searchQuery ?? ""
+  const searchQuery = router.query.searchUserQuery ?? ""
   const [page, setPage] = useState<number>(0)
   const [hasMore, setHasMore] = useState<boolean>(true)
   const [isLoading, setLoading] = useState<boolean>(true)
